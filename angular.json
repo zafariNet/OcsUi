@@ -27,9 +27,34 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/plugins/fontawesome-free/css/all.min.css",
+              
+              "src/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "src/assets/plugins/datepicker/css/bootstrap-datepicker.min.css",
+              "src/assets/plugins/select2/css/select2.min.css",
+              "src/assets/plugins/xml-viewer/simpleXML.css",
+              "src/assets/plugins/flag-icon-css/css/flag-icon.min.css",
+              "src/assets/plugins/tooltip/jquery.toolbar.css",
+              "src/assets/plugins/ionicons-2.0.1/css/ionicons.min.css",
+              "src/assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css",
+              "src/assets/plugins/toastr/toastr.min.css",
+              "src/assets/css/adminlte.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/plugins/jquery/jquery.min.js",
+              "src/assets/plugins/bootstrap/bootstrap.bundle.min.js",
+              "src/assets/plugins/xml-viewer/simpleXML.js",
+              "src/assets/plugins/xml-viewer/jquery.format.js",
+              "src/assets/plugins/tooltip/jquery.toolbar.min.js",
+              "src/assets/plugins/moment/moment.min.js",
+              "src/assets/plugins/datepicker/js/bootstrap-datepicker.min.js",
+              "src/assets/plugins/select2/js/select2.full.min.js",
+              "src/assets/plugins/sweetalert2/sweetalert2.min.js",
+              "src/assets/plugins/toastr/toastr.min.js",
+              "src/assets/js/adminlte.min.js",
+              "src/assets/app.js"
+            ]
           },
           "configurations": {
             "production": {

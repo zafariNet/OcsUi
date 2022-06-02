@@ -1,0 +1,1 @@
+OcsUi: add basic login functionality and add notification service and configure NsWag
