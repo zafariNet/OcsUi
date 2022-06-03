@@ -20,8 +20,13 @@ export class LoginService {
     }
     logout()
     {
+        let refreshToken=this.tokenService.getRefreshToken();
+        this.accountService.signout(refreshToken).subscribe(response=>{
+            debugger;
+        });
         this.globalModelService=new GlobalModelService();
         this.tokenService.cleareTokens();
+
         this.router.navigate(['/login']);
 
     }

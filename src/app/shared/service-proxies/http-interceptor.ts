@@ -177,13 +177,13 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     }
 
     normalizeRequestHeaders(request) {
-
         // add heir additional headers
         // Example
         var modifiedHeaders = new HttpHeaders();
         modifiedHeaders = request.headers.set("Pragma", "no-cache")
             .set("Cache-Control", "no-cache")
-            .set("Expires", "Sat, 01 Jan 2000 00:00:00 GMT");
+            .set("Expires", "Sat, 01 Jan 2000 00:00:00 GMT")
+            
         modifiedHeaders = this.addXRequestedWithHeader(modifiedHeaders);
         modifiedHeaders = this.addAuthorizationHeaders(modifiedHeaders);
         return request.clone({

@@ -46,9 +46,9 @@ export function tokenGetter(): string | null {
     GlobalModelService,
     {
       provide: 'SERVER_BASE_URL',
-      useValue: 'https://localhost:7232/api',
+      useValue: 'http://localhost:5232/api',
     },
-    { provide: API_BASE_URL, useValue: 'https://localhost:7232' },
+    { provide: API_BASE_URL, useValue: 'http://localhost:5232' },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpConfigInterceptor,
