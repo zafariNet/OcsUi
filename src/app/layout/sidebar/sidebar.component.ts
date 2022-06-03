@@ -10,6 +10,7 @@ export class SidebarComponent implements OnInit {
     currentUrl: string = '';
     _globalMpodelService: GlobalModelService
     constructor(private router: Router, globalModelService: GlobalModelService,private loginService : LoginService) {
+        
         this._globalMpodelService = globalModelService;
         
     }

@@ -2,35 +2,38 @@
     <div class="login-box">
       <div class="card card-outline card-primary">
         <div class="card-header text-center">
-          <a href="../../index2.html" class="h1"><b>AoutClick</b></a>
+          <a href="../../index2.html" class="h1"><b>AutoClick</b></a>
         </div>
         <div class="card-body">
           <p class="login-box-msg">Please enter your account info</p>
     
           <form  [formGroup]="loginForm" (ngSubmit)="authenticate()">
-            <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="User name" formControlName="userName">
+            <div class="input-group mb-4">
+              <input type="text" class="form-control" placeholder="User name" formControlName="userName" [ngClass]="{'is-invalid':showUsernameError()}">
+              
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
                 </div>
+                
               </div>
+              <span [@fadeInOut] class="validation-error" *ngIf="showUsernameError()">* You must enter your username</span>
             </div>
-            <div class="input-group mb-3">
-              <input type="password" class="form-control" placeholder="Password" formControlName="password">
+            <div class="input-group mb-4">
+              <input type="password" class="form-control" placeholder="Password" formControlName="password" [ngClass]="{'is-invalid':showPasswordError()}">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>
                 </div>
               </div>
+              <span [@fadeInOut] class="validation-error" *ngIf="showPasswordError()">* You must enter your password</span>
             </div>
             <div class="social-auth-links text-center mt-2 mb-3">
                 <button class="btn btn-block btn-primary" 
                 [buttonBusy]="gettingData"
-                [busyText]="'Please wait...'" type="submit">
+                [busyText]="'Please wait...'" type="submit" [disabled]="!loginForm.valid">
                   Login
               </button>
-        
               </div>
             </form>
         </div>

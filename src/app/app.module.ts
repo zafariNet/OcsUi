@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,19 +9,26 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ServiceProxyModule } from './service-proxies/service-proxy.module';
 import { API_BASE_URL } from './service-proxies/service-proxies';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { HttpConfigInterceptor } from './shared/service-proxies/http-interceptor';
 import { TokenService } from './login/services/token.service';
 import { LocalStorageService } from './shared/local-storage.service';
 
+import { initializeAppFactory } from './services/app-initializer.service'
+import { Router } from '@angular/router';
+import { ErrorComponent } from './layout/errors/error-component';
+import { Error500Component } from './layout/errors/error-500.component';
+import { GlobalModelService } from './login/services/global-model.service';
 export function tokenGetter(): string | null {
   var token = localStorage.getItem('token');
   return token;
 }
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ErrorComponent,
+    Error500Component
   ],
   imports: [
     BrowserModule,
@@ -32,16 +39,11 @@ export function tokenGetter(): string | null {
     AppRoutingModule,
     SharedModule,
     ServiceProxyModule,
-    // JwtModule.forRoot({
-    //   config: {
-    //     tokenGetter,
-    //     allowedDomains: ['localhost:7232'],
-    //   },
-    // }),
   ],
   providers: [
     TokenService,
     LocalStorageService,
+    GlobalModelService,
     {
       provide: 'SERVER_BASE_URL',
       useValue: 'https://localhost:7232/api',
@@ -50,6 +52,12 @@ export function tokenGetter(): string | null {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpConfigInterceptor,
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeAppFactory,
+      deps: [Injector,TokenService,Router,GlobalModelService],
       multi: true
     }
   ],

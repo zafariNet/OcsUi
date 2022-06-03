@@ -107,7 +107,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     }
 
     handleOcsResponse(response, ajaxResponse) {
-        debugger;
         var newResponse;
         if (!ajaxResponse.failed) {
             newResponse = response.clone({

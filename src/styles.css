@@ -1,0 +1,9 @@
+.dropdown-item{
+    cursor: pointer;
+}
+.validation-error {
+    position: absolute;
+    margin-top: 2.3rem;
+    font-size: .8em;
+    color: #a94442;
+  }

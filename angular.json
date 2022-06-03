@@ -38,6 +38,7 @@
               "src/assets/plugins/ionicons-2.0.1/css/ionicons.min.css",
               "src/assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css",
               "src/assets/plugins/toastr/toastr.min.css",
+              "node_modules/ngx-spinner/animations/ball-spin-fade.css",
               "src/assets/css/adminlte.min.css",
               "src/styles.css"
             ],
