@@ -1,0 +1,9 @@
+{
+    "EXAMPLE": "Hallo {{value}}",
+    "CHANGE_PASSWORD": "Benutzername verändern",
+    "CURRENT_PASSWORD" : "Aktuelles Kennwort",
+    "NEW_PASSWORD" : "neues Kennwort",
+    "CONFIRM_NEW_PASSWORD" : "neues Kennwort bestätigen",
+    "HELP" : "Hilfe",
+    "CONTACT":"Kontakt"
+}

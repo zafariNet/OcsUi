@@ -3,8 +3,8 @@ import { Injector } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, tap } from "rxjs";
 import { ajax, AjaxError, AjaxResponse } from "rxjs/ajax";
-import { GlobalModelService } from "../login/services/global-model.service";
-import { TokenService } from "../login/services/token.service";
+import { GlobalModelService } from "../account/services/global-model.service";
+import { TokenService } from "../account/services/token.service";
 import { API_BASE_URL, ResultOfJwtTokensData } from "../service-proxies/service-proxies";
 declare var $: any;
 

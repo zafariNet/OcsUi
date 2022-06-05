@@ -12,7 +12,7 @@ import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, filter, map, switchMap, take } from 'rxjs/operators';
 import { LocalStorageService } from '../local-storage.service';
 import { NotifyServiceService } from 'src/app/services/notify-service.service';
-import { TokenService } from 'src/app/login/services/token.service';
+import { TokenService } from 'src/app/account/services/token.service';
 import { Router } from '@angular/router';
 @Injectable({
     providedIn: 'root',
