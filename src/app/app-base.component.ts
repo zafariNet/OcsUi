@@ -27,10 +27,10 @@ export class AppBaseComponent implements OnDestroy {
 
   ngOnDestroy(): void {}
 
-  l(key: string = 'nothing'): string {
+  l(key: string): string {
     let translated;
-
-    this.translate.get(key).subscribe({
+    let resolvedKey = key != '' ? key : 'NOTHING';
+    this.translate.get(resolvedKey).subscribe({
       next: (value) => (translated = value),
       error: (error) => {},
     });

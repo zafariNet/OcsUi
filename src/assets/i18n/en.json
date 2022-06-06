@@ -1,9 +1,14 @@
 {
+    "NOTHING" : "",
     "EXAMPLE": "hello {{value}}",
     "CHANGE_PASSWORD": "Change password",
     "CURRENT_PASSWORD" : "Current password",
     "NEW_PASSWORD" : "New password",
     "CONFIRM_NEW_PASSWORD" : "Confirm new password",
     "HELP" : "Help",
-    "CONTACT":"Contact"
+    "CONTACT":"Contact",
+    "USER_NOTFOUND" : "User not found",
+    "CURRENT_PASSWORD_IS_WORNG":"Current password is worng",
+    "WORNG_USERNAME_OR_PASSWORD" : "Worng username or password",
+    "NEW_PASSWORD_AND_CONFIRM_PASSWORD_ARE_NOT_MATCH" : "New password con confirm password are not match."
 }

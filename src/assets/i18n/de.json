@@ -1,9 +1,15 @@
 {
+    "NOTHING" : "",
     "EXAMPLE": "Hallo {{value}}",
     "CHANGE_PASSWORD": "Benutzername verändern",
     "CURRENT_PASSWORD" : "Aktuelles Kennwort",
     "NEW_PASSWORD" : "neues Kennwort",
     "CONFIRM_NEW_PASSWORD" : "neues Kennwort bestätigen",
     "HELP" : "Hilfe",
-    "CONTACT":"Kontakt"
+    "CONTACT":"Kontakt",
+    "USER_NOTFOUND" : "Benutzer nicht gefunden",
+    "CURRENT_PASSWORD_IS_WORNG":"Aktuelles Passwort ist falsch",
+    "WORNG_USERNAME_OR_PASSWORD" : "Falscher Benutzername oder falsches Passwort",
+    "NEW_PASSWORD_AND_CONFIRM_PASSWORD_ARE_NOT_MATCH" : "Neues Passwort und Bestätigungspasswort stimmen nicht überein."
+
 }
