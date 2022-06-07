@@ -2,9 +2,13 @@ m
 msrc
 msrc/app
 msrc/app/layout
+msrc/app/layout/header
 msrc/app/layout/main
 msrc/app/layout/sidebar
-msrc/app/login
-msrc/app/login/services
+rsrc/app/login
+rsrc/app/login/services
 msrc/app/modules/dashboard
+msrc/app/service-proxies
+msrc/app/services
+msrc/app/shared
 msrc/app/shared/service-proxies

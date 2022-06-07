@@ -4,6 +4,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { ButtonBusyDirective } from './directives/button-busy.directive';
 
 @NgModule({
@@ -11,6 +12,7 @@ import { ButtonBusyDirective } from './directives/button-busy.directive';
   imports: [
     CommonModule,
     ModalModule,
+    NgxSpinnerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -19,7 +21,7 @@ import { ButtonBusyDirective } from './directives/button-busy.directive';
       },
     }),
   ],
-  exports: [ButtonBusyDirective],
+  exports: [ButtonBusyDirective,NgxSpinnerModule],
   providers: [BsModalService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

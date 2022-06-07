@@ -11,7 +11,7 @@ declare var Toast: any;
 @Injectable({
   providedIn: 'root',
 })
-export class NotifyServiceService {
+export class NotifyService {
   constructor(private translate: TranslateService) {}
 
   showError(title?: string, body: string = '') {
@@ -20,6 +20,31 @@ export class NotifyServiceService {
       title: this.l(title),
       text: this.l(body),
     });
+  }
+
+  async showMessageWithCheckBox(title?: string, body: string = '',chechBoxMessage : string ='',YesButtonText : string = '',cancleButtonText : string = '')
+  {
+    return  Swal.fire({
+      icon: 'error',
+      title: this.l(title),
+      text: this.l(body),
+      showCancelButton: true,
+      input: 'checkbox',
+      inputValue: 1,
+      inputPlaceholder:
+      chechBoxMessage,
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: 'btn btn-success button-in-notification',
+        cancelButton:'btn btn-info button-in-notification'
+        
+      },
+      confirmButtonText:
+      '<i  class="fa fa-check"></i><span class="button-text">' + YesButtonText  + '</span>',
+      cancelButtonText :  
+      '<i  class="fa fa-share"></i><span class="button-text">' + cancleButtonText  + '</span>'
+    });
+    
   }
   showSuccess(message: string) {
     toastr.options = {

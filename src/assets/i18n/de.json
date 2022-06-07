@@ -10,6 +10,16 @@
     "USER_NOTFOUND" : "Benutzer nicht gefunden",
     "CURRENT_PASSWORD_IS_WORNG":"Aktuelles Passwort ist falsch",
     "WORNG_USERNAME_OR_PASSWORD" : "Falscher Benutzername oder falsches Passwort",
-    "NEW_PASSWORD_AND_CONFIRM_PASSWORD_ARE_NOT_MATCH" : "Neues Passwort und Bestätigungspasswort stimmen nicht überein."
+    "NEW_PASSWORD_AND_CONFIRM_PASSWORD_ARE_NOT_MATCH" : "Neues Passwort und Bestätigungspasswort stimmen nicht überein.",
+    "LOGIN_PAGE_TITLE":"Bitte geben Sie Ihre Kontoinformationen ein",
+    "PROFILE" : "Profil",
+    "HISTORY" : "Geschichte",
+    "SETTINGS" : "Einstellungen",
+    "LOGOUT" : "Abmeldung",
+    "ARE_YOU_SURE_TO_LOGOUT":"Sind Sie sicher, dass Sie sich abmelden können?",
+    "LOGOUT_FROM_ALL_OPPEN_SESSION" : "Abmelden von allen offenen Sitzungen",
+    "YES": "Ja",
+    "NO" : "Nein",
+    "REQURED_FIELD" : "Erforderliches Feld"
 
 }

@@ -9,16 +9,20 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 // const routes: Routes = [{ path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule) }];
 const routes: Routes = [
   { 
-    path: '',
+    path: 'main',
     component: MainLayoutComponent, 
     children: [
-      { path: '', redirectTo : 'dashboard', pathMatch : 'full' },
+      { path: '', redirectTo : 'login', pathMatch : 'full' },
       { path: 'dashboard', component: DashboardComponent },
     ]
   },
   { 
-    path: 'login',
+    path: '',
     component: LoginComponent, 
+    children: [
+      { path: '', redirectTo : 'login', pathMatch : 'full' },
+      { path: 'login', component: LoginComponent },
+    ]
   },
   {
     path: 'error',

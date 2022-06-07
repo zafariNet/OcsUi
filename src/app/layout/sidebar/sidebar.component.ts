@@ -1,6 +1,5 @@
 import { AppBaseComponent } from 'src/app/app-base.component';
 import { Component, Injector, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { GlobalModelService } from 'src/app/account/services/global-model.service';
 import { LoginService } from 'src/app/account/services/login.service';
 @Component({
@@ -12,7 +11,6 @@ export class SidebarComponent extends AppBaseComponent implements OnInit {
   _globalMpodelService: GlobalModelService;
   constructor(
     injector: Injector,
-    private router: Router,
     globalModelService: GlobalModelService,
     private loginService: LoginService
   ) {

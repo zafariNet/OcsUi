@@ -18,11 +18,11 @@ export class LoginService {
     authenticate(loginRequest: LoginRequest) {
         return this.accountService.login(loginRequest);
     }
-    logout()
+    logout(revokeAllSessions : boolean)
     {
+        let _revokeAllSessions=revokeAllSessions?true:false;
         let refreshToken=this.tokenService.getRefreshToken();
-        this.accountService.signout(refreshToken).subscribe(response=>{
-            debugger;
+        this.accountService.signout(refreshToken,_revokeAllSessions).subscribe(response=>{
         });
         this.globalModelService=new GlobalModelService();
         this.tokenService.cleareTokens();

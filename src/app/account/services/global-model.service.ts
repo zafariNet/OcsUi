@@ -13,9 +13,14 @@ export class GlobalModelService {
     this.initialDataFeteched.subscribe((dataFetched) => {
       this.dataFetched = dataFetched;
     });
+    this.applicationCanStart.subscribe((applicationStarted) => {
+      this.applicationStarted = applicationStarted;
+    });
   }
   initialDataFeteched: Subject<boolean> = new Subject<boolean>();
+  applicationCanStart: Subject<boolean> = new Subject<boolean>();
   dataFetched: boolean = false;
+  applicationStarted: boolean = false;
   logedInUser: LogedInUserViewModel = new LogedInUserViewModel();
   userSetting: UserSettingViewModel = new UserSettingViewModel();
 }

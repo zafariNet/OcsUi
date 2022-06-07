@@ -2,10 +2,10 @@
   <div class="login-box">
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="../../index2.html" class="h1"><b>AutoClick</b></a>
+        <a href="../../index2.html" class="h1"><img src="assets/img/clickpostlogo_login.svg" width="250px"/></a>
       </div>
       <div class="card-body">
-        <p class="login-box-msg">Please enter your account info</p>
+        <p class="login-box-msg">{{l('LOGIN_PAGE_TITLE')}}</p>
 
         <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
           <div class="input-group mb-4">
@@ -66,3 +66,17 @@
     </div>
   </div>
 </body>
+<ngx-spinner
+  bdOpacity="0.9"
+  bdColor="#000"
+  size="medium"
+  color="#fff"
+  type="ball-spin-fade"
+  [fullScreen]="true"
+  template="
+  <img src='assets/img/ocslogo.svg' width=500 />
+"
+>
+<h6 style="color: #fff">Loading...</h6>
+
+</ngx-spinner>

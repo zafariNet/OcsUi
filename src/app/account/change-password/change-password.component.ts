@@ -9,7 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { AppBaseComponent } from 'src/app/app-base.component';
-import { AccountService } from 'src/app/service-proxies/service-proxies';
+import { AccountService, ChangePasswordRequest } from 'src/app/service-proxies/service-proxies';
 @Component({
   selector: 'ocs-change-password',
   templateUrl: './change-password.component.html',
@@ -22,28 +22,28 @@ export class ChangePasswordComponent
   gettingData: boolean = false;
   modalRef: BsModalRef;
   changePasswordForm: FormGroup;
+  changePasswordRequest:ChangePasswordRequest;
   constructor(
     injector: Injector,
     private modalService: BsModalService,
     private accountService: AccountService
   ) {
     super(injector);
+    this.changePasswordRequest=new ChangePasswordRequest();
   }
   ngOnInit(): void {
-    this.changePasswordForm = new FormGroup({
-      currentPassword: new FormControl('', [Validators.required]),
-      newPassword: new FormControl('', [Validators.required]),
-      confirmPassword: new FormControl('', [Validators.required]),
-    });
+
   }
   public showModal(data: any) {
+    this.createForm()
+     this.changePasswordForm.reset();
+    this.changePasswordRequest=new ChangePasswordRequest();
     const config: ModalOptions = { class: 'modal-md' };
-
     this.modalRef = this.modalService.show(this.modal, config);
   }
   changePassword() {
-    this.gettingData = true;
     if (this.changePasswordForm.valid) {
+      this.gettingData = true;
       this.accountService
         .changePassword(this.changePasswordForm.value)
         .subscribe({
@@ -54,6 +54,8 @@ export class ChangePasswordComponent
             this.gettingData = false;
           },
         });
+    } else {
+      this.validateAllFields(this.changePasswordForm);
     }
   }
 
@@ -63,5 +65,12 @@ export class ChangePasswordComponent
       (this.changePasswordForm.get(field)?.dirty ||
         this.changePasswordForm.get(field)?.touched)
     );
+  }
+  createForm(){
+    this.changePasswordForm = new FormGroup({
+      currentPassword: new FormControl(this.changePasswordRequest.currentPassword, [Validators.required]),
+      newPassword: new FormControl(this.changePasswordRequest.newPassword, [Validators.required]),
+      confirmPassword: new FormControl(this.changePasswordRequest.confirmPassword, [Validators.required]),
+    });
   }
 }

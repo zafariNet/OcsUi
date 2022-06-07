@@ -3,7 +3,6 @@ import { ChangePasswordComponent } from './../account/change-password/change-pas
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { HeaderComponent } from './header/header.component';
 import { MainLayoutComponent } from './main/main-layout.component';
@@ -23,7 +22,7 @@ import { SharedModule } from '../shared/shared.module';
     RouterModule,
     CommonModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule,
+  
     SharedModule,
     ReactiveFormsModule,
   ],

@@ -14,15 +14,24 @@ import { LoginService } from 'src/app/account/services/login.service';
 export class HeaderComponent extends AppBaseComponent {
   @ViewChild('changePasswordModal')
   changePasswordModal: ChangePasswordComponent;
-  constructor(
-    injector: Injector,
-    private loginService: LoginService,
-    private accountService: AccountService
-  ) {
+  constructor(injector: Injector, private accountService: AccountService,private loginService : LoginService) {
     super(injector);
   }
-  logout() {
-    this.loginService.logout();
+   logout() {
+    let _this=this;
+    this.notificationService
+      .showMessageWithCheckBox(
+        this.l('ARE_YOU_SURE_TO_LOGOUT'),
+        '',
+        this.l('LOGOUT_FROM_ALL_OPPEN_SESSION'),
+        this.l('YES'),
+        this.l('NO')
+      )
+      .then((response) => {
+        if (response.isConfirmed) {
+           _this.loginService.logout(response.value);
+        }
+      });
   }
   showChangePasswordModal() {
     this.changePasswordModal.showModal(null);
@@ -38,5 +47,11 @@ export class HeaderComponent extends AppBaseComponent {
       },
       error: () => {},
     });
+  }
+  getCurrentLanguageFlag() {
+    if (this.translate.currentLang == 'en') {
+      return 'us';
+    }
+    return this.translate.currentLang;
   }
 }
