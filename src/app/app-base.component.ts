@@ -22,29 +22,28 @@ import { Router } from '@angular/router';
 export class AppBaseComponent implements OnDestroy {
   translate: TranslateService;
   spinner: NgxSpinnerService;
-  notificationService : NotifyService
+  notificationService: NotifyService;
   globalModelService: GlobalModelService;
-  tokenService : TokenService;
-  router : Router
+  tokenService: TokenService;
+  router: Router;
   constructor(injector: Injector) {
     this.translate = injector.get(TranslateService);
     this.globalModelService = injector.get(GlobalModelService);
     this.spinner = injector.get(NgxSpinnerService);
-    this.notificationService=injector.get(NotifyService);
-    this.tokenService=injector.get(TokenService);
-    this.router=injector.get(Router);
-    let currentToken=this.tokenService.getToken();
-    if(!currentToken)
-    {
-      this.router.navigate(['/login'])
+    this.notificationService = injector.get(NotifyService);
+    this.tokenService = injector.get(TokenService);
+    this.router = injector.get(Router);
+    let currentToken = this.tokenService.getToken();
+    if (!currentToken) {
+      this.router.navigate(['/login']);
     }
   }
 
   ngOnDestroy(): void {}
 
-  l(key: string): string {
+  l(key: string | undefined | null): string {
     let translated;
-    let resolvedKey = key != '' ? key : 'NOTHING';
+    let resolvedKey = key != '' ? key! : 'NOTHING';
     this.translate.get(resolvedKey).subscribe({
       next: (value) => (translated = value),
       error: (error) => {},
@@ -60,16 +59,16 @@ export class AppBaseComponent implements OnDestroy {
   hideSpinner() {
     this.spinner.hide();
   }
-  validateAllFields(formGroup: FormGroup) {         
-    Object.keys(formGroup.controls).forEach(field => {  
-        const control = formGroup.get(field);    
-        
-        control?.updateValueAndValidity();        
-        if (control instanceof FormControl) {             
-            control.markAsTouched({ onlySelf: true });
-        } else if (control instanceof FormGroup) {        
-            this.validateAllFields(control);  
-        }
+  validateAllFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach((field) => {
+      const control = formGroup.get(field);
+
+      control?.updateValueAndValidity();
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFields(control);
+      }
     });
   }
 }

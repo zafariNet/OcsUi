@@ -9,7 +9,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { AppBaseComponent } from 'src/app/app-base.component';
-import { AccountService, ChangePasswordRequest } from 'src/app/service-proxies/service-proxies';
+import {
+  AccountService,
+  ChangePasswordRequest,
+} from 'src/app/service-proxies/service-proxies';
 @Component({
   selector: 'ocs-change-password',
   templateUrl: './change-password.component.html',
@@ -22,22 +25,20 @@ export class ChangePasswordComponent
   gettingData: boolean = false;
   modalRef: BsModalRef;
   changePasswordForm: FormGroup;
-  changePasswordRequest:ChangePasswordRequest;
+  changePasswordRequest: ChangePasswordRequest;
   constructor(
     injector: Injector,
     private modalService: BsModalService,
     private accountService: AccountService
   ) {
     super(injector);
-    this.changePasswordRequest=new ChangePasswordRequest();
+    this.changePasswordRequest = new ChangePasswordRequest();
   }
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
   public showModal(data: any) {
-    this.createForm()
-     this.changePasswordForm.reset();
-    this.changePasswordRequest=new ChangePasswordRequest();
+    this.createForm();
+    this.changePasswordForm.reset();
+    this.changePasswordRequest = new ChangePasswordRequest();
     const config: ModalOptions = { class: 'modal-md' };
     this.modalRef = this.modalService.show(this.modal, config);
   }
@@ -47,10 +48,13 @@ export class ChangePasswordComponent
       this.accountService
         .changePassword(this.changePasswordForm.value)
         .subscribe({
-          error: () => {
+          next: (response) => {
             this.gettingData = false;
+            this.modalService.hide();
+            debugger;
+            this.notificationService.showSuccess(this.l(response.message));
           },
-          complete: () => {
+          error: () => {
             this.gettingData = false;
           },
         });
@@ -66,11 +70,19 @@ export class ChangePasswordComponent
         this.changePasswordForm.get(field)?.touched)
     );
   }
-  createForm(){
+  createForm() {
     this.changePasswordForm = new FormGroup({
-      currentPassword: new FormControl(this.changePasswordRequest.currentPassword, [Validators.required]),
-      newPassword: new FormControl(this.changePasswordRequest.newPassword, [Validators.required]),
-      confirmPassword: new FormControl(this.changePasswordRequest.confirmPassword, [Validators.required]),
+      currentPassword: new FormControl(
+        this.changePasswordRequest.currentPassword,
+        [Validators.required]
+      ),
+      newPassword: new FormControl(this.changePasswordRequest.newPassword, [
+        Validators.required,
+      ]),
+      confirmPassword: new FormControl(
+        this.changePasswordRequest.confirmPassword,
+        [Validators.required]
+      ),
     });
   }
 }

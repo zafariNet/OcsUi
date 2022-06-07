@@ -5,37 +5,39 @@ import { ErrorComponent } from './layout/errors/error-component';
 import { MainLayoutComponent } from './layout/main/main-layout.component';
 import { LoginComponent } from './account/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { UsersComponent } from './account/users/users.component';
 
 // const routes: Routes = [{ path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule) }];
 const routes: Routes = [
-  { 
+  {
     path: 'main',
-    component: MainLayoutComponent, 
+    component: MainLayoutComponent,
     children: [
-      { path: '', redirectTo : 'login', pathMatch : 'full' },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
-    ]
+      { path: 'users', component: UsersComponent },
+    ],
   },
-  { 
+  {
     path: '',
-    component: LoginComponent, 
+    component: LoginComponent,
     children: [
-      { path: '', redirectTo : 'login', pathMatch : 'full' },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
-    ]
+    ],
   },
   {
     path: 'error',
-    component : ErrorComponent,
-    children : [
-      { path: '', redirectTo : 'error-500', pathMatch : 'full' },
-      { path: 'error-500', component: Error500Component }
-    ]
-  }
+    component: ErrorComponent,
+    children: [
+      { path: '', redirectTo: 'error-500', pathMatch: 'full' },
+      { path: 'error-500', component: Error500Component },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
