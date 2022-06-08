@@ -20,6 +20,13 @@
     "LOGOUT_FROM_ALL_OPPEN_SESSION" : "Abmelden von allen offenen Sitzungen",
     "YES": "Ja",
     "NO" : "Nein",
-    "REQURED_FIELD" : "Erforderliches Feld"
+    "REQURED_FIELD" : "Erforderliches Feld",
+    "PASSWORD_CHANGED_SUCCESSFULLY" : "Passwort erfolgreich geändert",
+    "ACCOUNTS" : "Konten",
+    "USERS" : "Benutzer",
+    "USER_NAME" : "Nutzername",
+    "DISPLAY_NAME" :"Name anzeigen",
+    "ACTIVE" : "AKTIV",
+    "LAST_LOGIN" : "Letzte Anmeldung"
 
 }

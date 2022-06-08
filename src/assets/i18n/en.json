@@ -20,5 +20,12 @@
   "LOGOUT_FROM_ALL_OPPEN_SESSION": "Logout from all open sessions",
   "YES": "Yes",
   "NO" : "No",
-  "REQURED_FIELD" : "Required field"
+  "REQURED_FIELD" : "Required field",
+  "PASSWORD_CHANGED_SUCCESSFULLY" : "Password changed successfully",
+  "ACCOUNTS" : "Accounts",
+  "USERS" : "Users",
+  "USER_NAME" : "User name",
+  "DISPLAY_NAME": "Display name",
+  "ACTIVE" : "Active",
+  "LAST_LOGIN" : "Last login"
 }

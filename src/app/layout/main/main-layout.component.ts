@@ -11,23 +11,25 @@ declare var $: any;
   selector: 'ocs-main-layout',
   templateUrl: './main-layout.component.html',
 })
-export class MainLayoutComponent extends AppBaseComponent implements AfterViewInit, OnInit {
+export class MainLayoutComponent
+  extends AppBaseComponent
+  implements AfterViewInit, OnInit
+{
   initialDataFetched: boolean = false;
   _globalModelService: GlobalModelService;
   constructor(
     globalModelService: GlobalModelService,
     private accountService: AccountService,
     private translateService: TranslateService,
-    injector : Injector
+    injector: Injector
   ) {
-    super(injector)
+    super(injector);
     this._globalModelService = globalModelService;
     if (this._globalModelService.applicationStarted) {
       this.getInitialData();
     } else {
       this._globalModelService.applicationCanStart.subscribe((response) => {
-        if(response)
-        this.getInitialData();
+        if (response) this.getInitialData();
       });
     }
   }
@@ -37,24 +39,27 @@ export class MainLayoutComponent extends AppBaseComponent implements AfterViewIn
     });
   }
   getInitialData() {
-    
-      if (this.router.url !== '/login') {
-        this.spinner.show();
-        this.accountService.getUserData().subscribe({
-          next: (value) => {
-            this._globalModelService.initialDataFeteched.next(true);
-            this._globalModelService.userSetting = value.value!;
-            this.setLangulagedefaults(value.value?.defaultLanguage);
-            setTimeout(() => {
-              this.spinner.hide();
-            }, 1000);
-          },
-          error: (error) => {},
-        });
-      }
-
+    if (this.router.url !== '/login') {
+      this.spinner.show();
+      this.accountService.getUserData().subscribe({
+        next: (value) => {
+          this._globalModelService.initialDataFeteched.next(true);
+          this._globalModelService.userSetting = value.value!;
+          this.setLangulagedefaults(value.value?.defaultLanguage);
+          setTimeout(() => {
+            this.spinner.hide();
+          }, 1000);
+        },
+        error: (error) => {},
+      });
+    }
   }
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      debugger;
+      $.getScript('assets/js/adminlte.min.js');
+    }, 2000);
+  }
 
   setLangulagedefaults(currentLanguage = 'en') {
     this.translateService.addLangs(['en', 'de']);

@@ -22,29 +22,35 @@ export class NotifyService {
     });
   }
 
-  async showMessageWithCheckBox(title?: string, body: string = '',chechBoxMessage : string ='',YesButtonText : string = '',cancleButtonText : string = '')
-  {
-    return  Swal.fire({
+  async showMessageWithCheckBox(
+    title?: string,
+    body: string = '',
+    chechBoxMessage: string = '',
+    YesButtonText: string = '',
+    cancleButtonText: string = ''
+  ) {
+    return Swal.fire({
       icon: 'error',
       title: this.l(title),
       text: this.l(body),
       showCancelButton: true,
       input: 'checkbox',
       inputValue: 1,
-      inputPlaceholder:
-      chechBoxMessage,
+      inputPlaceholder: chechBoxMessage,
       buttonsStyling: false,
       customClass: {
         confirmButton: 'btn btn-success button-in-notification',
-        cancelButton:'btn btn-info button-in-notification'
-        
+        cancelButton: 'btn btn-info button-in-notification',
       },
       confirmButtonText:
-      '<i  class="fa fa-check"></i><span class="button-text">' + YesButtonText  + '</span>',
-      cancelButtonText :  
-      '<i  class="fa fa-share"></i><span class="button-text">' + cancleButtonText  + '</span>'
+        '<i  class="fa fa-check"></i><span class="button-text">' +
+        YesButtonText +
+        '</span>',
+      cancelButtonText:
+        '<i  class="fa fa-share"></i><span class="button-text">' +
+        cancleButtonText +
+        '</span>',
     });
-    
   }
   showSuccess(message: string) {
     toastr.options = {
@@ -53,8 +59,8 @@ export class NotifyService {
       onclick: null,
       fadeIn: 300,
       fadeOut: 1000,
-      timeOut: 1000,
-      extendedTimeOut: 1000,
+      timeOut: 3000,
+      extendedTimeOut: 3000,
     };
     toastr.success(this.l(message));
   }
