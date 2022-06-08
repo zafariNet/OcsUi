@@ -47,6 +47,7 @@ export class ChangePasswordComponent
       this.accountService
         .changePassword(this.changePasswordForm.value)
         .subscribe({
+          next : ()=> this.modalService.hide(),
           error: () => {
             this.gettingData = false;
           },
