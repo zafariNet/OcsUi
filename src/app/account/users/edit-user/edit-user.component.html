@@ -1,0 +1,104 @@
+<ng-template #editUserModal>
+  <form [formGroup]="editUserForm" (ngSubmit)="addUser()">
+    <div class="modal-header modal-header-blue">
+      <h6 class="modal-title pull-left">
+        <i class="fas fa-user-plus mr-2"></i>{{ l("ADD_NEW_USER") }}
+      </h6>
+      <button
+        type="button"
+        class="close pull-right"
+        aria-label="Close"
+        (click)="modalRef.hide()"
+      >
+        <span aria-hidden="true" class="text-white">×</span>
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="displayName" class="control-label-required">{{
+              l("DISPLAY_NAME")
+            }}</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="displayName"
+              autocomplete="off"
+              [ngClass]="{ 'is-invalid': showRequiredField('displayName') }"
+            />
+            <span
+              [@fadeInOut]
+              class="validation-error-message"
+              *ngIf="showRequiredField('displayName')"
+              >{{ l("REQURED_FIELD") }}</span
+            >
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="check-box-in-horizental-form">
+            <div class="icheck-primary d-inline">
+              <input
+                type="checkbox"
+                id="Cleanup-ClickPost-journa"
+                formControlName="isActive"
+              />
+              <label for="Cleanup-ClickPost-journa"> {{ l("ACTIVE") }}</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          {{ l("SETTINGS") }}
+          <hr class="divider" />
+        </div>
+      </div>
+      <div class="row" formGroupName="userSetting">
+        <div class="col-lg-4">
+          <label for="defaultLanguage" class="control-label-required">{{
+            l("DEFAULT_LANGUAGE")
+          }}</label>
+          <select
+            id="defaultLanguage"
+            class="form-control"
+            formControlName="defaultLanguage"
+            [ngClass]="{
+              'is-invalid': showRequiredField('userSetting.defaultLanguage')
+            }"
+          >
+            <option [ngValue]="null" disabled [selected]="true">
+              {{ l("SELECT_A_LANGUAGE") }}
+            </option>
+            <option [ngValue]="'en'">English</option>
+            <option [ngValue]="'de'">Germany</option>
+          </select>
+          <span
+            [@fadeInOut]
+            class="validation-error-message"
+            *ngIf="showRequiredField('userSetting.defaultLanguage')"
+            >{{ l("REQURED_FIELD") }}</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer clearfix">
+      <button
+        type="button"
+        class="btn btn-default float-right"
+        (click)="modalRef.hide()"
+      >
+        {{ l("CLOSE") }}
+      </button>
+      <button
+        type="submit"
+        class="btn btn-success"
+        [buttonBusy]="saving"
+        [busyText]="'Please wait...'"
+      >
+        <i class="fa fa-save mr-2"></i><span class=""> {{ l("SAVE") }}</span>
+      </button>
+    </div>
+  </form>
+</ng-template>

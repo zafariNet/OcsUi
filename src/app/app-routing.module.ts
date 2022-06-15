@@ -5,7 +5,7 @@ import { ErrorComponent } from './layout/errors/error-component';
 import { MainLayoutComponent } from './layout/main/main-layout.component';
 import { LoginComponent } from './account/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { UsersComponent } from './account/users/users.component';
+import { AccountComponent } from './account/account.component';
 
 // const routes: Routes = [{ path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule) }];
 const routes: Routes = [
@@ -15,7 +15,9 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'users', component: UsersComponent },
+      { path: 'account', component: AccountComponent },
+      // { path: 'users', component: UsersComponent },
+      // { path: 'roles', component: RolesComponent },
     ],
   },
   {

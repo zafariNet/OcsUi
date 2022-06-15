@@ -1,0 +1,50 @@
+<ng-template #addPermissionModal>
+  <form [formGroup]="addPermissionForm" (ngSubmit)="addPermission()">
+    <div class="modal-header modal-header-blue">
+      <h6 class="modal-title pull-left">
+        <i class="fas fa-plus mr-2"></i>
+        {{ l("EDIT_ROLE_PERMISSION") }} :
+        <span class="font-weight-bold text-warning">{{ roleName }}</span>
+      </h6>
+      <button
+        type="button"
+        class="close pull-right"
+        aria-label="Close"
+        (click)="modalRef.hide()"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div
+          class="col-lg-6 border-left"
+          *ngFor="let permission of permissionList"
+        >
+          <ocs-tree-permission
+            [node]="permission!"
+            [title]="permission.displayName!"
+            (permissionChanged)="permissionChanged($event)"
+          ></ocs-tree-permission>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer clearfix">
+      <button
+        type="button"
+        class="btn btn-default float-right"
+        (click)="modalRef.hide()"
+      >
+        {{ l("CLOSE") }}
+      </button>
+      <button
+        type="submit"
+        class="btn btn-success"
+        [buttonBusy]="saving"
+        [busyText]="'Please wait...'"
+      >
+        <i class="fa fa-save mr-2"></i><span class=""> {{ l("SAVE") }}</span>
+      </button>
+    </div>
+  </form>
+</ng-template>

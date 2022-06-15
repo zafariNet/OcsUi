@@ -7,6 +7,7 @@ import { TokenService } from 'src/app/account/services/token.service';
 import { AppBaseComponent } from 'src/app/app-base.component';
 import { AccountService } from 'src/app/service-proxies/service-proxies';
 declare var $: any;
+declare var Layout: any;
 @Component({
   selector: 'ocs-main-layout',
   templateUrl: './main-layout.component.html',
@@ -46,20 +47,17 @@ export class MainLayoutComponent
           this._globalModelService.initialDataFeteched.next(true);
           this._globalModelService.userSetting = value.value!;
           this.setLangulagedefaults(value.value?.defaultLanguage);
-          setTimeout(() => {
-            this.spinner.hide();
-          }, 1000);
+          this.spinner.hide();
+          if (!this.globalModelService.sidebarInitilized) {
+            Layout.initialTreeview(this.router.url);
+            this.globalModelService.sidebarInitilized = true;
+          }
         },
         error: (error) => {},
       });
     }
   }
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      debugger;
-      $.getScript('assets/js/adminlte.min.js');
-    }, 2000);
-  }
+  ngAfterViewInit(): void {}
 
   setLangulagedefaults(currentLanguage = 'en') {
     this.translateService.addLangs(['en', 'de']);

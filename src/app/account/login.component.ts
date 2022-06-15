@@ -2,6 +2,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppBaseComponent } from '../app-base.component';
+import * as AdminLte from 'admin-lte';
+declare var $: any;
 import {
   AccountService,
 } from '../service-proxies/service-proxies';

@@ -1,18 +1,18 @@
-<div class="card card-outline card-primary">
+<div class="card card-outline card-warning">
   <div class="card-header">
     <h3 class="card-title">
-      <i class="far fa fa-user nav-icon mr-2 text-info"></i
-      ><strong>{{ l("USERS") }}</strong>
+      <i class="fas fa-user-cog nav-icon mr-2 text-info"></i
+      ><strong>{{ l("ROLES") }}</strong>
     </h3>
     <div class="card-tools">
       <ul class="nav nav-pills ml-auto">
         <li class="nav-item mr-3">
           <a
             class="btn btn-block btn-default btn-xs"
-            (click)="openEditUserModal(null, null)"
+            (click)="showAddRoleModal()"
           >
-            <i class="fa fa-user-plus nav-icon mr-2"></i
-            ><span class="p-2">{{ l("ADD_NEW_USER") }}</span>
+            <i class="fa fa-plus nav-icon mr-2"></i
+            ><span class="p-2">{{ l("ADD_NEW_ROLE") }}</span>
           </a>
         </li>
         <li class="nav-item">
@@ -36,48 +36,39 @@
       </ul>
     </div>
   </div>
+
   <div
     class="card-body p-0 overlay-wrapper table-responsive"
     style="min-height: 500px"
   >
-    <div class="overlay" *ngIf="gettingUserList">
+    <div class="overlay" *ngIf="gettingRuleList">
       <i class="fas fa-3x fa-sync-alt fa-spin"></i>
       <div class="text-bold pt-2"></div>
     </div>
-    <table class="table table-bordered table-hover" *ngIf="userList">
+    <table class="table table-bordered table-hover" *ngIf="roleList">
       <thead>
         <th>#</th>
-        <th>{{ l("USER_NAME") }}</th>
-        <th>{{ l("DISPLAY_NAME") }}</th>
-        <th>{{ l("DEFAULT_LANGUAGE") }}</th>
-        <th>{{ l("ACTIVE") }}</th>
-        <th>{{ l("LAST_LOGIN") }}</th>
-        <th>{{ l("ROLE") }}</th>
+        <th>{{ l("ROLE_NAME") }}</th>
+        <th>{{ l("DESCRIPTION") }}</th>
         <th>{{ l("ACTIONS") }}</th>
       </thead>
       <tbody>
         <tr
           *ngFor="
-            let user of userList
+            let role of roleList
               | paginate
                 : {
                     itemsPerPage: config.itemsPerPage,
                     currentPage: config.currentPage!,
                     totalItems: config.totalItems,
-                    id: 'userPagination'
+                    id: 'rolePagination'
                   };
             let i = index
           "
         >
           <td>{{ i + 1 }}</td>
-          <td>{{ user.userName }}</td>
-          <td>{{ user.displayName }}</td>
-          <td>{{ user.userSetting?.defaultLanguage }}</td>
-          <td>{{ user.isActive }}</td>
-          <td>
-            {{ user.lastLoggedIn | date: "EEEE, MMMM d, y, h:mm:ss a zzzz" }}
-          </td>
-          <td>{{ "Administrator" }}</td>
+          <td>{{ role.name }}</td>
+          <td>{{ role.description }}</td>
           <td>
             <div class="btn-group">
               <button
@@ -91,21 +82,14 @@
               <div class="dropdown-menu dropdown-menu-right" role="menu">
                 <a
                   class="dropdown-item"
-                  (click)="
-                    openChangePasswordModal(
-                      user.id!,
-                      user.displayName!,
-                      user.version!
-                    )
-                  "
-                  ><i class="fas fa-lock mr-2"></i>{{ l("CHANGE_PASSWORD") }}</a
+                  (click)="showAddPermissionModal(role.id!, role.name!)"
+                  ><i class="fas fa-key mr-2"></i>{{ l("PERMISSIONS") }}</a
                 >
-                <a class="dropdown-item" (click)="openEditUserModal(user, i)"
+                <a class="dropdown-item" (click)="showEditRoleModal(role)"
                   ><i class="fas fa-edit mr-2"></i>{{ l("EDIT") }}</a
                 >
-                <a class="dropdown-item" (click)="deleteUser(user.id!, i)"
-                  ><i class="fas fa-user-slash mr-2"></i
-                  >{{ l("DELETE_USER") }}</a
+                <a class="dropdown-item" (click)="deleteRole(role.id!)"
+                  ><i class="fas fa-trash mr-2"></i>{{ l("DELETE_ROLE") }}</a
                 >
               </div>
             </div>
@@ -117,11 +101,11 @@
   <div class="card-footer clearfix">
     <div class="row">
       <div class="col-lg-3">
-        {{ l("NUMBER_OF_USERS") }} {{ config.totalItems }}
+        {{ l("NUMBER_OF_ROLES") }} {{ config.totalItems }}
       </div>
       <div class="col-lg-9 text-right">
         <pagination-controls
-          id="userPagination"
+          id="rolePagination"
           (pageChange)="pageChanged($event)"
           (pageBoundsCorrection)="pageChanged($event)"
           [maxSize]="9"
@@ -139,7 +123,6 @@
     </div>
   </div>
 </div>
-
-<ocs-change-user-password #changeUserPasswordModal></ocs-change-user-password>
-<ocs-add-user #addUserModal (userAdded)="getAllUser()"></ocs-add-user>
-<ocs-edit-user #editUserModal (userEdited)="getAllUser()"></ocs-edit-user>
+<ocs-add-role #addRoleModal (roleAdded)="GetAllRoles()"></ocs-add-role>
+<ocs-edit-role #editRoleModal (roleEdited)="GetAllRoles()"></ocs-edit-role>
+<ocs-add-permission #addPermissionModal></ocs-add-permission>

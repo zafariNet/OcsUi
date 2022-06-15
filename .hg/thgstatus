@@ -12,3 +12,5 @@ msrc/app/service-proxies
 msrc/app/services
 msrc/app/shared
 msrc/app/shared/service-proxies
+msrc/assets
+msrc/assets/js

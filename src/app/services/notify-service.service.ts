@@ -1,6 +1,7 @@
 import { animate } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Subject } from 'rxjs';
 declare var $: any;
 declare var Noty: any;
 declare var Swal: any;
@@ -54,13 +55,21 @@ export class NotifyService {
   }
   showSuccess(message: string) {
     toastr.options = {
+      closeButton: false,
       debug: false,
-      positionClass: 'toast-bottom-right',
+      newestOnTop: false,
+      progressBar: false,
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: false,
       onclick: null,
-      fadeIn: 300,
-      fadeOut: 1000,
-      timeOut: 3000,
-      extendedTimeOut: 3000,
+      showDuration: '300',
+      hideDuration: '1000',
+      timeOut: '5000',
+      extendedTimeOut: '1000',
+      showEasing: 'swing',
+      hideEasing: 'linear',
+      showMethod: 'fadeIn',
+      hideMethod: 'fadeOut',
     };
     toastr.success(this.l(message));
   }
@@ -73,5 +82,30 @@ export class NotifyService {
       error: (error) => {},
     });
     return translated;
+  }
+  async showNewConfirm(title: string, cancleText = 'Mohammad') {
+    var deferred = new $.Deferred();
+    $.confirm({
+      title: this.l(title),
+      content: '',
+      theme: 'bootstrap',
+      type: 'orange',
+      // icon: 'fas fa-exclamation-triangle',
+      buttons: {
+        yes: {
+          text: this.l('YES'),
+          action: function () {
+            deferred.resolve(true);
+          },
+        },
+        no: {
+          text: this.l('NO'),
+          action: function () {
+            deferred.resolve(false);
+          },
+        },
+      },
+    });
+    return deferred;
   }
 }

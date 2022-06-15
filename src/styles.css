@@ -616,6 +616,24 @@ summary::-webkit-details-marker {
 .button-in-notification{
   margin-left: 10px !important;
 }
+.nav-link{
+  cursor: pointer;
+}
+.check-box-in-horizental-form{
+margin-top: 35px;
+}
+
+hr.divider {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+
+
+
+
 /* .cdk-drop-dragging .cdk-drag {
   transition: transform 500ms cubic-bezier(0, 0, 0.2, 1);
 }

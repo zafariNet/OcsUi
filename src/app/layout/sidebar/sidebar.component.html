@@ -1,15 +1,17 @@
 <aside class="main-sidebar sidebar-dark-lightblue elevation-4">
-  <a href="" class="brand-link">
+  <!-- Brand Logo -->
+  <a href="../../index3.html" class="brand-link">
     <img
       src="assets/img/clickpostlogo.svg"
       alt="AdminLTE Logo"
       class="brand-image"
       style="padding-left: 8px"
     />
-    <span class="brand-text font-weight-light text-muted">.</span>
   </a>
 
+  <!-- Sidebar -->
   <div class="sidebar">
+    <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
         <img
@@ -24,6 +26,25 @@
         }}</a>
       </div>
     </div>
+
+    <!-- SidebarSearch Form -->
+    <div class="form-inline">
+      <div class="input-group" data-widget="sidebar-search">
+        <input
+          class="form-control form-control-sidebar"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-sidebar">
+            <i class="fas fa-search fa-fw"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul
         class="nav nav-pills nav-sidebar flex-column nav-flat"
@@ -31,6 +52,8 @@
         role="menu"
         data-accordion="true"
       >
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
         <li class="nav-item">
           <a
             href="#"
@@ -44,29 +67,153 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">
-            <i class="nav-icon fa fa-users"></i>
+          <a
+            href="#"
+            class="nav-link"
+            [routerLink]="['/queue/monitor']"
+            class="nav-link"
+            [routerLinkActive]="'active'"
+          >
+            <i class="nav-icon fas fa-chart-line"></i>
+            <p>Queue Montior</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            href="#"
+            class="nav-link"
+            [routerLink]="['/queue/monitor1']"
+            class="nav-link"
+            [routerLinkActive]="'active'"
+          >
+            <i class="nav-icon fas fa-chart-line"></i>
+            <p>Queue Montior 1</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            href="#"
+            class="nav-link"
+            [routerLink]="['/click-post']"
+            class="nav-link"
+            [routerLinkActive]="'active'"
+          >
+            <i class="nav-icon fas fa-mail-bulk"></i>
+            <p>Click Post</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            href="#"
+            class="nav-link"
+            [routerLink]="['/drag']"
+            class="nav-link"
+            [routerLinkActive]="'active'"
+          >
+            <i class="nav-icon fas fa-mail-bulk"></i>
+            <p>Click Post 1</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            href="#"
+            class="nav-link"
+            [routerLink]="['/document-type/types']"
+            class="nav-link"
+            [routerLinkActive]="'active'"
+          >
+            <i class="nav-icon fas fa-file-alt"></i>
+            <p>Document Types</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [ngClass]="{ active: isActiveRoute('/settings') }"
+          >
+            <i class="nav-icon fas fa-cogs"></i>
+
             <p>
-              {{ l("ACCOUNTS") }}
-              <i class="fas fa-angle-left right"></i>
+              {{ l("SETTINGS") }}
+              <i class="right fas fa-angle-right"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/main/users']">
-                <i class="far fa fa-user nav-icon"></i>
-                <p>{{ l("USERS") }}</p>
+              <a
+                class="nav-link"
+                [routerLink]="['../settings/all-settings']"
+                [routerLinkActive]="'active'"
+              >
+                <i class="fab fa-wpbeginner nav-icon"></i>
+                <p>All settings</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="UI/icons.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Icons</p>
+              <a
+                class="nav-link"
+                [routerLink]="['../settings/clickPost-directories']"
+                [routerLinkActive]="'active'"
+              >
+                <i class="fas fa-weight-hanging nav-icon"></i>
+                <p>ClickPost Directories</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLink]="['../settings/click-post-webapp-setttings']"
+                [routerLinkActive]="'active'"
+              >
+                <i class="fab fa-wpbeginner nav-icon"></i>
+                <p>ClickPost Web App Settings</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLink]="['../settings/document-seperation']"
+                [routerLinkActive]="'active'"
+              >
+                <i class="fab fa-windows nav-icon"></i>
+                <p>Document Seperation</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../charts/uplot.html" class="nav-link">
+                <i class="fas fa-cloud-download-alt nav-icon"></i>
+                <p>Email Download</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../charts/uplot.html" class="nav-link">
+                <i class="fab fab fa-android nav-icon"></i>
+                <p>Notifications in batch mode</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../charts/uplot.html" class="nav-link">
+                <i class="fab fa-servicestack nav-icon"></i>
+                <p>Extract information from file andsss path</p>
               </a>
             </li>
           </ul>
         </li>
+
+        <li class="nav-item">
+          <a
+            href="#"
+            [routerLink]="['/main/account']"
+            class="nav-link"
+            [routerLinkActive]="'active'"
+          >
+            <i class="nav-icon fas fa fa-users-cog"></i>
+            <p>{{ l("ACCOUNTS") }}</p>
+          </a>
+        </li>
       </ul>
     </nav>
+    <!-- /.sidebar-menu -->
   </div>
+  <!-- /.sidebar -->
 </aside>

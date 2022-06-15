@@ -14,22 +14,19 @@ import { LoginService } from 'src/app/account/services/login.service';
 export class HeaderComponent extends AppBaseComponent {
   @ViewChild('changePasswordModal')
   changePasswordModal: ChangePasswordComponent;
-  constructor(injector: Injector, private accountService: AccountService,private loginService : LoginService) {
+  constructor(
+    injector: Injector,
+    private accountService: AccountService,
+    private loginService: LoginService
+  ) {
     super(injector);
   }
-   logout() {
-    let _this=this;
+  logout() {
     this.notificationService
-      .showMessageWithCheckBox(
-        this.l('ARE_YOU_SURE_TO_LOGOUT'),
-        '',
-        this.l('LOGOUT_FROM_ALL_OPPEN_SESSION'),
-        this.l('YES'),
-        this.l('NO')
-      )
+      .showNewConfirm('ARE_YOU_SURE_TO_LOGOUT')
       .then((response) => {
-        if (response.isConfirmed) {
-           _this.loginService.logout(response.value);
+        if (response) {
+          this.loginService.logout(response.value);
         }
       });
   }
@@ -37,13 +34,11 @@ export class HeaderComponent extends AppBaseComponent {
     this.changePasswordModal.showModal(null);
   }
   changeLanguage(language: string): void {
-    this.showSpinner();
     let request = new ChanageDefaultLanguageRequest();
     request.defaultLanguage = language;
     this.accountService.changeDefaultLanguage(request).subscribe({
       next: () => {
         this.translate.use(language);
-        this.hideSpinner();
       },
       error: () => {},
     });

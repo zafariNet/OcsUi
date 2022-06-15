@@ -1,12 +1,14 @@
 import { AppBaseComponent } from 'src/app/app-base.component';
-import { Component, Injector, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Injector, OnInit } from '@angular/core';
 import { GlobalModelService } from 'src/app/account/services/global-model.service';
 import { LoginService } from 'src/app/account/services/login.service';
+declare var $: any
+import * as AdminLte from 'admin-lte';
 @Component({
   selector: 'ocs-sidebar',
   templateUrl: './sidebar.component.html',
 })
-export class SidebarComponent extends AppBaseComponent implements OnInit {
+export class SidebarComponent extends AppBaseComponent implements OnInit,AfterViewInit {
   currentUrl: string = '';
   _globalMpodelService: GlobalModelService;
   constructor(
@@ -17,8 +19,13 @@ export class SidebarComponent extends AppBaseComponent implements OnInit {
     super(injector);
     this._globalMpodelService = globalModelService;
   }
+  ngAfterViewInit(): void {
+    
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
   isActiveRoute(route: string) {
     return this.router.url.startsWith(route);
   }
