@@ -37,6 +37,7 @@
   "ROLE": "Role",
   "ACTIONS": "Actions",
   "DEFAULT_LANGUAGE": "Default language",
+  "LANGUAGE": "Language",
   "SAVE": "Save",
   "CLOSE": "Close",
   "VERSIONS_ARE_NOTE_MATCH": "This entity already changed, please refresh page to get updated data",

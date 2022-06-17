@@ -97,4 +97,10 @@ export class UsersComponent extends AppBaseComponent implements OnInit {
     currentPage: 1,
     totalItems: 0,
   };
+  getCurrentLanguageFlag(language: string) {
+    if (language == 'en') {
+      return 'us';
+    }
+    return language;
+  }
 }

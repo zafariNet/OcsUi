@@ -37,6 +37,7 @@
   "ROLE": "Rolle",
   "ACTIONS": "Aktionen",
   "DEFAULT_LANGUAGE": "Standardsprache",
+  "LANGUAGE": "Sptache",
   "SAVE": "Speichern",
   "CLOSE": "Schließen",
   "VERSIONS_ARE_NOTE_MATCH": "Diese Entität hat sich bereits geändert, bitte aktualisieren Sie die Seite, um aktuelle Daten zu erhalten",

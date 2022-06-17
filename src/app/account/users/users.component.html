@@ -50,7 +50,7 @@
         <th>{{ l("USER_NAME") }}</th>
         <th>{{ l("DISPLAY_NAME") }}</th>
         <th>{{ l("PARENT_USER") }}</th>
-        <th>{{ l("DEFAULT_LANGUAGE") }}</th>
+        <th>{{ l("LANGUAGE") }}</th>
         <th>{{ l("ACTIVE") }}</th>
         <th>{{ l("LAST_LOGIN") }}</th>
         <th>{{ l("ROLES") }}</th>
@@ -74,10 +74,27 @@
           <td>{{ user.userName }}</td>
           <td>{{ user.displayName }}</td>
           <td>{{ user.parentUser?.displayName }}</td>
-          <td>{{ user.userSetting?.defaultLanguage }}</td>
-          <td>{{ user.isActive }}</td>
+          <td class="text-center">
+            <i
+              class="flag-icon flag-icon"
+              [ngClass]="
+                'flag-icon-' +
+                getCurrentLanguageFlag(user.userSetting?.defaultLanguage!)
+              "
+            ></i>
+          </td>
+          <td class="text-center">
+            <i
+              class="fa fa-solid fa-check text-success"
+              *ngIf="user.isActive"
+            ></i>
+            <i
+              class="fa fa-solid fa-ban text-danger"
+              *ngIf="!user.isActive"
+            ></i>
+          </td>
           <td>
-            {{ user.lastLoggedIn | date: "EEEE, MMMM d, y, h:mm:ss a zzzz" }}
+            {{ user.lastLoggedIn | date: "medium" }}
           </td>
           <td>
             <span *ngFor="let role of user.roles"
