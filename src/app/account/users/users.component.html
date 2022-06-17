@@ -9,7 +9,7 @@
         <li class="nav-item mr-3">
           <a
             class="btn btn-block btn-default btn-xs"
-            (click)="openEditUserModal(null, null)"
+            (click)="openAddUserModal()"
           >
             <i class="fa fa-user-plus nav-icon mr-2"></i
             ><span class="p-2">{{ l("ADD_NEW_USER") }}</span>
@@ -49,10 +49,11 @@
         <th>#</th>
         <th>{{ l("USER_NAME") }}</th>
         <th>{{ l("DISPLAY_NAME") }}</th>
+        <th>{{ l("PARENT_USER") }}</th>
         <th>{{ l("DEFAULT_LANGUAGE") }}</th>
         <th>{{ l("ACTIVE") }}</th>
         <th>{{ l("LAST_LOGIN") }}</th>
-        <th>{{ l("ROLE") }}</th>
+        <th>{{ l("ROLES") }}</th>
         <th>{{ l("ACTIONS") }}</th>
       </thead>
       <tbody>
@@ -72,12 +73,17 @@
           <td>{{ i + 1 }}</td>
           <td>{{ user.userName }}</td>
           <td>{{ user.displayName }}</td>
+          <td>{{ user.parentUser?.displayName }}</td>
           <td>{{ user.userSetting?.defaultLanguage }}</td>
           <td>{{ user.isActive }}</td>
           <td>
             {{ user.lastLoggedIn | date: "EEEE, MMMM d, y, h:mm:ss a zzzz" }}
           </td>
-          <td>{{ "Administrator" }}</td>
+          <td>
+            <span *ngFor="let role of user.roles"
+              >{{ role.role!.name }} |
+            </span>
+          </td>
           <td>
             <div class="btn-group">
               <button
@@ -139,7 +145,6 @@
     </div>
   </div>
 </div>
-
 <ocs-change-user-password #changeUserPasswordModal></ocs-change-user-password>
 <ocs-add-user #addUserModal (userAdded)="getAllUser()"></ocs-add-user>
 <ocs-edit-user #editUserModal (userEdited)="getAllUser()"></ocs-edit-user>

@@ -35,7 +35,7 @@ export class RolesComponent extends AppBaseComponent implements OnInit {
   GetAllRoles() {
     this.gettingRuleList = true;
     this.roleService
-      .get('', this.config.currentPage, this.config.itemsPerPage, '')
+      .getList('', this.config.currentPage, this.config.itemsPerPage, '')
       .subscribe({
         next: (response: PagedResultOfRoleListViewModel) => {
           this.roleList = <RoleListViewModel[]>response['value'].itemList!;

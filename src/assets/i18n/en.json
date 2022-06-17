@@ -59,5 +59,8 @@
   "ARE_YOU_SURE_TO_DELETE_ROLE": "Are you sure to delete role?",
   "EDIT_ROLE_PERMISSION": "Edit permissions of role",
   "PERMISSIONS_CHANGED_SUCCESSFULLY": "Permissions changed sucessfully",
-  "ROLE_EDITED_SUCCESSFULLY": "Role edited successfully"
+  "ROLE_EDITED_SUCCESSFULLY": "Role edited successfully",
+  "SELECT_A_ROLE": "Select a role",
+  "YOU_MUST_SELECT_A_ROLE": "You must select a role",
+  "PARENT_USER": "Parent user"
 }

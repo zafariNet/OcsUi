@@ -59,5 +59,8 @@
   "ARE_YOU_SURE_TO_DELETE_ROLE": "Sind Sie sicher, dass Sie die Rolle löschen wollen?",
   "EDIT_ROLE_PERMISSION": "Berechtigungen der Rolle bearbeiten",
   "PERMISSIONS_CHANGED_SUCCESSFULLY": "Berechtigungen erfolgreich geändert",
-  "ROLE_EDITED_SUCCESSFULLY": "Rolle erfolgreich bearbeitet"
+  "ROLE_EDITED_SUCCESSFULLY": "Rolle erfolgreich bearbeitet",
+  "SELECT_A_ROLE": "Wählen Sie eine Rolle",
+  "YOU_MUST_SELECT_A_ROLE": "Sie müssen eine Rolle auswählen",
+  "PARENT_USER": "übergeordneter Nutzer"
 }

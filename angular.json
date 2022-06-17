@@ -26,9 +26,9 @@
             "styles": [
               "node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css",
               "node_modules/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
-              "node_modules/admin-lte/dist/css/adminlte.min.css",
+
               "node_modules/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
-              "node_modules/admin-lte/plugins/select2/css/select2.min.css",
+
               "node_modules/admin-lte/plugins/flag-icon-css/css/flag-icons.min.css",
               "node_modules/admin-lte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css",
               "node_modules/admin-lte/plugins/toastr/toastr.min.css",
@@ -39,7 +39,9 @@
               "src/assets/plugins/xml-viewer/simpleXML.css",
               "src/assets/plugins/tooltip/jquery.toolbar.css",
               "src/assets/plugins/ionicons-2.0.1/css/ionicons.min.css",
-
+              "node_modules/admin-lte/plugins/select2/css/select2.min.css",
+              "node_modules/admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css",
+              "node_modules/admin-lte/dist/css/adminlte.min.css",
               "src/styles.css"
             ],
             "scripts": [

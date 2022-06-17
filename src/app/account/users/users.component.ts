@@ -18,7 +18,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 
 import { ChangeUserPasswordComponent } from './change-user-password/change-user-password.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
-
+declare var $: any;
 @Component({
   selector: '[ocs-users]',
   templateUrl: './users.component.html',
@@ -36,6 +36,7 @@ export class UsersComponent extends AppBaseComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getAllUser();
+    $('.select2').select2();
   }
   openChangePasswordModal(
     userId: string,
@@ -51,8 +52,7 @@ export class UsersComponent extends AppBaseComponent implements OnInit {
     this.addUserModal.showModal();
   }
   userAddedEventHandler(addedUser: UserListViewModel) {
-    console.log(addedUser);
-    this.userList?.push(addedUser);
+    this.getAllUser();
   }
   deleteUser(id: string, index: number) {
     var request = new DeleteRequest({ id: id });
@@ -70,6 +70,7 @@ export class UsersComponent extends AppBaseComponent implements OnInit {
       });
   }
   getAllUser() {
+    debugger;
     this.gettingUserList = true;
     this.userService
       .get('', this.config.currentPage, this.config.itemsPerPage, '')
@@ -92,7 +93,7 @@ export class UsersComponent extends AppBaseComponent implements OnInit {
 
   public config: PaginationInstance = {
     id: 'userPagination',
-    itemsPerPage: 3,
+    itemsPerPage: 10,
     currentPage: 1,
     totalItems: 0,
   };

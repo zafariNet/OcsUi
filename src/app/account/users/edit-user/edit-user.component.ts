@@ -7,16 +7,21 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { AppBaseComponent } from 'src/app/app-base.component';
 import {
-  BaseViewModel,
-  CreateUserRequest,
-  CreateUserSettingRequest,
+  DropDownViewModel,
+  RoleService,
+  RoleSimpleViewModel,
   UserListViewModel,
   UserService,
-  UserSettingViewModel,
 } from 'src/app/service-proxies/service-proxies';
 
 @Component({
@@ -27,35 +32,48 @@ export class EditUserComponent extends AppBaseComponent implements OnInit {
   modalRef: BsModalRef;
   @ViewChild('editUserModal') modal: TemplateRef<any>;
   saving: boolean = false;
-  editUserRequest: CreateUserRequest;
+
   editUserForm: FormGroup;
   userIndex: number | null;
-  @Output() userEdited: EventEmitter<UserListViewModel> =
-    new EventEmitter<UserListViewModel>();
+  roleList: RoleSimpleViewModel[] | undefined;
+  userList: DropDownViewModel[] | undefined;
+  roleIdsControllArray: FormArray;
+  editUser: UserListViewModel;
+  @Output() userEdited: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     injector: Injector,
     private modalService: BsModalService,
-    private userService: UserService
+    private userService: UserService,
+    private roleService: RoleService,
+    private formBuilder: FormBuilder
   ) {
     super(injector);
   }
+  ngAfterViewInit(): void {}
   ngOnInit(): void {
-    // throw new Error('Method not implemented.');
+    this.roleService.getDropdownList().subscribe({
+      next: (response) => {
+        this.roleList = response.itemList;
+      },
+    });
+
+    this.userService.getDropdownList().subscribe({
+      next: (response) => {
+        this.userList = response.itemList;
+      },
+    });
   }
 
-  addUser() {
+  saveData() {
+    debugger;
     if (this.editUserForm.valid) {
       this.saving = true;
-      this.userService.create(this.editUserForm.value).subscribe({
+      this.userService.put(this.editUserForm.value).subscribe({
         next: (response) => {
+          debugger;
           this.saving = false;
-          this.userEdited.emit(
-            this.createUserListViewModel(
-              this.editUserForm.value,
-              response.value!
-            )
-          );
+          this.userEdited.emit(true);
           this.modalService.hide();
         },
         error: () => (this.saving = false),
@@ -65,22 +83,32 @@ export class EditUserComponent extends AppBaseComponent implements OnInit {
     }
   }
   showModal(user: UserListViewModel | null) {
-    this.editUserRequest = new CreateUserRequest();
-    this.editUserRequest.userSetting = new CreateUserSettingRequest();
-    this.createForm(user);
+    this.editUser = user!;
+    this.createForm();
     const config: ModalOptions = { class: 'modal-lg' };
     this.modalRef = this.modalService.show(this.modal, config);
   }
 
-  createForm(user: UserListViewModel | null) {
-    this.editUserForm = new FormGroup({
-      displayName: new FormControl(user?.displayName, [Validators.required]),
-      isActive: new FormControl(user?.isActive ?? true, [Validators.required]),
+  createForm() {
+    this.editUserForm = this.formBuilder.group({
+      id: new FormControl(this.editUser.id, [Validators.required]),
+      displayName: new FormControl(this.editUser.displayName, [
+        Validators.required,
+      ]),
+      isActive: new FormControl(this.editUser.isActive, [Validators.required]),
+      parentUserId: new FormControl(this.editUser.parentUser?.id!),
+      version: new FormControl(this.editUser.version, [Validators.required]),
       userSetting: new FormGroup({
-        defaultLanguage: new FormControl(user?.userSetting?.defaultLanguage, [
-          Validators.required,
-        ]),
+        defaultLanguage: new FormControl(
+          this.editUser.userSetting?.defaultLanguage,
+          [Validators.required]
+        ),
       }),
+      roleIds: this.formBuilder.array([]),
+    });
+    this.roleIdsControllArray = this.editUserForm.get('roleIds') as FormArray;
+    this.editUser.roles?.forEach((role) => {
+      this.roleIdsControllArray.push(new FormControl(role.role!.id));
     });
   }
 
@@ -91,23 +119,25 @@ export class EditUserComponent extends AppBaseComponent implements OnInit {
         this.editUserForm.get(field)?.touched)
     );
   }
-  private createUserListViewModel(
-    createUserRequest: CreateUserRequest,
-    baseviewModelData: BaseViewModel
-  ): UserListViewModel {
-    var user = new UserListViewModel();
-    var userSetting = new UserSettingViewModel();
-    userSetting.defaultLanguage =
-      createUserRequest.userSetting?.defaultLanguage;
-    user.displayName = createUserRequest.displayName;
-    user.userName = createUserRequest.userName;
-    user.id = baseviewModelData.id;
-    user.version = baseviewModelData.version;
-    user.isActive = createUserRequest.isActive;
-    user.lastLoggedIn = undefined;
-    user.parentUser = undefined;
-    user.userSetting = userSetting;
 
-    return user;
+  rolesChange(event) {
+    if (event.target.checked) {
+      this.roleIdsControllArray.push(new FormControl(event.target.id));
+    } else {
+      let i: number = 0;
+
+      this.roleIdsControllArray.controls.forEach((ctrl) => {
+        if (ctrl.value == event.target.id) {
+          this.roleIdsControllArray.removeAt(i);
+          return;
+        }
+
+        i++;
+      });
+    }
+  }
+  hasPermission(roleId) {
+    return this.editUser.roles?.filter((item) => item.role?.id == roleId)
+      .length;
   }
 }

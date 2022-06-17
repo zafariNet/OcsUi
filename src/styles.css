@@ -630,10 +630,19 @@ hr.divider {
   border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 
+.select2-container--default .select2-selection--single{
+  height: calc(2.25rem + 2px) !important;
+}
 
 
-
-
+.text-sm .select2-container--default .select2-selection--single .select2-selection__rendered, select.form-control-sm~.select2-container--default .select2-selection--single .select2-selection__rendered
+{
+  margin-top: -0.2rem !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b
+{
+  margin-top: 2px !important;
+}
 /* .cdk-drop-dragging .cdk-drag {
   transition: transform 500ms cubic-bezier(0, 0, 0.2, 1);
 }

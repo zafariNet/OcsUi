@@ -24,6 +24,7 @@ import { Router } from '@angular/router';
 import { ErrorComponent } from './layout/errors/error-component';
 import { Error500Component } from './layout/errors/error-500.component';
 import { GlobalModelService } from './account/services/global-model.service';
+
 export function tokenGetter(): string | null {
   var token = localStorage.getItem('token');
   return token;

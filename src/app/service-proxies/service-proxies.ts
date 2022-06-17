@@ -680,7 +680,8 @@ export class FileService implements IFileService {
 export interface IRoleService {
     post(request: CreateRoleRequest): Observable<ResultOfBaseViewModel>;
     put(request: EditRoleRequest): Observable<Result>;
-    get(filtering?: string | null | undefined, page?: number | undefined, pageSize?: number | undefined, sorting?: string | null | undefined): Observable<ResultOfPagedResultOfRoleListViewModel>;
+    getList(filtering?: string | null | undefined, page?: number | undefined, pageSize?: number | undefined, sorting?: string | null | undefined): Observable<ResultOfPagedResultOfRoleListViewModel>;
+    getDropdownList(): Observable<ListResultOfRoleSimpleViewModel>;
     delete(request: DeleteRequest): Observable<ResultOfString>;
     getPermissions(id?: string | undefined): Observable<ListResultOfPermissionCompleteViewModel>;
     setRolePermission(request: AddPermissionsToRoleRequest): Observable<FileResponse>;
@@ -805,8 +806,8 @@ export class RoleService implements IRoleService {
         return _observableOf<Result>(null as any);
     }
 
-    get(filtering?: string | null | undefined, page?: number | undefined, pageSize?: number | undefined, sorting?: string | null | undefined): Observable<ResultOfPagedResultOfRoleListViewModel> {
-        let url_ = this.baseUrl + "/api/Role/GetAll?";
+    getList(filtering?: string | null | undefined, page?: number | undefined, pageSize?: number | undefined, sorting?: string | null | undefined): Observable<ResultOfPagedResultOfRoleListViewModel> {
+        let url_ = this.baseUrl + "/api/Role/GetList?";
         if (filtering !== undefined && filtering !== null)
             url_ += "Filtering=" + encodeURIComponent("" + filtering) + "&";
         if (page === null)
@@ -831,11 +832,11 @@ export class RoleService implements IRoleService {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGet(response_);
+            return this.processGetList(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processGet(response_ as any);
+                    return this.processGetList(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<ResultOfPagedResultOfRoleListViewModel>;
                 }
@@ -844,7 +845,7 @@ export class RoleService implements IRoleService {
         }));
     }
 
-    protected processGet(response: HttpResponseBase): Observable<ResultOfPagedResultOfRoleListViewModel> {
+    protected processGetList(response: HttpResponseBase): Observable<ResultOfPagedResultOfRoleListViewModel> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -864,6 +865,55 @@ export class RoleService implements IRoleService {
             }));
         }
         return _observableOf<ResultOfPagedResultOfRoleListViewModel>(null as any);
+    }
+
+    getDropdownList(): Observable<ListResultOfRoleSimpleViewModel> {
+        let url_ = this.baseUrl + "/api/Role/GetDropdownList";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            withCredentials: true,
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDropdownList(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDropdownList(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ListResultOfRoleSimpleViewModel>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ListResultOfRoleSimpleViewModel>;
+        }));
+    }
+
+    protected processGetDropdownList(response: HttpResponseBase): Observable<ListResultOfRoleSimpleViewModel> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ListResultOfRoleSimpleViewModel.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ListResultOfRoleSimpleViewModel>(null as any);
     }
 
     delete(request: DeleteRequest): Observable<ResultOfString> {
@@ -1091,8 +1141,10 @@ export class TestService implements ITestService {
 
 export interface IUserService {
     create(request: CreateUserRequest): Observable<ResultOfBaseViewModel>;
+    put(request: UserEditRequest): Observable<Result>;
     delete(request: DeleteRequest): Observable<ResultOfString>;
     get(filtering?: string | null | undefined, page?: number | undefined, pageSize?: number | undefined, sorting?: string | null | undefined): Observable<ResultOfPagedResultOfUserListViewModel>;
+    getDropdownList(): Observable<ListResultOfDropDownViewModel>;
     changePassword(request: ChangeUserPasswordRequest): Observable<Result>;
 }
 
@@ -1160,6 +1212,59 @@ export class UserService implements IUserService {
             }));
         }
         return _observableOf<ResultOfBaseViewModel>(null as any);
+    }
+
+    put(request: UserEditRequest): Observable<Result> {
+        let url_ = this.baseUrl + "/api/User/Update";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(request);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            withCredentials: true,
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processPut(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processPut(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<Result>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<Result>;
+        }));
+    }
+
+    protected processPut(response: HttpResponseBase): Observable<Result> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Result.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<Result>(null as any);
     }
 
     delete(request: DeleteRequest): Observable<ResultOfString> {
@@ -1274,6 +1379,55 @@ export class UserService implements IUserService {
             }));
         }
         return _observableOf<ResultOfPagedResultOfUserListViewModel>(null as any);
+    }
+
+    getDropdownList(): Observable<ListResultOfDropDownViewModel> {
+        let url_ = this.baseUrl + "/api/User/GetDropdownList";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            withCredentials: true,
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDropdownList(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDropdownList(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ListResultOfDropDownViewModel>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ListResultOfDropDownViewModel>;
+        }));
+    }
+
+    protected processGetDropdownList(response: HttpResponseBase): Observable<ListResultOfDropDownViewModel> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ListResultOfDropDownViewModel.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ListResultOfDropDownViewModel>(null as any);
     }
 
     changePassword(request: ChangeUserPasswordRequest): Observable<Result> {
@@ -2371,6 +2525,91 @@ export interface IRoleListViewModel extends IModificationTrackingViewModel {
     description?: string | undefined;
 }
 
+export class ListResultOfRoleSimpleViewModel implements IListResultOfRoleSimpleViewModel {
+    itemList?: RoleSimpleViewModel[] | undefined;
+
+    constructor(data?: IListResultOfRoleSimpleViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["itemList"])) {
+                this.itemList = [] as any;
+                for (let item of _data["itemList"])
+                    this.itemList!.push(RoleSimpleViewModel.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListResultOfRoleSimpleViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ListResultOfRoleSimpleViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.itemList)) {
+            data["itemList"] = [];
+            for (let item of this.itemList)
+                data["itemList"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IListResultOfRoleSimpleViewModel {
+    itemList?: RoleSimpleViewModel[] | undefined;
+}
+
+export class RoleSimpleViewModel extends BaseViewModel implements IRoleSimpleViewModel {
+    name?: string | undefined;
+    description?: string | undefined;
+    checked?: boolean;
+
+    constructor(data?: IRoleSimpleViewModel) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.name = _data["name"];
+            this.description = _data["description"];
+            this.checked = _data["checked"];
+        }
+    }
+
+    static override fromJS(data: any): RoleSimpleViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new RoleSimpleViewModel();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["description"] = this.description;
+        data["checked"] = this.checked;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IRoleSimpleViewModel extends IBaseViewModel {
+    name?: string | undefined;
+    description?: string | undefined;
+    checked?: boolean;
+}
+
 export class ResultOfString extends Result implements IResultOfString {
     value?: string | undefined;
 
@@ -2594,6 +2833,8 @@ export class CreateUserRequest implements ICreateUserRequest {
     displayName?: string | undefined;
     password?: string | undefined;
     confirmPassword?: string | undefined;
+    roleIds?: string[] | undefined;
+    parentUserId?: string | undefined;
     isActive?: boolean;
     userSetting?: CreateUserSettingRequest | undefined;
 
@@ -2612,6 +2853,12 @@ export class CreateUserRequest implements ICreateUserRequest {
             this.displayName = _data["displayName"];
             this.password = _data["password"];
             this.confirmPassword = _data["confirmPassword"];
+            if (Array.isArray(_data["roleIds"])) {
+                this.roleIds = [] as any;
+                for (let item of _data["roleIds"])
+                    this.roleIds!.push(item);
+            }
+            this.parentUserId = _data["parentUserId"];
             this.isActive = _data["isActive"];
             this.userSetting = _data["userSetting"] ? CreateUserSettingRequest.fromJS(_data["userSetting"]) : <any>undefined;
         }
@@ -2630,6 +2877,12 @@ export class CreateUserRequest implements ICreateUserRequest {
         data["displayName"] = this.displayName;
         data["password"] = this.password;
         data["confirmPassword"] = this.confirmPassword;
+        if (Array.isArray(this.roleIds)) {
+            data["roleIds"] = [];
+            for (let item of this.roleIds)
+                data["roleIds"].push(item);
+        }
+        data["parentUserId"] = this.parentUserId;
         data["isActive"] = this.isActive;
         data["userSetting"] = this.userSetting ? this.userSetting.toJSON() : <any>undefined;
         return data;
@@ -2641,6 +2894,8 @@ export interface ICreateUserRequest {
     displayName?: string | undefined;
     password?: string | undefined;
     confirmPassword?: string | undefined;
+    roleIds?: string[] | undefined;
+    parentUserId?: string | undefined;
     isActive?: boolean;
     userSetting?: CreateUserSettingRequest | undefined;
 }
@@ -2679,6 +2934,63 @@ export class CreateUserSettingRequest implements ICreateUserSettingRequest {
 
 export interface ICreateUserSettingRequest {
     defaultLanguage?: string | undefined;
+}
+
+export class UserEditRequest extends BaseRequest implements IUserEditRequest {
+    displayName?: string | undefined;
+    isActive?: boolean;
+    roleIds?: string[] | undefined;
+    parentUserId?: string | undefined;
+    userSetting?: CreateUserSettingRequest | undefined;
+
+    constructor(data?: IUserEditRequest) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.displayName = _data["displayName"];
+            this.isActive = _data["isActive"];
+            if (Array.isArray(_data["roleIds"])) {
+                this.roleIds = [] as any;
+                for (let item of _data["roleIds"])
+                    this.roleIds!.push(item);
+            }
+            this.parentUserId = _data["parentUserId"];
+            this.userSetting = _data["userSetting"] ? CreateUserSettingRequest.fromJS(_data["userSetting"]) : <any>undefined;
+        }
+    }
+
+    static override fromJS(data: any): UserEditRequest {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserEditRequest();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["displayName"] = this.displayName;
+        data["isActive"] = this.isActive;
+        if (Array.isArray(this.roleIds)) {
+            data["roleIds"] = [];
+            for (let item of this.roleIds)
+                data["roleIds"].push(item);
+        }
+        data["parentUserId"] = this.parentUserId;
+        data["userSetting"] = this.userSetting ? this.userSetting.toJSON() : <any>undefined;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IUserEditRequest extends IBaseRequest {
+    displayName?: string | undefined;
+    isActive?: boolean;
+    roleIds?: string[] | undefined;
+    parentUserId?: string | undefined;
+    userSetting?: CreateUserSettingRequest | undefined;
 }
 
 export class ResultOfPagedResultOfUserListViewModel extends Result implements IResultOfPagedResultOfUserListViewModel {
@@ -2775,8 +3087,9 @@ export class UserListViewModel extends CreationTrackingViewModel implements IUse
     displayName?: string | undefined;
     isActive?: boolean;
     lastLoggedIn?: Date | undefined;
-    parentUser?: SimpleUserViewModel | undefined;
+    parentUser?: UserSimpleViewModel | undefined;
     userSetting?: UserSettingViewModel | undefined;
+    roles?: UserRoleSimpleViewModel[] | undefined;
 
     constructor(data?: IUserListViewModel) {
         super(data);
@@ -2789,8 +3102,13 @@ export class UserListViewModel extends CreationTrackingViewModel implements IUse
             this.displayName = _data["displayName"];
             this.isActive = _data["isActive"];
             this.lastLoggedIn = _data["lastLoggedIn"] ? new Date(_data["lastLoggedIn"].toString()) : <any>undefined;
-            this.parentUser = _data["parentUser"] ? SimpleUserViewModel.fromJS(_data["parentUser"]) : <any>undefined;
+            this.parentUser = _data["parentUser"] ? UserSimpleViewModel.fromJS(_data["parentUser"]) : <any>undefined;
             this.userSetting = _data["userSetting"] ? UserSettingViewModel.fromJS(_data["userSetting"]) : <any>undefined;
+            if (Array.isArray(_data["roles"])) {
+                this.roles = [] as any;
+                for (let item of _data["roles"])
+                    this.roles!.push(UserRoleSimpleViewModel.fromJS(item));
+            }
         }
     }
 
@@ -2809,6 +3127,11 @@ export class UserListViewModel extends CreationTrackingViewModel implements IUse
         data["lastLoggedIn"] = this.lastLoggedIn ? this.lastLoggedIn.toISOString() : <any>undefined;
         data["parentUser"] = this.parentUser ? this.parentUser.toJSON() : <any>undefined;
         data["userSetting"] = this.userSetting ? this.userSetting.toJSON() : <any>undefined;
+        if (Array.isArray(this.roles)) {
+            data["roles"] = [];
+            for (let item of this.roles)
+                data["roles"].push(item.toJSON());
+        }
         super.toJSON(data);
         return data;
     }
@@ -2819,19 +3142,52 @@ export interface IUserListViewModel extends ICreationTrackingViewModel {
     displayName?: string | undefined;
     isActive?: boolean;
     lastLoggedIn?: Date | undefined;
-    parentUser?: SimpleUserViewModel | undefined;
+    parentUser?: UserSimpleViewModel | undefined;
     userSetting?: UserSettingViewModel | undefined;
+    roles?: UserRoleSimpleViewModel[] | undefined;
 }
 
-export class SimpleUserViewModel implements ISimpleUserViewModel {
-    id?: string;
+export class UserSimpleViewModel extends BaseViewModel implements IUserSimpleViewModel {
     userName?: string | undefined;
-    normalizedUserName?: string | undefined;
     displayName?: string | undefined;
-    lastLoggedIn?: Date | undefined;
-    version?: string | undefined;
 
-    constructor(data?: ISimpleUserViewModel) {
+    constructor(data?: IUserSimpleViewModel) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.userName = _data["userName"];
+            this.displayName = _data["displayName"];
+        }
+    }
+
+    static override fromJS(data: any): UserSimpleViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserSimpleViewModel();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["userName"] = this.userName;
+        data["displayName"] = this.displayName;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IUserSimpleViewModel extends IBaseViewModel {
+    userName?: string | undefined;
+    displayName?: string | undefined;
+}
+
+export class UserRoleSimpleViewModel implements IUserRoleSimpleViewModel {
+    role?: SimpleRoleViewModel | undefined;
+
+    constructor(data?: IUserRoleSimpleViewModel) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -2842,41 +3198,143 @@ export class SimpleUserViewModel implements ISimpleUserViewModel {
 
     init(_data?: any) {
         if (_data) {
-            this.id = _data["id"];
-            this.userName = _data["userName"];
-            this.normalizedUserName = _data["normalizedUserName"];
-            this.displayName = _data["displayName"];
-            this.lastLoggedIn = _data["lastLoggedIn"] ? new Date(_data["lastLoggedIn"].toString()) : <any>undefined;
-            this.version = _data["version"];
+            this.role = _data["role"] ? SimpleRoleViewModel.fromJS(_data["role"]) : <any>undefined;
         }
     }
 
-    static fromJS(data: any): SimpleUserViewModel {
+    static fromJS(data: any): UserRoleSimpleViewModel {
         data = typeof data === 'object' ? data : {};
-        let result = new SimpleUserViewModel();
+        let result = new UserRoleSimpleViewModel();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["userName"] = this.userName;
-        data["normalizedUserName"] = this.normalizedUserName;
-        data["displayName"] = this.displayName;
-        data["lastLoggedIn"] = this.lastLoggedIn ? this.lastLoggedIn.toISOString() : <any>undefined;
-        data["version"] = this.version;
+        data["role"] = this.role ? this.role.toJSON() : <any>undefined;
         return data;
     }
 }
 
-export interface ISimpleUserViewModel {
+export interface IUserRoleSimpleViewModel {
+    role?: SimpleRoleViewModel | undefined;
+}
+
+export class SimpleRoleViewModel extends BaseViewModel implements ISimpleRoleViewModel {
+    name?: string | undefined;
+
+    constructor(data?: ISimpleRoleViewModel) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.name = _data["name"];
+        }
+    }
+
+    static override fromJS(data: any): SimpleRoleViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new SimpleRoleViewModel();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface ISimpleRoleViewModel extends IBaseViewModel {
+    name?: string | undefined;
+}
+
+export class ListResultOfDropDownViewModel implements IListResultOfDropDownViewModel {
+    itemList?: DropDownViewModel[] | undefined;
+
+    constructor(data?: IListResultOfDropDownViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["itemList"])) {
+                this.itemList = [] as any;
+                for (let item of _data["itemList"])
+                    this.itemList!.push(DropDownViewModel.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListResultOfDropDownViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ListResultOfDropDownViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.itemList)) {
+            data["itemList"] = [];
+            for (let item of this.itemList)
+                data["itemList"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IListResultOfDropDownViewModel {
+    itemList?: DropDownViewModel[] | undefined;
+}
+
+export class DropDownViewModel implements IDropDownViewModel {
+    text?: string | undefined;
     id?: string;
-    userName?: string | undefined;
-    normalizedUserName?: string | undefined;
-    displayName?: string | undefined;
-    lastLoggedIn?: Date | undefined;
-    version?: string | undefined;
+
+    constructor(data?: IDropDownViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.text = _data["text"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): DropDownViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new DropDownViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["text"] = this.text;
+        data["id"] = this.id;
+        return data;
+    }
+}
+
+export interface IDropDownViewModel {
+    text?: string | undefined;
+    id?: string;
 }
 
 export class ChangeUserPasswordRequest extends BaseRequest implements IChangeUserPasswordRequest {
