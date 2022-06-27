@@ -19,35 +19,47 @@ declare var $: any;
 @Component({
   selector: 'ocs-tree-permission',
   template: `
-    <form [formGroup]="permissionForm">
-      <h6 href="javascript:void(0)">{{ title }}</h6>
-      <ul class="tree" [id]="node!.id" [formArrayName]="'permissionIds'">
+    <form>
+      <ul class="tree">
         <li>
+          <a>{{ title }}</a>
           <ul>
-            <li
-              style="width: 100%; white-space: nowrap"
-              *ngFor="
-                let item of permissionsControllArray.controls;
-                let i = index
+            <ng-container
+              *ngTemplateOutlet="
+                recursiveListTmpl;
+                context: { list: node.children }
               "
-              [formGroupName]="i"
-            >
-              <div class="icheck-primary d-inline">
-                <input
-                  type="checkbox"
-                  [id]="(node?.children)![i].id!"
-                  [(ngModel)]="(node?.children)![i].isGranted!"
-                  formControlName="isGranted"
-                  (change)="changePermission($event, (node?.children)![i].id!)"
-                />
-                <label [for]="(node?.children)![i].id!"
-                  >{{ (node?.children)![i].displayName! }}
-                </label>
-              </div>
-            </li>
+            ></ng-container>
           </ul>
         </li>
       </ul>
+
+      <ng-template #recursiveListTmpl let-list="list">
+        <li *ngFor="let item of list">
+          <div
+            class="icheck-primary d-inline"
+            *ngIf="item.children.length == 0"
+          >
+            <input
+              type="checkbox"
+              [id]="item.id!"
+              [(ngModel)]="item.isGranted"
+              [name]="item.name"
+              (change)="changePermission($event, item.id!)"
+            />
+            <label [for]="item.id!">{{ item.displayName! }} </label>
+          </div>
+          <a *ngIf="item.children.length > 0">{{ item.displayName }}</a>
+          <ul *ngIf="item.children.length > 0">
+            <ng-container
+              *ngTemplateOutlet="
+                recursiveListTmpl;
+                context: { list: item.children }
+              "
+            ></ng-container>
+          </ul>
+        </li>
+      </ng-template>
     </form>
   `,
 })
@@ -56,9 +68,7 @@ export class TreePermissionComponent implements AfterViewInit, OnInit {
   permissionsControllArray: FormArray;
 
   constructor(private formBuilder: FormBuilder) {}
-  ngOnInit(): void {
-    this.createForm();
-  }
+  ngOnInit(): void {}
   ngAfterViewInit(): void {
     let tree = $('#' + this.node?.id);
     tree.treed();
@@ -76,24 +86,6 @@ export class TreePermissionComponent implements AfterViewInit, OnInit {
     this.permissionChanged.emit({
       checked: checked,
       permissionId: id,
-    });
-  }
-
-  private createForm() {
-    this.permissionForm = this.formBuilder.group({
-      roleId: ['', Validators.required],
-      permissionIds: this.formBuilder.array([]),
-    });
-    this.permissionsControllArray = this.permissionForm.get(
-      'permissionIds'
-    ) as FormArray;
-    this.node?.children?.forEach((response) => {
-      this.permissionsControllArray.push(
-        this.formBuilder.group({
-          id: new FormControl(response.id),
-          isGranted: new FormControl(true),
-        })
-      );
     });
   }
 }

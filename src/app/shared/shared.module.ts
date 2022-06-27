@@ -1,3 +1,4 @@
+import { CDK_DRAG_CONFIG, DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -9,10 +10,16 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ComponentInitilizer } from './component-initilizer';
 import { Select2Component } from './components/select2/select2.component';
 
 import { ButtonBusyDirective } from './directives/button-busy.directive';
-
+import { RouteGard } from './gaurds/route.gaurd';
+const DragConfig = {
+  dragStartThreshold: 0,
+  pointerDirectionChangeThreshold: 5,
+  zIndex: 10000,
+};
 @NgModule({
   declarations: [ButtonBusyDirective, Select2Component],
   imports: [
@@ -28,6 +35,7 @@ import { ButtonBusyDirective } from './directives/button-busy.directive';
       },
     }),
     FormsModule,
+    DragDropModule,
   ],
   exports: [
     ButtonBusyDirective,
@@ -35,8 +43,14 @@ import { ButtonBusyDirective } from './directives/button-busy.directive';
     NgxPaginationModule,
     Select2Component,
     FormsModule,
+    DragDropModule,
   ],
-  providers: [BsModalService],
+  providers: [
+    BsModalService,
+    RouteGard,
+    ComponentInitilizer,
+    { provide: CDK_DRAG_CONFIG, useValue: DragConfig },
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SharedModule {}

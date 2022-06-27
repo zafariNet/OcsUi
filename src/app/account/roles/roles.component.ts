@@ -14,7 +14,7 @@ import { AddRoleComponent } from './add-role/add-role.component';
 import { EditRoleComponent } from './edit-role/edit-role.component';
 
 @Component({
-  selector: '[ocs-rules]',
+  selector: '[ocs-roles]',
   templateUrl: './roles.component.html',
 })
 export class RolesComponent extends AppBaseComponent implements OnInit {

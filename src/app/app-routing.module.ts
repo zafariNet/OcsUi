@@ -6,6 +6,9 @@ import { MainLayoutComponent } from './layout/main/main-layout.component';
 import { LoginComponent } from './account/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { AccountComponent } from './account/account.component';
+import { RouteGard } from './shared/gaurds/route.gaurd';
+import { ClickPostComponent } from './modules/click-post/click-post.component';
+import { FileUploadComponent } from './modules/file-center/file-upload/file-upload.component';
 
 // const routes: Routes = [{ path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule) }];
 const routes: Routes = [
@@ -15,9 +18,14 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'account', component: AccountComponent },
-      // { path: 'users', component: UsersComponent },
-      // { path: 'roles', component: RolesComponent },
+      { path: 'click-post', component: ClickPostComponent },
+      { path: 'file-center/upload', component: FileUploadComponent },
+      {
+        path: 'account',
+        component: AccountComponent,
+        canActivate: [RouteGard],
+        data: { permission: 'ACCOUNT' },
+      },
     ],
   },
   {

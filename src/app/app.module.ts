@@ -24,6 +24,8 @@ import { Router } from '@angular/router';
 import { ErrorComponent } from './layout/errors/error-component';
 import { Error500Component } from './layout/errors/error-500.component';
 import { GlobalModelService } from './account/services/global-model.service';
+import { ClickPostModule } from './modules/click-post/click-post.module';
+import { FileCenterModule } from './modules/file-center/file-center.module';
 
 export function tokenGetter(): string | null {
   var token = localStorage.getItem('token');
@@ -39,6 +41,8 @@ export function tokenGetter(): string | null {
     AccountModule,
     AppRoutingModule,
     SharedModule,
+    ClickPostModule,
+    FileCenterModule,
     ServiceProxyModule,
   ],
   providers: [

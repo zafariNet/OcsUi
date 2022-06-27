@@ -68,65 +68,39 @@
         </li>
         <li class="nav-item">
           <a
-            href="#"
             class="nav-link"
-            [routerLink]="['/queue/monitor']"
-            class="nav-link"
+            [routerLink]="['/main/click-post']"
             [routerLinkActive]="'active'"
+            ><i class="nav-icon fas fa-mail-bulk"></i>
+            <p>Click Post</p></a
           >
-            <i class="nav-icon fas fa-chart-line"></i>
-            <p>Queue Montior</p>
-          </a>
         </li>
         <li class="nav-item">
           <a
-            href="#"
             class="nav-link"
-            [routerLink]="['/queue/monitor1']"
-            class="nav-link"
-            [routerLinkActive]="'active'"
+            [ngClass]="{ active: isActiveRoute('/file-center') }"
           >
-            <i class="nav-icon fas fa-chart-line"></i>
-            <p>Queue Montior 1</p>
+            <i class="nav-icon fa fa-file"></i>
+
+            <p>
+              {{ l("FILE_CENTER") }}
+              <i class="right fas fa-angle-right"></i>
+            </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLink]="['/main/file-center/upload']"
+                [routerLinkActive]="'active'"
+              >
+                <i class="fa fa-cloud-upload-alt nav-icon"></i>
+                <p>{{ l("FILE_UPLOAD") }}</p>
+              </a>
+            </li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a
-            href="#"
-            class="nav-link"
-            [routerLink]="['/click-post']"
-            class="nav-link"
-            [routerLinkActive]="'active'"
-          >
-            <i class="nav-icon fas fa-mail-bulk"></i>
-            <p>Click Post</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            href="#"
-            class="nav-link"
-            [routerLink]="['/drag']"
-            class="nav-link"
-            [routerLinkActive]="'active'"
-          >
-            <i class="nav-icon fas fa-mail-bulk"></i>
-            <p>Click Post 1</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            href="#"
-            class="nav-link"
-            [routerLink]="['/document-type/types']"
-            class="nav-link"
-            [routerLinkActive]="'active'"
-          >
-            <i class="nav-icon fas fa-file-alt"></i>
-            <p>Document Types</p>
-          </a>
-        </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="hasAccessToSidebarMenu('SETTINGS')">
           <a
             class="nav-link"
             [ngClass]="{ active: isActiveRoute('/settings') }"
@@ -200,7 +174,7 @@
           </ul>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="hasAccessToSidebarMenu('ACCOUNT')">
           <a
             href="#"
             [routerLink]="['/main/account']"

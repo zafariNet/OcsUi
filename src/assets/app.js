@@ -167,34 +167,26 @@ $(function () {
     }
   });
 
-  // fix action buttons
-  $(document).scroll(function (event) {
-    var actionButtons = $("#action-button-inner");
-    var top = actionButtons.offset().top;
-    console.log(top);
-    if (top > 170) {
-      $("#action-button-inner").find("img").attr("width", 25);
-
-      $("#action-button-inner")
-        .find("a")
-        .removeClass("click-post-action-button");
-      $("#action-button-inner").find("a").css("padding", "5px 5px");
-      $("#action-button-inner")
-        .find("a")
-        .addClass("click-post-action-button-scrolled");
-      actionButtons.css("background-color", "#343A40");
-    } else {
-      $("#action-button-inner").find("img").attr("width", 35);
-      $("#action-button-inner").find("a").addClass("click-post-action-button");
-      $("#action-button-inner").find("a").css("padding", "");
-      $("#action-button-inner")
-        .find("a")
-        .removeClass("click-post-action-button-scrolled");
-      actionButtons.css("background-color", "white");
+  // Input clear
+  jQuery(function ($) {
+    function tog(v) {
+      return v ? "addClass" : "removeClass";
     }
-  });
-  $('[data-toggle="tooltip"]').tooltip();
-  $("#checkboxPrimary22").click(function (e) {
-    e.stopPropagation();
+
+    $(document)
+      .on("input", ".clearable", function () {
+        $(this)[tog(this.value)]("x");
+      })
+      .on("mousemove", ".x", function (e) {
+        $(this)[
+          tog(
+            this.offsetWidth - 18 <
+              e.clientX - this.getBoundingClientRect().left
+          )
+        ]("onX");
+      })
+      .on("click", ".onX", function () {
+        $(this).removeClass("x onX").val("");
+      });
   });
 });

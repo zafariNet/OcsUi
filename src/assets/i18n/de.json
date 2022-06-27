@@ -63,5 +63,16 @@
   "ROLE_EDITED_SUCCESSFULLY": "Rolle erfolgreich bearbeitet",
   "SELECT_A_ROLE": "Wählen Sie eine Rolle",
   "YOU_MUST_SELECT_A_ROLE": "Sie müssen eine Rolle auswählen",
-  "PARENT_USER": "übergeordneter Nutzer"
+  "PARENT_USER": "übergeordneter Nutzer",
+  "ACCESS_DENIED": "Zugang verweigert.",
+  "LICENSE_INFORMATION": "Lizenzinformationen",
+  "ABOUT": "Über uns",
+  "FILE_CENTER": "Datei-Center",
+  "FILE_UPLOAD": "Datei hochladen",
+  "ADD_FILES": "Dateien hinzufügen",
+  "START_UPLOAD": "Upload starten",
+  "CANCEL_UPLOAD": "Upload abbrechen",
+  "START": "Starten",
+  "CANCEL": "abbrechen",
+  "DELETE": "löschen"
 }

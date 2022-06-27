@@ -58,16 +58,14 @@ export function initializeAppFactory(
                 globalModelService.logedInUser = result.user!;
                 globalModelService.initialDataFeteched.next(true);
                 globalModelService.applicationCanStart.next(true);
-                if(_router.url=='/login')
-                {
-                    _router.navigate(['/main'])
+                if (_router.url == '/login') {
+                  _router.navigate(['/main']);
                 }
               },
-              error: (error : AjaxResponse<ResultOfJwtTokensData>) => {
-                  if(error.status == 400)
-                  {
-                      router.navigate(['/login'])
-                  }
+              error: (error: AjaxResponse<ResultOfJwtTokensData>) => {
+                if (error.status == 400) {
+                  router.navigate(['/login']);
+                }
               },
             });
           }

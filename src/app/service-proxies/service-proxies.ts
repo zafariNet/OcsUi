@@ -1639,6 +1639,7 @@ export class LogedInUserViewModel implements ILogedInUserViewModel {
     normalizedUserName?: string | undefined;
     displayName?: string | undefined;
     lastLoggedIn?: Date | undefined;
+    permissions?: PermissionSimpleViewModel[] | undefined;
 
     constructor(data?: ILogedInUserViewModel) {
         if (data) {
@@ -1656,6 +1657,11 @@ export class LogedInUserViewModel implements ILogedInUserViewModel {
             this.normalizedUserName = _data["normalizedUserName"];
             this.displayName = _data["displayName"];
             this.lastLoggedIn = _data["lastLoggedIn"] ? new Date(_data["lastLoggedIn"].toString()) : <any>undefined;
+            if (Array.isArray(_data["permissions"])) {
+                this.permissions = [] as any;
+                for (let item of _data["permissions"])
+                    this.permissions!.push(PermissionSimpleViewModel.fromJS(item));
+            }
         }
     }
 
@@ -1673,6 +1679,11 @@ export class LogedInUserViewModel implements ILogedInUserViewModel {
         data["normalizedUserName"] = this.normalizedUserName;
         data["displayName"] = this.displayName;
         data["lastLoggedIn"] = this.lastLoggedIn ? this.lastLoggedIn.toISOString() : <any>undefined;
+        if (Array.isArray(this.permissions)) {
+            data["permissions"] = [];
+            for (let item of this.permissions)
+                data["permissions"].push(item.toJSON());
+        }
         return data;
     }
 }
@@ -1683,6 +1694,51 @@ export interface ILogedInUserViewModel {
     normalizedUserName?: string | undefined;
     displayName?: string | undefined;
     lastLoggedIn?: Date | undefined;
+    permissions?: PermissionSimpleViewModel[] | undefined;
+}
+
+export class PermissionSimpleViewModel implements IPermissionSimpleViewModel {
+    id?: string;
+    name?: string | undefined;
+    displayName?: string | undefined;
+
+    constructor(data?: IPermissionSimpleViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.displayName = _data["displayName"];
+        }
+    }
+
+    static fromJS(data: any): PermissionSimpleViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new PermissionSimpleViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["displayName"] = this.displayName;
+        return data;
+    }
+}
+
+export interface IPermissionSimpleViewModel {
+    id?: string;
+    name?: string | undefined;
+    displayName?: string | undefined;
 }
 
 export class Claim implements IClaim {
@@ -3185,7 +3241,7 @@ export interface IUserSimpleViewModel extends IBaseViewModel {
 }
 
 export class UserRoleSimpleViewModel implements IUserRoleSimpleViewModel {
-    role?: SimpleRoleViewModel | undefined;
+    role?: RoleSimpleViewModel | undefined;
 
     constructor(data?: IUserRoleSimpleViewModel) {
         if (data) {
@@ -3198,7 +3254,7 @@ export class UserRoleSimpleViewModel implements IUserRoleSimpleViewModel {
 
     init(_data?: any) {
         if (_data) {
-            this.role = _data["role"] ? SimpleRoleViewModel.fromJS(_data["role"]) : <any>undefined;
+            this.role = _data["role"] ? RoleSimpleViewModel.fromJS(_data["role"]) : <any>undefined;
         }
     }
 
@@ -3217,40 +3273,7 @@ export class UserRoleSimpleViewModel implements IUserRoleSimpleViewModel {
 }
 
 export interface IUserRoleSimpleViewModel {
-    role?: SimpleRoleViewModel | undefined;
-}
-
-export class SimpleRoleViewModel extends BaseViewModel implements ISimpleRoleViewModel {
-    name?: string | undefined;
-
-    constructor(data?: ISimpleRoleViewModel) {
-        super(data);
-    }
-
-    override init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            this.name = _data["name"];
-        }
-    }
-
-    static override fromJS(data: any): SimpleRoleViewModel {
-        data = typeof data === 'object' ? data : {};
-        let result = new SimpleRoleViewModel();
-        result.init(data);
-        return result;
-    }
-
-    override toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
-        super.toJSON(data);
-        return data;
-    }
-}
-
-export interface ISimpleRoleViewModel extends IBaseViewModel {
-    name?: string | undefined;
+    role?: RoleSimpleViewModel | undefined;
 }
 
 export class ListResultOfDropDownViewModel implements IListResultOfDropDownViewModel {

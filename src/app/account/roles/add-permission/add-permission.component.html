@@ -1,5 +1,5 @@
 <ng-template #addPermissionModal>
-  <form [formGroup]="addPermissionForm" (ngSubmit)="addPermission()">
+  <form (ngSubmit)="addPermission()">
     <div class="modal-header modal-header-blue">
       <h6 class="modal-title pull-left">
         <i class="fas fa-plus mr-2"></i>
@@ -17,10 +17,7 @@
     </div>
     <div class="card-body">
       <div class="row">
-        <div
-          class="col-lg-6 border-left"
-          *ngFor="let permission of permissionList"
-        >
+        <div class="col-lg-6" *ngFor="let permission of permissionList">
           <ocs-tree-permission
             [node]="permission!"
             [title]="permission.displayName!"

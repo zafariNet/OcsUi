@@ -39,6 +39,8 @@
               "src/assets/plugins/xml-viewer/simpleXML.css",
               "src/assets/plugins/tooltip/jquery.toolbar.css",
               "src/assets/plugins/ionicons-2.0.1/css/ionicons.min.css",
+              "src/assets/plugins/dropzone/min/dropzone.min.css",
+
               "node_modules/admin-lte/plugins/select2/css/select2.min.css",
               "node_modules/admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css",
               "node_modules/admin-lte/dist/css/adminlte.min.css",
@@ -48,7 +50,7 @@
               "node_modules/admin-lte/plugins/jquery/jquery.min.js",
               "node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js",
               "node_modules/admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js",
-              "node_modules/admin-lte/dist/js/adminlte.min.js",
+              "src/assets/js/adminlte.js",
               "node_modules/admin-lte/plugins/jquery-mousewheel/jquery.mousewheel.js",
               "node_modules/admin-lte/plugins/raphael/raphael.min.js",
               "node_modules/admin-lte/plugins/jquery-mapael/jquery.mapael.min.js",
@@ -57,6 +59,7 @@
               "node_modules/admin-lte/plugins/select2/js/select2.full.min.js",
               "node_modules/jquery-confirm/dist/jquery-confirm.min.js",
 
+              "src/assets/plugins/dropzone/min/dropzone.min.js",
               "src/assets/plugins/xml-viewer/simpleXML.js",
               "src/assets/plugins/xml-viewer/jquery.format.js",
               "src/assets/plugins/tooltip/jquery.toolbar.min.js",

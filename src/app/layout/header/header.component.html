@@ -10,11 +10,11 @@
       <a class="nav-link" data-toggle="dropdown" href="#"> {{ l("HELP") }} </a>
       <div class="dropdown-menu dropdown-menu dropdown-menu-left">
         <a href="#" class="dropdown-item">
-          <i class="fas fa-envelope mr-2"></i> License information
+          <i class="fas fa-envelope mr-2"></i> {{ l("LICENSE_INFORMATON") }}
         </a>
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">
-          <i class="fas fa-users mr-2"></i> About
+          <i class="fas fa-users mr-2"></i> {{ l("ABOUT") }}
         </a>
       </div>
     </li>
@@ -68,7 +68,10 @@
     </li>
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
-        <i class="flag-icon flag-icon" [ngClass]="'flag-icon-'+getCurrentLanguageFlag()"></i>
+        <i
+          class="flag-icon flag-icon"
+          [ngClass]="'flag-icon-' + getCurrentLanguageFlag()"
+        ></i>
       </a>
       <div class="dropdown-menu dropdown-menu-right p-0">
         <a
@@ -96,20 +99,20 @@
       </a>
       <div class="dropdown-menu dropdown-menu dropdown-menu-right">
         <a href="#" class="dropdown-item">
-          <i class="fas fa-list-alt mr-2"></i> {{l('PROFILE')}}
+          <i class="fas fa-list-alt mr-2"></i> {{ l("PROFILE") }}
         </a>
         <a href="#" class="dropdown-item">
-          <i class="fas fa-history mr-2"></i> {{l('HISTORY')}}
+          <i class="fas fa-history mr-2"></i> {{ l("HISTORY") }}
         </a>
         <a href="#" class="dropdown-item">
-          <i class="fas fa-cogs mr-2"></i> {{l('SETTINGS')}}
+          <i class="fas fa-cogs mr-2"></i> {{ l("SETTINGS") }}
         </a>
         <a class="dropdown-item" (click)="showChangePasswordModal()">
-          <i class="fas fa-lock mr-2"></i> {{l('CHANGE_PASSWORD')}}
+          <i class="fas fa-lock mr-2"></i> {{ l("CHANGE_PASSWORD") }}
         </a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()">
-          <i class="fas fa-power-off mr-2"></i>{{l('LOGOUT')}}
+          <i class="fas fa-power-off mr-2"></i>{{ l("LOGOUT") }}
         </a>
       </div>
     </li>

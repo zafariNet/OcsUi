@@ -22,7 +22,6 @@ import {
 export class AddPermissionComponent extends AppBaseComponent implements OnInit {
   @ViewChild('addPermissionModal') modal: TemplateRef<any>;
   modalRef: BsModalRef;
-  addPermissionForm: FormGroup;
   saving: boolean = false;
   roleName: string;
   permissionList: PermissionCompleteViewModel[];
@@ -36,16 +35,14 @@ export class AddPermissionComponent extends AppBaseComponent implements OnInit {
     super(injector);
   }
 
-  ngOnInit(): void {
-    this.createForm();
-  }
+  ngOnInit(): void {}
 
   public showModal(roleId: string, name: string): void {
     this.roleName = name;
     this.addPermissionsToRoleRequest = new AddPermissionsToRoleRequest();
+    this.addPermissionsToRoleRequest.permissionIds = [];
     this.addPermissionsToRoleRequest.roleId = roleId;
-    this.addPermissionForm.reset();
-    const config: ModalOptions = { class: 'modal-md' };
+    const config: ModalOptions = { class: 'modal-lg' };
     this.modalRef = this.modalService.show(this.modal, config);
     this.roleService.getPermissions(roleId).subscribe({
       next: (response) => {
@@ -87,17 +84,13 @@ export class AddPermissionComponent extends AppBaseComponent implements OnInit {
   private retriveGrantedPermissions(
     rolePermissions: PermissionCompleteViewModel[]
   ) {
-    this.addPermissionsToRoleRequest.permissionIds = [];
-
-    rolePermissions.forEach((root) => {
-      root.children?.forEach((leaf) => {
-        if (leaf.isGranted)
-          this.addPermissionsToRoleRequest.permissionIds?.push(leaf.id!);
-      });
+    rolePermissions.forEach((element) => {
+      if (element.children?.length! > 0) {
+        this.retriveGrantedPermissions(element.children!);
+      } else {
+        if (element.isGranted)
+          this.addPermissionsToRoleRequest.permissionIds?.push(element.id!);
+      }
     });
-  }
-
-  private createForm(): void {
-    this.addPermissionForm = new FormGroup({});
   }
 }

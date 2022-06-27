@@ -46,7 +46,9 @@ export class AddRoleComponent extends AppBaseComponent implements OnInit {
           this.roleAdded.emit(true);
           this.modalService.hide();
         },
-        error: () => (this.saving = false),
+        error: () => {
+          this.saving = false;
+        },
       });
     } else {
       this.validateAllFields(this.addRoleForm);

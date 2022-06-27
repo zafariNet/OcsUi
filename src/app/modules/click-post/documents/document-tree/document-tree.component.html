@@ -1,0 +1,78 @@
+<div class="btn-group" style="left: 0px; max-width: 300px; width: 100%">
+  <button
+    type="button"
+    class="btn btn-default btn-flat"
+    data-toggle="tooltip"
+    data-placement="bottom"
+    title="calculate and assign field values"
+  >
+    <img
+      src="assets/img/buttons/performFieldAssignments.svg"
+      width="25"
+    /></button
+  ><button
+    data-toggle="tooltip"
+    data-placement="bottom"
+    title="delete"
+    type="button"
+    class="btn btn-default btn-flat"
+  >
+    <img src="assets/img/buttons/delete.svg" width="25" /></button
+  ><button
+    data-toggle="tooltip"
+    data-placement="bottom"
+    title="send document"
+    type="button"
+    class="btn btn-default btn-flat"
+  >
+    <img src="assets/img/buttons/send.svg" width="25" />
+  </button>
+</div>
+<ul class="tree">
+  <li>
+    <a href="javascript:void(0)">Pages</a>
+
+    <ul
+      cdkDropList
+      #documentList="cdkDropList"
+      [cdkDropListData]="treeData.images"
+      (cdkDropListDropped)="doDrop($event)"
+      [cdkDropListConnectedTo]="connectedTo"
+      id="{{ treeData.id }}"
+    >
+      <li
+        style="width: 100%; white-space: nowrap"
+        *ngFor="let image of treeData.images"
+        cdkDrag
+      >
+        <div
+          class="doc-list"
+          [attr.data-value]="image.id"
+          (click)="showIcons(image.id)"
+        ></div>
+        <a href="javascript:void(0)">
+          <img
+            src="assets/img/documents/thumbnails/{{ image.id }}.jpg"
+            class="thumbnails"
+          />
+          <div
+            class="btn-group-vertical document-action-button"
+            [id]="image.id"
+            style="opacity: 0; left: 0px"
+          >
+            <a type="button" class="btn btn-default btn-xs p-2">
+              <img src="assets/img/buttons/movePageUp.svg" width="20px" />
+            </a>
+
+            <a type="button" class="btn btn-default btn-xs p-2">
+              <img src="assets/img/buttons/split.svg" width="20px" />
+            </a>
+            <a type="button" class="btn btn-default btn-xs p-2">
+              <img src="assets/img/buttons/movePageDown.svg" width="20px" />
+            </a>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>

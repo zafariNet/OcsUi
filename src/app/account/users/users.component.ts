@@ -70,7 +70,6 @@ export class UsersComponent extends AppBaseComponent implements OnInit {
       });
   }
   getAllUser() {
-    debugger;
     this.gettingUserList = true;
     this.userService
       .get('', this.config.currentPage, this.config.itemsPerPage, '')

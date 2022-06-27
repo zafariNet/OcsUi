@@ -1,0 +1,30 @@
+<div class="card card-primary card-outline">
+  <div class="card-header">
+    <h3 class="card-title">Click Post</h3>
+
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+        <i class="fas fa-minus"></i>
+      </button>
+
+      <button type="button" class="btn btn-tool" data-card-widget="maximize">
+        <i class="fas fa-expand"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    <action-button-container></action-button-container>
+
+    <ocs-documents [documentData]="documentData"></ocs-documents>
+  </div>
+  <div class="card-footer clearfix">
+    <ul class="pagination pagination-sm m-0 float-right">
+      <li class="page-item"><a href="#" class="page-link">«</a></li>
+      <li class="page-item"><a href="#" class="page-link">1</a></li>
+      <li class="page-item"><a href="#" class="page-link">2</a></li>
+      <li class="page-item"><a href="#" class="page-link">3</a></li>
+      <li class="page-item"><a href="#" class="page-link">»</a></li>
+    </ul>
+  </div>
+</div>

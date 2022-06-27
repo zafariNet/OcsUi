@@ -50,9 +50,11 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     var modifiedRequest = this.normalizeRequestHeaders(req);
     return next.handle(modifiedRequest).pipe(
       catchError(function (error) {
-        debugger;
         if (error instanceof HttpErrorResponse && error.status === 401) {
           return _this.tryAuthWithRefreshToken(modifiedRequest, next, error);
+        } else if (error instanceof HttpErrorResponse && error.status === 403) {
+          _this.showError('ACCESS_DENIED');
+          return _this.handleErrorResponse(error);
         } else {
           return _this.handleErrorResponse(error);
         }

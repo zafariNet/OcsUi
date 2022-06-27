@@ -6,7 +6,7 @@
     </h3>
     <div class="card-tools">
       <ul class="nav nav-pills ml-auto">
-        <li class="nav-item mr-3">
+        <li class="nav-item mr-3" *ngIf="hasAccess('ACCOUNT_USER_ADDUSER')">
           <a
             class="btn btn-block btn-default btn-xs"
             (click)="openAddUserModal()"
@@ -97,9 +97,7 @@
             {{ user.lastLoggedIn | date: "medium" }}
           </td>
           <td>
-            <span *ngFor="let role of user.roles"
-              >{{ role.role!.name }} |
-            </span>
+            <span *ngFor="let role of user.roles">{{ role.role!.name }} </span>
           </td>
           <td>
             <div class="btn-group">
@@ -121,12 +119,19 @@
                       user.version!
                     )
                   "
+                  *ngIf="hasAccess('ACCOUNT_USER_CHANGEPASSWORD')"
                   ><i class="fas fa-lock mr-2"></i>{{ l("CHANGE_PASSWORD") }}</a
                 >
-                <a class="dropdown-item" (click)="openEditUserModal(user, i)"
+                <a
+                  class="dropdown-item"
+                  (click)="openEditUserModal(user, i)"
+                  *ngIf="hasAccess('ACCOUNT_USER_EDITUSER')"
                   ><i class="fas fa-edit mr-2"></i>{{ l("EDIT") }}</a
                 >
-                <a class="dropdown-item" (click)="deleteUser(user.id!, i)"
+                <a
+                  class="dropdown-item"
+                  (click)="deleteUser(user.id!, i)"
+                  *ngIf="hasAccess('ACCOUNT_USER_DELETEUSER')"
                   ><i class="fas fa-user-slash mr-2"></i
                   >{{ l("DELETE_USER") }}</a
                 >

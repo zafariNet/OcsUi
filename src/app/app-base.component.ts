@@ -7,6 +7,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { NotifyService } from './services/notify-service.service';
 import { TokenService } from './account/services/token.service';
 import { Router } from '@angular/router';
+import { API_BASE_URL } from './service-proxies/service-proxies';
 @Component({
   template: '',
   animations: [
@@ -26,6 +27,7 @@ export class AppBaseComponent implements OnDestroy {
   globalModelService: GlobalModelService;
   tokenService: TokenService;
   router: Router;
+  baseUrl: string = '';
   constructor(injector: Injector) {
     this.translate = injector.get(TranslateService);
     this.globalModelService = injector.get(GlobalModelService);
@@ -34,6 +36,7 @@ export class AppBaseComponent implements OnDestroy {
     this.tokenService = injector.get(TokenService);
     this.router = injector.get(Router);
     let currentToken = this.tokenService.getToken();
+    this.baseUrl = injector.get(API_BASE_URL);
     if (!currentToken) {
       this.router.navigate(['/login']);
     }
@@ -70,5 +73,13 @@ export class AppBaseComponent implements OnDestroy {
         this.validateAllFields(control);
       }
     });
+  }
+  hasAccess(permissionName: string) {
+    var index = this.globalModelService.logedInUser.permissions?.find(
+      (permission) => {
+        return permission.name?.startsWith(permissionName);
+      }
+    );
+    return index?.id;
   }
 }

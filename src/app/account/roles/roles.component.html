@@ -10,6 +10,7 @@
           <a
             class="btn btn-block btn-default btn-xs"
             (click)="showAddRoleModal()"
+            *ngIf="hasAccess('ACCOUNT_ROLE_ADDROLE')"
           >
             <i class="fa fa-plus nav-icon mr-2"></i
             ><span class="p-2">{{ l("ADD_NEW_ROLE") }}</span>
@@ -83,12 +84,19 @@
                 <a
                   class="dropdown-item"
                   (click)="showAddPermissionModal(role.id!, role.name!)"
+                  *ngIf="hasAccess('ACCOUNT_ROLE_EDITPERMISSIONS')"
                   ><i class="fas fa-key mr-2"></i>{{ l("PERMISSIONS") }}</a
                 >
-                <a class="dropdown-item" (click)="showEditRoleModal(role)"
+                <a
+                  class="dropdown-item"
+                  (click)="showEditRoleModal(role)"
+                  *ngIf="hasAccess('ACCOUNT_ROLE_EDITROLE')"
                   ><i class="fas fa-edit mr-2"></i>{{ l("EDIT") }}</a
                 >
-                <a class="dropdown-item" (click)="deleteRole(role.id!)"
+                <a
+                  class="dropdown-item"
+                  (click)="deleteRole(role.id!)"
+                  *ngIf="hasAccess('ACCOUNT_ROLE_DELETEROLE')"
                   ><i class="fas fa-trash mr-2"></i>{{ l("DELETE_ROLE") }}</a
                 >
               </div>

@@ -63,5 +63,16 @@
   "ROLE_EDITED_SUCCESSFULLY": "Role edited successfully",
   "SELECT_A_ROLE": "Select a role",
   "YOU_MUST_SELECT_A_ROLE": "You must select a role",
-  "PARENT_USER": "Parent user"
+  "PARENT_USER": "Parent user",
+  "ACCESS_DENIED": "Access denied.",
+  "LICENSE_INFORMATION": "License information",
+  "ABOUT": "About us",
+  "FILE_CENTER": "File center",
+  "FILE_UPLOAD": "File upload",
+  "ADD_FILES": "Add files",
+  "START_UPLOAD": "Start upload",
+  "CANCEL_UPLOAD": "Cancel upload",
+  "START": "Start",
+  "CANCEL": "Cancel",
+  "DELETE": "Delete"
 }

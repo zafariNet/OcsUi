@@ -18,25 +18,6 @@
   margin-left: 0.3rem;
 }
 
-.spy-scroll {
-  margin-bottom: 1rem;
-  padding: .5rem;
-  opacity: 1;
-}
-
-.spy-scroll.active {
-  border-left: 3px #3c8dbc solid !important;
-  opacity: 1;
-  font-weight: bold;
-
-}
-
-@media screen and (max-width: 600px) {
-  .spy-scroll {
-    visibility: hidden;
-    display: none;
-  }
-}
 
 fieldset {
   border: 1px solid #ddd !important;
@@ -200,22 +181,22 @@ legend {
 }
 
 /* width */
-::-webkit-scrollbar {
+div::-webkit-scrollbar {
   width: 10px;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+div::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+div::-webkit-scrollbar-thumb {
   background: #607d8b;
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+div::-webkit-scrollbar-thumb:hover {
   background: #607d8b;
 }
 
@@ -416,7 +397,7 @@ tr[aria-expanded="true"]+tr {
 }
 
 .extend-table-minimize-content {
-  overflow-y: scroll;
+  overflow: auto;
   max-height: 600px;
   /* overflow-x : hidden */
 
@@ -522,7 +503,7 @@ tr[aria-expanded="true"]:hover{
 .action-button-container{
   position: -webkit-sticky;
   position: sticky;
-  top: 32px;
+  top: 31px;
   z-index: 10;
 }
 .action-button-wrapper{
@@ -643,103 +624,33 @@ hr.divider {
 {
   margin-top: 2px !important;
 }
-/* .cdk-drop-dragging .cdk-drag {
-  transition: transform 500ms cubic-bezier(0, 0, 0.2, 1);
+
+.form-control:focus {
+  outline: 0 !important;
+  border-color: initial;
+  box-shadow: none;
 }
 
-.cdk-drag-animating {
-  transition: transform 550ms cubic-bezier(0, 0, 0.2, 1);
+.btn-pos {
+  position:relative;
+  z-index:1;
 }
 
-.cdk-drag-placeholder {
-  background: rgba(0, 0, 0, .2);
-} */
-
-
-
-/* 
-a:hover,a:focus{
-    text-decoration: none;
-    outline: none;
-    }
-    #accordion:before{
-    content: "";
-    width: 1px;
-    height: 80%;
-    background: #550527;
-    position: absolute;
-    top: 20px;
-    left: 24px;
-    bottom: 20px;
-    }
-    #accordion .panel{
-    border: none;
-    border-radius: 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-    margin: 0 0 12px 50px;
-    position: relative;
-    }
-    #accordion .panel:before{
-    content: "";
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(to bottom, #688e26 0%,#ff816a 100%);
-    position: absolute;
-    top: 0;
-    left: -2px;
-    }
-    #accordion .panel-heading{
-    padding: 0;
-    background: #fff;
-    position: relative;
-    }
-    #accordion .panel-heading:before{
-    content: "";
-    width: 15px;
-    height: 15px;
-    border-radius: 50px;
-    background: #fff;
-    border: 1px solid #550527;
-    position: absolute;
-    top: 50%;
-    left: -48px;
-    transform: translateY(-50%);
-    }
-    #accordion .panel-title a{
-    display: block;
-    padding: 15px 55px 15px 30px;
-    font-size: 20px;
-    font-weight: 600;
-    color: #550527;
-    border: none;
-    margin: 0;
-    position: relative;
-    }
-    #accordion .panel-title a:before,
-    #accordion .panel-title a.collapsed:before{
-    content: "\f068";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    width: 25px;
-    height: 25px;
-    line-height: 25px;
-    border-radius: 50%;
-    font-size: 15px;
-    font-weight: normal;
-    color: #688e26;
-    text-align: center;
-    border: 1px solid #688e26;
-    position: absolute;
-    top: 50%;
-    right: 25px;
-    transform: translateY(-50%);
-    transition: all 0.5s ease 0s;
-    }
-    #accordion .panel-title a.collapsed:before{ content: "\f067"; }
-    #accordion .panel-body{
-    padding: 0 30px 15px;
-    border: none;
-    font-size: 14px;
-    color: #305275;
-    line-height: 28px;
-    } */
+/* Clearable */
+.clearable{
+  background:url(http://i.imgur.com/z7ZSYjt.png) no-repeat right -10px center;
+  
+  padding:3px 18px 3px 4px; /* USE the same right padding in jQ! */
+  border-radius:3px;
+  transition: background 0.4s;
+}
+.clearable.x{
+  background-position: right 5px center;
+}
+.clearable.onX{
+  cursor:pointer;
+}
+.selected-form-control{
+  border-color: #000 !important;
+  background-color: #eee;
+}
