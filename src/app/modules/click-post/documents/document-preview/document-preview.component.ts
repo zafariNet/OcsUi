@@ -23,11 +23,11 @@ export class DocumentPreviewComponent implements AfterViewInit {
   bgImage: any;
   canvasScale = 1;
   photoUrlLandscape = 'assets/img/documents/Scan-to-File-2205170845197968.jpg';
-  photoUrlPortrait =
-    'https://presspack.rte.ie/wp-content/blogs.dir/2/files/2015/04/AMC_TWD_Maggie_Portraits_4817_V1.jpg';
 
   ngAfterViewInit(): void {
-    this.setCanvas();
+    setTimeout(() => {
+      this.zoomOut(2.25);
+    }, 200);
   }
   extended: boolean = false;
   @Output() documentToggled: EventEmitter<boolean> =
@@ -37,23 +37,31 @@ export class DocumentPreviewComponent implements AfterViewInit {
   toggleDocument() {
     this.extended = !this.extended;
     this.documentToggled.emit(this.extended);
-    setTimeout(() => {}, 1000);
   }
 
   setCanvas() {
+    $('#convas-container').empty();
+    $('#convas-container').append('<canvas id="canvas"></canvas>');
+    this.canvas = {};
     this.canvas = new fabric.Canvas('canvas');
+    this.canvas.hoverCursor = 'pointer';
     this.setCanvasSize({ height: this.canvasHeight, width: this.canvasWidth });
     this.setCanvasBackgroundImageUrl(this.photoUrlLandscape);
   }
 
   zoomIn() {
+    if (this.canvasScale > 0.555) return;
     this.canvasScale *= 1.25;
-    this.scaleAndPositionImage();
+
+    this.setCanvas();
   }
-  zoomOut() {
-    this.canvasScale /= 1.25;
-    this.scaleAndPositionImage();
+  zoomOut(scale) {
+    debugger;
+    this.canvasScale /= scale;
+
+    this.setCanvas();
   }
+  fitPageHeight() {}
   setCanvasSize(canvasSizeObject) {
     this.canvas.setWidth(canvasSizeObject.width);
     this.canvas.setHeight(canvasSizeObject.height);
@@ -72,14 +80,14 @@ export class DocumentPreviewComponent implements AfterViewInit {
         '',
         that.canvas.renderAll.bind(that.canvas)
       );
-
       that.canvas.renderAll();
     }
   }
   scaleAndPositionImage() {
-    this.canvas.clear();
+    let that = this;
+
+    that.canvas.clear();
     this.setCanvasZoom();
-    debugger;
     var canvasAspect = this.canvasWidth / this.canvasHeight;
     var imgAspect = this.bgImage.width / this.bgImage.height;
     var left, top, scaleFactor;
@@ -106,38 +114,60 @@ export class DocumentPreviewComponent implements AfterViewInit {
         scaleY: scaleFactor,
       }
     );
+    this.setBloks();
+    this.canvas.on({
+      'selection:created': (obj) => {
+        var text = '';
+        obj.selected.forEach((element) => {
+          text += ' ' + element.id;
+        });
+        that.textSelected.emit(text);
+      },
+      'selection:updated': this.HandleElement.bind(this),
+    });
 
+    this.canvas.renderAll();
+  }
+  HandleElement(obj) {
+    debugger;
+    var text = '';
+    obj.selected.forEach((element) => {
+      text += ' ' + element.id;
+    });
+    this.textSelected.emit(text);
+  }
+  setBloks() {
     var pageHeight = this.canvas.getHeight();
     var pageWidth = this.canvas.getWidth();
     this.canvas.setDimensions({ height: pageHeight, width: pageWidth });
     for (var i = 0; i < this.blocks.length; i++) {
       var block = this.blocks[i];
-      this.canvas.add(
-        new fabric.Rect({
-          left: block.left * pageWidth,
-          top: block.top * pageHeight,
-          width: block.width * pageWidth,
-          height: block.height * pageHeight,
-          fill: 'green',
-          opacity: 0.1,
-          id: block.text,
-        })
-      );
-    }
-    this.canvas.on({
-      'selection:updated': HandleElement.bind(this),
-      'selection:created': HandleElement.bind(this),
-    });
-    function HandleElement(obj) {
-      debugger;
-      debugger;
-      var text = '';
-      obj.selected.forEach((element) => {
-        text += ' ' + element.id;
+      var blockContent = new fabric.Rect({
+        left: block.left * pageWidth,
+        top: block.top * pageHeight,
+        width: block.width * pageWidth,
+        height: block.height * pageHeight,
+        fill: 'green',
+        opacity: 0.1,
+        id: block.text,
+        hoverCursor: 'pointer',
       });
-      this.textSelected.emit(text);
+      blockContent.controls = {
+        ...fabric.Rect.prototype.controls,
+      };
+      blockContent.setControlsVisibility({
+        mt: false,
+        mb: false,
+        ml: false,
+        mr: false,
+        bl: false,
+        br: false,
+        tl: false,
+        tr: false,
+        mtr: false,
+      });
+      this.canvas.add(blockContent);
     }
-    this.canvas.renderAll();
   }
   setCanvasZoom() {
     this.canvasWidth = this.canvasOriginalWidth * this.canvasScale;
@@ -146,6 +176,7 @@ export class DocumentPreviewComponent implements AfterViewInit {
     this.canvas.setWidth(this.canvasWidth);
     this.canvas.setHeight(this.canvasHeight);
   }
+
   blocks: any[] = [
     {
       text: 'windream.',

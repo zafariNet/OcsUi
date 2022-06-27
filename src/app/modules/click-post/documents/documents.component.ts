@@ -41,6 +41,7 @@ export class DocumentsComponent implements AfterViewInit, OnInit {
   }
   resizeCanvas(size) {}
   textSelected(data) {
+    debugger;
     this.textSelectedComponent.setFomrData(data);
   }
 }

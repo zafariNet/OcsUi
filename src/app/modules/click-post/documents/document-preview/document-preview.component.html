@@ -1,3 +1,46 @@
-<button (click)="zoomIn()">+</button>
-<button (click)="zoomOut()">-</button>
-<canvas id="canvas"></canvas>
+<div id="canvas-container" class="col-lg-12">
+  <div
+    class="btn-group-vertical"
+    style="opacity: 1; right: 0px; float: right; z-index: 100"
+  >
+    <button
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Maximize"
+      type="button"
+      data-card-widget="maximize"
+      data-animation-speed="1000"
+      class="btn btn-default btn-flat"
+    >
+      <i class="fas fa-expand"></i>
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-default btn-xs p-2"
+      (click)="zoomIn()"
+      [disabled]="canvasScale > 0.555"
+    >
+      <img src="assets/img/buttons/zoomIn.svg" width="20px" /></button
+    ><button
+      type="button"
+      class="btn btn-default btn-xs p-2"
+      (click)="zoomOut(1.25)"
+    >
+      <img src="assets/img/buttons/zoomOut.svg" width="20px" />
+    </button>
+    <button
+      type="button"
+      class="btn btn-default btn-xs p-2"
+      (click)="fitPageHeight()"
+    >
+      <img src="assets/img/buttons/zoomPageHeight.svg" width="20px" />
+    </button>
+    <button type="button" class="btn btn-default btn-xs p-2">
+      <img src="assets/img/buttons/zoomPageWidth.svg" width="20px" />
+    </button>
+  </div>
+  <div id="convas-container">
+    <canvas id="canvas"></canvas>
+  </div>
+</div>
