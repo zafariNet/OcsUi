@@ -636,25 +636,20 @@ hr.divider {
   z-index:1;
 }
 
-/* Clearable */
-.clearable{
-  background:url(http://i.imgur.com/z7ZSYjt.png) no-repeat right -10px center;
+
+
+.input-remover{
+
+  background-color: transparent;
+  color: #adb5bd;
+  font-size: .875rem;
+  margin-right: -5px;
+  cursor: pointer !important;
+}
+.input-remover:hover{
+  color: #000;
+}
+#canvas{
   
-  padding:3px 18px 3px 4px; /* USE the same right padding in jQ! */
-  border-radius:3px;
-  transition: background 0.4s;
+  width: 100%;
 }
-.clearable.x{
-  background-position: right 5px center;
-}
-.clearable.onX{
-  cursor:pointer;
-}
-.selected-form-control{
-  border-color: #000 !important;
-  background-color: #eee;
-}
-
-
-
-

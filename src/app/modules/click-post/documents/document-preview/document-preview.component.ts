@@ -40,23 +40,26 @@ export class DocumentPreviewComponent implements AfterViewInit {
   }
 
   setCanvas() {
-    $('#convas-container').empty();
-    $('#convas-container').append('<canvas id="canvas"></canvas>');
-    this.canvas = {};
     this.canvas = new fabric.Canvas('canvas');
     this.canvas.hoverCursor = 'pointer';
     this.setCanvasSize({ height: this.canvasHeight, width: this.canvasWidth });
     this.setCanvasBackgroundImageUrl(this.photoUrlLandscape);
   }
 
-  zoomIn() {
-    if (this.canvasScale > 0.555) return;
-    this.canvasScale *= 1.25;
+  zoom(delta) {
+    var zoom = this.canvas.getZoom();
+    zoom *= 0.999 ** delta;
+    if (zoom > 20) zoom = 20;
+    if (zoom < 0.01) zoom = 0.01;
+    const height = this.canvasHeight * zoom;
+    const width = this.canvasWidth * zoom;
+    debugger;
+    this.canvas.setHeight(height);
+    this.canvas.setWidth(width);
 
-    this.setCanvas();
+    this.canvas.setZoom(zoom);
   }
   zoomOut(scale) {
-    debugger;
     this.canvasScale /= scale;
 
     this.setCanvas();
@@ -151,6 +154,9 @@ export class DocumentPreviewComponent implements AfterViewInit {
         opacity: 0.1,
         id: block.text,
         hoverCursor: 'pointer',
+        lockMovementY: true,
+        lockMovementX: true,
+        borderScaleFactor: 2,
       });
       blockContent.controls = {
         ...fabric.Rect.prototype.controls,
@@ -543,7 +549,7 @@ export class DocumentPreviewComponent implements AfterViewInit {
       height: 0.00798175598631699,
     },
     {
-      text: 'ZwergbachstraBe',
+      text: 'Zwergbachstraße',
       left: 0.14320290439693426,
       top: 0.23204104903078676,
       width: 0.12666397741024607,

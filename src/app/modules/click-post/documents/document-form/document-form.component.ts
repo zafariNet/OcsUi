@@ -27,10 +27,12 @@ export class DocumentFormComponent implements AfterViewInit, OnInit {
     );
     this.componentInitializer.setInputClearable();
     setTimeout(() => {
-      $('.form-control').focusin(function (e) {
-        $('.form-control').removeClass('selected-form-control');
+      $('.form-control,input-group-append').focusin(function (e) {
+        // $('.form-control,input-group-append').removeClass(
+        //   'selected-form-control'
+        // );
         that.selectedControl = e.currentTarget.id;
-        e.currentTarget.classList.add('selected-form-control');
+        // e.currentTarget.classList.add('selected-form-control');
       });
     }, 10);
   }
@@ -54,5 +56,12 @@ export class DocumentFormComponent implements AfterViewInit, OnInit {
       note: new FormControl(this.documentData.note),
       other: new FormControl(),
     });
+  }
+  clearField(data) {
+    debugger;
+    this.documentForm.patchValue({
+      [data]: '',
+    });
+    this.selectedControl = data;
   }
 }

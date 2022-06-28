@@ -1,73 +1,115 @@
 <form [formGroup]="documentForm">
   <div class="form-group document-control">
     <label for="company" class="lable-from-control-document">Company</label>
-    <input
-      type="text"
-      class="form-control form-control-sm clearable"
-      id="company"
-      placeholder="Company name"
-      formControlName="company"
-    />
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control form-control-sm border-right-0 border"
+        id="company"
+        placeholder="Company name"
+        formControlName="company"
+      />
+      <span class="input-group-append" (click)="clearField('company')">
+        <div class="input-group-text bg-transparent">
+          <i class="fa fa-times input-remover"></i>
+        </div>
+      </span>
+    </div>
   </div>
   <div class="form-group document-control">
     <label for="department" class="lable-from-control-document"
       >Department</label
     >
-    <input
-      type="text"
-      class="form-control form-control-sm clearable"
-      id="department"
-      placeholder="Department name"
-      formControlName="department"
-    />
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control form-control-sm border-right-0 border"
+        id="department"
+        placeholder="Department name"
+        formControlName="department"
+      />
+      <span class="input-group-append" (click)="clearField('department')">
+        <div class="input-group-text bg-transparent">
+          <i class="fa fa-times input-remover"></i>
+        </div>
+      </span>
+    </div>
   </div>
   <div class="form-group document-control">
     <label for="surname" class="lable-from-control-document">Surename</label>
-    <input
-      type="text"
-      class="form-control form-control-sm clearable"
-      id="surname"
-      placeholder="surname"
-      formControlName="surname"
-    />
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control form-control-sm border-right-0 border"
+        id="surname"
+        placeholder="surname"
+        formControlName="surname"
+      />
+      <span class="input-group-append" (click)="clearField('surname')">
+        <div class="input-group-text bg-transparent">
+          <i class="fa fa-times input-remover"></i>
+        </div>
+      </span>
+    </div>
   </div>
   <div class="form-group document-control">
     <label for="givenNames" class="lable-from-control-document"
       >Given names</label
     >
-    <input
-      type="text"
-      class="form-control form-control-sm deletable"
-      id="givenNames"
-      placeholder="Given names"
-      formControlName="givenNames"
-    />
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control form-control-sm border-right-0 border"
+        id="givenNames"
+        placeholder="Given names"
+        formControlName="givenNames"
+      />
+      <span class="input-group-append" (click)="clearField('givenNames')">
+        <div class="input-group-text bg-transparent">
+          <i class="fa fa-times input-remover"></i>
+        </div>
+      </span>
+    </div>
   </div>
   <div class="form-group document-control">
     <label for="eMail" class="lable-from-control-document">E-Mail</label>
-    <input
-      type="text"
-      class="form-control form-control-sm clearable"
-      id="eMail"
-      placeholder="eMail"
-      formControlName="eMail"
-    />
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control form-control-sm border-right-0 border"
+        id="eMail"
+        placeholder="eMail"
+        formControlName="eMail"
+      />
+      <span class="input-group-append" (click)="clearField('eMail')">
+        <div class="input-group-text bg-transparent">
+          <i class="fa fa-times input-remover"></i>
+        </div>
+      </span>
+    </div>
   </div>
   <div class="form-group document-control">
     <label for="sender" class="lable-from-control-document">Sender</label>
-    <input
-      type="text"
-      class="form-control form-control-sm clearable"
-      id="sender"
-      placeholder="sender"
-      formControlName="sender"
-    />
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control form-control-sm border-right-0 border"
+        id="sender"
+        placeholder="sender"
+        formControlName="sender"
+      />
+      <span class="input-group-append" (click)="clearField('sender')">
+        <div class="input-group-text bg-transparent">
+          <i class="fa fa-times input-remover"></i>
+        </div>
+      </span>
+    </div>
   </div>
   <div class="form-group document-control">
     <label for="date" class="lable-from-control-document">Date</label>
     <input
       type="text"
-      class="form-control form-control-sm clearable"
+      class="form-control form-control-sm"
       id="date"
       data-provide="datepicker"
       formControlName="date"
@@ -75,13 +117,20 @@
   </div>
   <div class="form-group document-control">
     <label class="lable-from-control-document">Note</label>
-    <textarea
-      class="form-control"
-      formControlName="note"
-      rows="3"
-      placeholder=""
-      id="note"
-    ></textarea>
+    <div class="input-group">
+      <textarea
+        class="form-control border-right-0 border"
+        formControlName="note"
+        rows="3"
+        placeholder=""
+        id="note"
+      ></textarea>
+      <span class="input-group-append" (click)="clearField('note')">
+        <div class="input-group-text bg-transparent">
+          <i class="fa fa-times input-remover"></i>
+        </div>
+      </span>
+    </div>
   </div>
   <div class="form-group document-control">
     <label class="lable-from-control-document">Quick dial buttons</label>
