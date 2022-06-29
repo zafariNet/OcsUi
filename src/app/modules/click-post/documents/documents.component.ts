@@ -14,7 +14,7 @@ declare var $: any;
 })
 export class DocumentsComponent implements AfterViewInit, OnInit {
   connectedTo: any[] = [];
-  showCard: boolean = false;
+  extendedCard: string;
 
   @ViewChild('textSelectedComponent')
   textSelectedComponent: DocumentFormComponent;
@@ -25,13 +25,18 @@ export class DocumentsComponent implements AfterViewInit, OnInit {
     }
   }
   ngAfterViewInit(): void {
+    let that = this;
     this.componentInitializer.setExpandableTable();
     this.componentInitializer.initialCard('.extend-card', this.resizeCanvas);
+    $('[card-id]').on('maximized.lte.cardwidget', function (data) {
+      that.extendedCard = $(this).attr('card-id');
+    });
+    $('[card-id]').on('minimized.lte.cardwidget', function (data) {
+      that.extendedCard = '';
+    });
   }
   @Input('documentData') documentData: any[];
-  showcard(data) {
-    this.showCard = data;
-  }
+  showcard(data) {}
   setSelectedDocument(data) {
     let checked = data.currentTarget.checked;
 
@@ -43,5 +48,8 @@ export class DocumentsComponent implements AfterViewInit, OnInit {
   textSelected(data) {
     debugger;
     this.textSelectedComponent.setFomrData(data);
+  }
+  fuck() {
+    alert('s');
   }
 }

@@ -14,7 +14,10 @@ export class DocumentTreeComponent implements OnInit {
   @Input('treeData') treeData: any;
   @Input('connectedTo') connectedTo: any[] = [];
   doDrop(event: CdkDragDrop<string[]>) {
+    debugger;
     if (event.previousContainer === event.container) {
+      var xxx = event.previousContainer.data[event.previousIndex]['id'];
+      var yyy = event.previousContainer.data[event.currentIndex]['id'];
       moveItemInArray(
         event.container.data,
         event.previousIndex,

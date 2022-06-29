@@ -120,10 +120,26 @@ export class DocumentPreviewComponent implements AfterViewInit {
     this.setBloks();
     this.canvas.on({
       'selection:created': (obj) => {
+        debugger;
         var text = '';
-        obj.selected.forEach((element) => {
-          text += ' ' + element.id;
-        });
+        if (obj.selected.length > 1) {
+          debugger;
+          var xxx = this.groupBy(obj.selected, 'top');
+          var value: [];
+
+          for (const [key, value] of Object.entries(xxx)) {
+            var texts = value as Array<any>;
+            for (let i = 0; i <= texts.length - 1; i++) {
+              text += texts[i].id;
+            }
+            text += '\\n';
+          }
+        } else
+          obj.selected.forEach((element) => {
+            text += ' ' + element.id;
+          });
+        debugger;
+        text = text.replace('\\n', '<br />');
         that.textSelected.emit(text);
       },
       'selection:updated': this.HandleElement.bind(this),
@@ -138,6 +154,12 @@ export class DocumentPreviewComponent implements AfterViewInit {
       text += ' ' + element.id;
     });
     this.textSelected.emit(text);
+  }
+  groupBy(xs, key) {
+    return xs.reduce(function (rv, x) {
+      (rv[x[key]] = rv[x[key]] || []).push(x);
+      return rv;
+    }, {});
   }
   setBloks() {
     var pageHeight = this.canvas.getHeight();

@@ -50,8 +50,11 @@
         <td colspan="10">
           <div class="row p-0">
             <div class="col-lg-12">
-              <div class="card card-border-0 extend-card card-primary">
-                <div class="card-header" *ngIf="showCard">
+              <div
+                class="card card-border-0 extend-card card-primary"
+                [attr.card-id]="item.id"
+              >
+                <div class="card-header" *ngIf="extendedCard == item.id">
                   <h3 class="card-title">
                     <b>{{ item.id }}</b>
                   </h3>
@@ -62,6 +65,15 @@
                       class="brand-image ng-tns-c89-3"
                       width="200px"
                     />
+
+                    <button
+                      type="button"
+                      data-card-widget="maximize"
+                      class="btn btn-tool"
+                      data-animation-speed="0"
+                    >
+                      <i class="fas fa-expand"></i>
+                    </button>
                   </div>
                 </div>
                 <div class="row p-1">

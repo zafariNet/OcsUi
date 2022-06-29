@@ -653,3 +653,7 @@ hr.divider {
   
   width: 100%;
 }
+
+.table td, .table th {
+  min-width: 100px;
+}
