@@ -23,9 +23,14 @@
     </tr>
   </thead>
   <tbody>
-    <ng-container *ngFor="let item of documentData">
+    <ng-container *ngFor="let item of documentData; let i = index">
       <!-- Second -->
-      <tr data-widget="expandable-table" aria-expanded="false">
+      <tr
+        data-widget="expandable-table"
+        aria-expanded="false"
+        [attr.document]="item.id"
+        [attr.index]="i"
+      >
         <td>
           <div class="icheck-primary d-inline">
             <input
@@ -46,7 +51,7 @@
         <td>{{ item.subject }}</td>
         <td><span class="right badge badge-danger">Bad</span></td>
       </tr>
-      <tr class="expandable-body">
+      <tr class="expandable-body" id="expandable-table-header-row">
         <td colspan="10">
           <div class="row p-0">
             <div class="col-lg-12">
@@ -76,11 +81,15 @@
                     </button>
                   </div>
                 </div>
-                <div class="row p-1">
+                <div class="row p-2">
                   <div class="col-md-2 extend-table-minimize-content">
                     <ocs-document-tree
                       [connectedTo]="connectedTo"
                       [treeData]="item"
+                      (currentDocumentChanged)="
+                        currentDocumentChanged($event, item.id)
+                      "
+                      (documentSplitted)="splitDocument($event)"
                     ></ocs-document-tree>
                   </div>
                   <div
@@ -96,8 +105,10 @@
                     id="convasContainer"
                   >
                     <ocs-document-preview
-                      (documentToggled)="showcard($event)"
                       (textSelected)="textSelected($event)"
+                      [documentId]="item.id"
+                      [page]="item.images[0]"
+                      #documentPreview
                     ></ocs-document-preview>
                   </div>
                 </div>

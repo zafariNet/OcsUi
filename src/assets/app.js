@@ -37,6 +37,7 @@ $(function () {
   });
   $.fn.extend({
     treed: function (o) {
+      debugger;
       var openedClass = "fa fa-minus";
       var closedClass = "fa fa-plus";
 

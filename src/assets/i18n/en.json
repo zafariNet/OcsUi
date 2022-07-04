@@ -74,5 +74,7 @@
   "CANCEL_UPLOAD": "Cancel upload",
   "START": "Start",
   "CANCEL": "Cancel",
-  "DELETE": "Delete"
+  "DELETE": "Delete",
+  "CAN_NOT_MOVE_FURTHER": "The page cannot be moved any further!",
+  "CAN_NOT_MOVE_FURTHER_DETAIL": "If you want to move the page to a different document, please drag it with the mouse!"
 }

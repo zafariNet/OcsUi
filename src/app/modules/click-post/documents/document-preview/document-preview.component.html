@@ -1,13 +1,6 @@
 <div
   class="btn-group-vertical"
-  style="
-    opacity: 1;
-    float: left;
-    z-index: 100;
-    position: sticky;
-    top: 0;
-    left: 0;
-  "
+  style="opacity: 1; float: left; z-index: 1; position: sticky; top: 0; left: 0"
 >
   <button
     data-placement="bottom"
@@ -35,5 +28,6 @@
     <img src="assets/img/buttons/zoomPageWidth.svg" width="20px" />
   </button>
 </div>
-
-<canvas id="canvas"></canvas>
+<div [id]="'convas-wrapper' + documentId">
+  <canvas [id]="'canvas' + page.id"></canvas>
+</div>

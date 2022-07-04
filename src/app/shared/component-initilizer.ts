@@ -1,13 +1,12 @@
 declare var $: any;
 export class ComponentInitilizer {
   //make card extensible
-  initialCard(dom: string | null | undefined, callback) {
+  initialCard(dom: string | null | undefined) {
     $(dom).on('maximized.lte.cardwidget', function (e: any) {
       setTimeout(() => {
         var parent = $(e.currentTarget).children().last();
         var target = $(e.currentTarget).height();
         parent.children().css({ minHeight: target });
-        callback(target);
       }, 500);
     });
 

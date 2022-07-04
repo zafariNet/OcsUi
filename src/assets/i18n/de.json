@@ -74,5 +74,7 @@
   "CANCEL_UPLOAD": "Upload abbrechen",
   "START": "Starten",
   "CANCEL": "abbrechen",
-  "DELETE": "löschen"
+  "DELETE": "löschen",
+  "CAN_NOT_MOVE_FURTHER": "Die Seite kann nicht weiter verschoben werden!",
+  "CAN_NOT_MOVE_FURTHER_DETAIL": "Wenn Sie die Seite in ein anderes Dokument verschieben möchten, ziehen Sie sie bitte mit der Maus!"
 }

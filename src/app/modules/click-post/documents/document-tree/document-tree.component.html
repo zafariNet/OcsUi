@@ -28,9 +28,9 @@
     <img src="assets/img/buttons/send.svg" width="25" />
   </button>
 </div>
-<ul class="tree">
+<ul class="tree" id="documentTree">
   <li>
-    <a href="javascript:void(0)">Pages</a>
+    <a href="javascript:void(0)">{{ treeData.id }}</a>
 
     <ul
       cdkDropList
@@ -41,37 +41,43 @@
       id="{{ treeData.id }}"
     >
       <li
-        style="width: 100%; white-space: nowrap"
-        *ngFor="let image of treeData.images"
+        *ngFor="let image of treeData.images; let order = index"
         cdkDrag
+        [id]="'node' + image.id"
       >
+        <img
+          src="assets/img/documents/thumbnails/{{ image.id }}.jpg"
+          class="thumbnails"
+          (click)="changeCurrentDocument(image)"
+        />
         <div
-          class="doc-list"
-          [attr.data-value]="image.id"
-          (click)="showIcons(image.id)"
-        ></div>
-        <a href="javascript:void(0)">
-          <img
-            src="assets/img/documents/thumbnails/{{ image.id }}.jpg"
-            class="thumbnails"
-          />
-          <div
-            class="btn-group-vertical document-action-button"
-            [id]="image.id"
-            style="opacity: 0; left: 0px"
+          class="btn-group-vertical document-action-button"
+          [id]="'thumbnail' + image.id"
+          *ngIf="image.id == currentDocumentId"
+        >
+          <a
+            type="button"
+            class="btn btn-default btn-xs p-2"
+            (click)="moveUp(order)"
           >
-            <a type="button" class="btn btn-default btn-xs p-2">
-              <img src="assets/img/buttons/movePageUp.svg" width="20px" />
-            </a>
+            <img src="assets/img/buttons/movePageUp.svg" width="20px" />
+          </a>
 
-            <a type="button" class="btn btn-default btn-xs p-2">
-              <img src="assets/img/buttons/split.svg" width="20px" />
-            </a>
-            <a type="button" class="btn btn-default btn-xs p-2">
-              <img src="assets/img/buttons/movePageDown.svg" width="20px" />
-            </a>
-          </div>
-        </a>
+          <a
+            type="button"
+            class="btn btn-default btn-xs p-2"
+            (click)="splitDocument(image)"
+          >
+            <img src="assets/img/buttons/split.svg" width="20px" />
+          </a>
+          <a
+            type="button"
+            class="btn btn-default btn-xs p-2"
+            (click)="moveDown(order)"
+          >
+            <img src="assets/img/buttons/movePageDown.svg" width="20px" />
+          </a>
+        </div>
       </li>
     </ul>
   </li>

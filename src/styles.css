@@ -92,7 +92,9 @@ legend {
   line-height: 2em;
   color: #369;
   font-weight: 700;
-  position: relative
+  position: relative;
+  width: 100%; 
+  white-space: nowrap;
 }
 
 .tree ul li:before {
@@ -356,6 +358,7 @@ div::-webkit-scrollbar-thumb:hover {
 .thumbnails {
   border: 1px solid rgb(139, 136, 136);
   margin-bottom: 5px;
+  cursor: pointer;
 }
 
 tr[aria-expanded="true"] {
@@ -364,7 +367,11 @@ tr[aria-expanded="true"] {
   color: #000;
 
 }
-
+.document-action-button{
+  opacity: 0;
+   left: 0px;
+   z-index: 100
+}
 .document-control {
   margin-bottom: 0.3rem !important;
 }
@@ -389,17 +396,19 @@ tr[aria-expanded="true"]+tr {
 
 .doc-list {
   position: absolute;
-  opacity: 0;
+  opacity: 0.5;
   width: 100%;
   height: 100%;
   cursor: pointer !important;
-  z-index: 1000;
+  z-index: 99;
+  background-color: #0480be;
 }
 
 .extend-table-minimize-content {
   overflow: auto;
-  max-height: 600px;
-  /* overflow-x : hidden */
+  max-height: 750px;
+     overflow-x : hidden  
+     
 
 }
 
@@ -492,7 +501,11 @@ div.scrollmenu a:hover {
   border: 1px solid #beebff;
   width: 100%;
 }
-
+.selected-tree-node{
+  border-right: 1px solid #e7f4f9;
+  border-top: 1px solid #e7f4f9;
+  border-bottom: 1px solid #e7f4f9
+}
 tr[aria-expanded="true"]:hover{
   /* color: #e7f4f9 !important; */
 }
@@ -656,4 +669,43 @@ hr.divider {
 
 .table td, .table th {
   min-width: 100px;
+}
+
+#toast-container > div {
+  opacity: 1;
+ -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+ filter: alpha(opacity=100);
+}
+.toast{
+  width: 500px !important;
+}
+.tools > a{
+  cursor: pointer;
+  padding: 3px;
+}
+.document-button{
+  opacity: 0.5;
+}
+.document-button :hover{
+  opacity: 1;
+  
+}
+
+.main-header{
+  background-color: #010a1f !important;
+}
+.timeline>div>.timeline-item{
+  margin-left : 0px !important;
+  margin-right: 0px !important;
+}
+.timeline>div{
+  margin-bottom: 0px;
+  margin-right: 0px;
+}
+.timeline-body{
+  padding-left :8px !important
+}
+.top-menu-active{
+  background-color: #3c8dbc;
+    color: #fff;
 }

@@ -1,13 +1,16 @@
 <ng-container *ngIf="_globalModelService.dataFetched">
-  <ocs-header></ocs-header>
-  <ocs-sidebar></ocs-sidebar>
-  <div class="content-wrapper" style="padding: 0 10px">
-    <ocs-breadcrumb></ocs-breadcrumb>
-    <section class="content">
-      <router-outlet></router-outlet>
-    </section>
+  <div class="wrapper">
+    <ocs-header></ocs-header>
+    <ocs-sidebar></ocs-sidebar>
+    <div class="content-wrapper" style="padding: 0 10px">
+      <ocs-breadcrumb></ocs-breadcrumb>
+      <section class="content">
+        <router-outlet></router-outlet>
+      </section>
+    </div>
   </div>
 </ng-container>
+
 <ngx-spinner
   bdOpacity="0.9"
   bdColor="#000"

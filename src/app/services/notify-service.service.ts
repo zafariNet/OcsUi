@@ -1,7 +1,7 @@
 import { animate } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 declare var $: any;
 declare var Noty: any;
 declare var Swal: any;
@@ -22,7 +22,32 @@ export class NotifyService {
       text: this.l(body),
     });
   }
+  showSimpleError(message: string, ...messages) {
+    toastr.options = {
+      closeButton: true,
+      debug: false,
+      newestOnTop: false,
+      progressBar: true,
+      positionClass: 'toast-top-center',
+      preventDuplicates: false,
+      onclick: null,
+      showDuration: '300',
+      hideDuration: '1000',
+      timeOut: '3000',
+      extendedTimeOut: '1000',
+      showEasing: 'swing',
+      hideEasing: 'linear',
+      showMethod: 'fadeIn',
+      hideMethod: 'fadeOut',
+    };
+    let completeMessage = '<strong>' + this.l(message) + '</strong>';
+    debugger;
+    for (message of messages) {
+      completeMessage += '<br //>' + message;
+    }
 
+    toastr.error(completeMessage);
+  }
   async showMessageWithCheckBox(
     title?: string,
     body: string = '',

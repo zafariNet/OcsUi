@@ -13,6 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [
     MainLayoutComponent,
+
     HeaderComponent,
     SidebarComponent,
     BreadcrumbComponent,
@@ -22,7 +23,7 @@ import { SharedModule } from '../shared/shared.module';
     RouterModule,
     CommonModule,
     BrowserAnimationsModule,
-  
+
     SharedModule,
     ReactiveFormsModule,
   ],
