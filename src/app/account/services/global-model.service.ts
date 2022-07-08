@@ -23,5 +23,8 @@ export class GlobalModelService {
   applicationStarted: boolean = false;
   logedInUser: LogedInUserViewModel = new LogedInUserViewModel();
   userSetting: UserSettingViewModel = new UserSettingViewModel();
-  sidebarInitilized : boolean;
+  sidebarInitilized: boolean;
+  scanToFile: any[] = [];
+  scanToWork: any[] = [];
+  OcrWork: any[] = [];
 }

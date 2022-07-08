@@ -6,6 +6,11 @@ import { GlobalModelService } from 'src/app/account/services/global-model.servic
 import { TokenService } from 'src/app/account/services/token.service';
 import { AppBaseComponent } from 'src/app/app-base.component';
 import { AccountService } from 'src/app/service-proxies/service-proxies';
+import {
+  NgbOffcanvas,
+  OffcanvasDismissReasons,
+} from '@ng-bootstrap/ng-bootstrap';
+import { SignalRService } from 'src/app/shared/service-proxies/signalr.service';
 declare var $: any;
 declare var Layout: any;
 @Component({
@@ -18,10 +23,12 @@ export class MainLayoutComponent
 {
   initialDataFetched: boolean = false;
   _globalModelService: GlobalModelService;
+
   constructor(
     globalModelService: GlobalModelService,
     private accountService: AccountService,
     private translateService: TranslateService,
+    private signalRService: SignalRService,
     injector: Injector
   ) {
     super(injector);
@@ -35,6 +42,12 @@ export class MainLayoutComponent
     }
   }
   ngOnInit(): void {
+    this.signalRService.startConnection();
+    this.signalRService.addTransferChartDataListener();
+    this.signalRService.deleteFileListener();
+    this.signalRService.scanWorkCreateListener();
+    this.signalRService.scanWorkDeleteListener();
+
     this._globalModelService.initialDataFeteched.subscribe({
       next: (data) => (this.initialDataFetched = data),
     });

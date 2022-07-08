@@ -339,8 +339,18 @@ div::-webkit-scrollbar-thumb:hover {
 }
 
 .click-post-action-button {
-  height: 60px !important;
-  min-width: 60px !important;
+  height: 45px !important;
+  min-width: 45px !important;
+  padding-top:10px !important;
+  margin : 5px 0 8px 10px !important;
+}
+.zoom-bottom{
+  opacity: 1; 
+  float: left; 
+  z-index: 1; 
+  position: sticky; 
+  top: 5; 
+  left: 5
 }
 .click-post-action-button-scrolled {
   height: 35px !important;
@@ -406,12 +416,26 @@ tr[aria-expanded="true"]+tr {
 
 .extend-table-minimize-content {
   overflow: auto;
-  max-height: 750px;
-     overflow-x : hidden  
+  
+  height:calc(100vh - 125px);
      
-
 }
-
+.extend-table-minimize-content-x {
+  overflow-x: auto;
+  height:calc(100vh - 125px);
+  /* max-height: 750px; */
+     
+}
+.document-card{
+  margin: 0px;
+  padding-left: 0px;
+  padding-right: 9px;
+  padding-top: 0px;
+  border-top: 5px solid rgba(0, 0, 0, 0.125)
+}
+.panel-title{
+  border : 1px solid rgba(0,0,0,.125)
+}
 .card-border-0 {
   box-shadow: 0 0 0 0 !important;
 }
@@ -502,9 +526,23 @@ div.scrollmenu a:hover {
   width: 100%;
 }
 .selected-tree-node{
-  border-right: 1px solid #e7f4f9;
+  /* border-right: 1px solid #e7f4f9;
   border-top: 1px solid #e7f4f9;
-  border-bottom: 1px solid #e7f4f9
+  border-bottom: 1px solid #e7f4f9 */
+}
+.border-left{
+  border-left : 5px solid rgba(0,0,0,.125) !important
+}
+.border-left-devider{
+  border-left : 1px solid rgba(0,0,0,.125) !important
+}
+
+.scrollbar-left
+{
+  
+   
+       
+  
 }
 tr[aria-expanded="true"]:hover{
   /* color: #e7f4f9 !important; */
@@ -686,14 +724,14 @@ hr.divider {
 .document-button{
   opacity: 0.5;
 }
-.document-button :hover{
-  opacity: 1;
+.document-button:hover {
+  opacity: 1 !important;
   
 }
 
-.main-header{
+ .main-header{
   background-color: #010a1f !important;
-}
+} 
 .timeline>div>.timeline-item{
   margin-left : 0px !important;
   margin-right: 0px !important;
@@ -709,3 +747,9 @@ hr.divider {
   background-color: #3c8dbc;
     color: #fff;
 }
+.margin-0{
+  margin: 0px !important;
+  min-width: 100% !important;
+}
+
+

@@ -6,24 +6,6 @@
     </h3>
     <div class="card-tools">
       <ul class="nav nav-pills ml-auto">
-        <li class="nav-item mr-3" *ngIf="hasAccess('ACCOUNT_USER_ADDUSER')">
-          <a
-            class="btn btn-block btn-default btn-xs"
-            (click)="openAddUserModal()"
-          >
-            <i class="fa fa-user-plus nav-icon mr-2"></i
-            ><span class="p-2">{{ l("ADD_NEW_USER") }}</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <button
-            type="button"
-            class="btn btn-tool"
-            data-card-widget="collapse"
-          >
-            <i class="fas fa-minus"></i>
-          </button>
-        </li>
         <li class="nav-item">
           <button
             type="button"

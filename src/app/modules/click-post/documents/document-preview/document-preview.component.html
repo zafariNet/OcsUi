@@ -1,8 +1,5 @@
-<div
-  class="btn-group-vertical"
-  style="opacity: 1; float: left; z-index: 1; position: sticky; top: 0; left: 0"
->
-  <button
+<div class="btn-group-vertical zoom-bottom">
+  <!-- <button
     data-placement="bottom"
     type="button"
     data-card-widget="maximize"
@@ -10,7 +7,7 @@
     class="btn btn-default btn-flat"
   >
     <i class="fas fa-expand"></i>
-  </button>
+  </button> -->
 
   <button type="button" class="btn btn-default btn-xs p-2" (click)="zoom(-100)">
     <img src="assets/img/buttons/zoomIn.svg" width="20px" /></button
@@ -28,6 +25,7 @@
     <img src="assets/img/buttons/zoomPageWidth.svg" width="20px" />
   </button>
 </div>
-<div [id]="'convas-wrapper' + documentId">
-  <canvas [id]="'canvas' + page.id"></canvas>
+
+<div id="convas-wrapper" style="float: left; position: absolute">
+  <canvas [id]="'canvas'"></canvas>
 </div>

@@ -21,32 +21,32 @@ export class ComponentInitilizer {
 
   // fix action buttons
   fixTopButtons() {
-    $(document).scroll(function (event) {
-      var actionButtons = $('#action-button-inner');
-      var top = actionButtons.offset().top;
-      if (top > 180) {
-        $('#action-button-inner').find('img').attr('width', 25);
+    // $(document).scroll(function (event) {
+    //   var actionButtons = $('#action-button-inner');
+    //   var top = actionButtons.offset().top;
+    //   if (top > 180) {
+    //     $('#action-button-inner').find('img').attr('width', 25);
 
-        $('#action-button-inner')
-          .find('a')
-          .removeClass('click-post-action-button');
-        $('#action-button-inner').find('a').css('padding', '5px 5px');
-        $('#action-button-inner')
-          .find('a')
-          .addClass('click-post-action-button-scrolled');
-        actionButtons.css('background-color', '#343A40');
-      } else {
-        $('#action-button-inner').find('img').attr('width', 35);
-        $('#action-button-inner')
-          .find('a')
-          .addClass('click-post-action-button');
-        $('#action-button-inner').find('a').css('padding', '');
-        $('#action-button-inner')
-          .find('a')
-          .removeClass('click-post-action-button-scrolled');
-        actionButtons.css('background-color', 'white');
-      }
-    });
+    //     $('#action-button-inner')
+    //       .find('a')
+    //       .removeClass('click-post-action-button');
+    //     $('#action-button-inner').find('a').css('padding', '5px 5px');
+    //     $('#action-button-inner')
+    //       .find('a')
+    //       .addClass('click-post-action-button-scrolled');
+    //     actionButtons.css('background-color', '#343A40');
+    //   } else {
+    //     $('#action-button-inner').find('img').attr('width', 35);
+    //     $('#action-button-inner')
+    //       .find('a')
+    //       .addClass('click-post-action-button');
+    //     $('#action-button-inner').find('a').css('padding', '');
+    //     $('#action-button-inner')
+    //       .find('a')
+    //       .removeClass('click-post-action-button-scrolled');
+    //     actionButtons.css('background-color', 'white');
+    //   }
+    // });
     $('[data-toggle="tooltip"]').tooltip();
     $('#checkboxPrimary22').click(function (e) {
       e.stopPropagation();

@@ -10,7 +10,10 @@ import { DocumentTreeComponent } from './documents/document-tree/document-tree.c
 import { DocumentsComponent } from './documents/documents.component';
 import { ClickPostService } from './top-buttons/click-post.service';
 import { TopButtonsComponent } from './top-buttons/top-buttons.component';
-
+import {
+  FullscreenOverlayContainer,
+  OverlayContainer,
+} from '@angular/cdk/overlay';
 @NgModule({
   imports: [
     CommonModule,
@@ -28,6 +31,9 @@ import { TopButtonsComponent } from './top-buttons/top-buttons.component';
     DocumentFormComponent,
     DocumentPreviewComponent,
   ],
-  providers: [ClickPostService],
+  providers: [
+    ClickPostService,
+    { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
+  ],
 })
 export class ClickPostModule {}

@@ -2,10 +2,10 @@ m
 msrc
 msrc/app
 msrc/app/layout
-msrc/app/layout/breadcrumb
-msrc/app/layout/header
+rsrc/app/layout/breadcrumb
+rsrc/app/layout/header
 msrc/app/layout/main
-msrc/app/layout/sidebar
+rsrc/app/layout/sidebar
 rsrc/app/login
 rsrc/app/login/services
 msrc/app/modules/dashboard

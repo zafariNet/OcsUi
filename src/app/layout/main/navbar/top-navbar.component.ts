@@ -1,25 +1,34 @@
+import { Component, Injector, ViewChild } from '@angular/core';
+import {
+  NgbOffcanvas,
+  OffcanvasDismissReasons,
+} from '@ng-bootstrap/ng-bootstrap';
+import { ChangePasswordComponent } from 'src/app/account/change-password/change-password.component';
+import { GlobalModelService } from 'src/app/account/services/global-model.service';
+import { LoginService } from 'src/app/account/services/login.service';
+import { AppBaseComponent } from 'src/app/app-base.component';
 import {
   AccountService,
   ChanageDefaultLanguageRequest,
 } from 'src/app/service-proxies/service-proxies';
-import { AppBaseComponent } from 'src/app/app-base.component';
-import { ChangePasswordComponent } from './../../account/change-password/change-password.component';
-import { Component, Injector, ViewChild } from '@angular/core';
-import { LoginService } from 'src/app/account/services/login.service';
 
 @Component({
-  selector: 'ocs-header',
-  templateUrl: './header.component.html',
+  selector: 'ocs-top-navbar',
+  templateUrl: './top-navbar.component.html',
 })
-export class HeaderComponent extends AppBaseComponent {
+export class TopNavbarComponent extends AppBaseComponent {
   @ViewChild('changePasswordModal')
   changePasswordModal: ChangePasswordComponent;
+  _globalMpodelService: GlobalModelService;
+  closeResult = '';
   constructor(
     injector: Injector,
     private accountService: AccountService,
+    globalModelService: GlobalModelService,
     private loginService: LoginService
   ) {
     super(injector);
+    this._globalMpodelService = globalModelService;
   }
   logout() {
     this.notificationService
@@ -48,5 +57,16 @@ export class HeaderComponent extends AppBaseComponent {
       return 'us';
     }
     return this.translate.currentLang;
+  }
+  hasAccessToSidebarMenu(permissionName: string) {
+    var index = this._globalMpodelService.logedInUser.permissions?.filter(
+      (response) => {
+        return response.name?.startsWith(permissionName);
+      }
+    );
+    return index?.length;
+  }
+  isActiveRoute(route: string) {
+    return this.router.url.startsWith(route);
   }
 }
