@@ -14,6 +14,7 @@ import { ComponentInitilizer } from './component-initilizer';
 import { Select2Component } from './components/select2/select2.component';
 
 import { ButtonBusyDirective } from './directives/button-busy.directive';
+import { ServiceRunningDirective } from './directives/service-runnging.directive';
 import { RouteGard } from './gaurds/route.gaurd';
 const DragConfig = {
   dragStartThreshold: 0,
@@ -21,7 +22,11 @@ const DragConfig = {
   zIndex: 10000,
 };
 @NgModule({
-  declarations: [ButtonBusyDirective, Select2Component],
+  declarations: [
+    ButtonBusyDirective,
+    Select2Component,
+    ServiceRunningDirective,
+  ],
   imports: [
     CommonModule,
     ModalModule,
@@ -44,6 +49,7 @@ const DragConfig = {
     Select2Component,
     FormsModule,
     DragDropModule,
+    ServiceRunningDirective,
   ],
   providers: [
     BsModalService,

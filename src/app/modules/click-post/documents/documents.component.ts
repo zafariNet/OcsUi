@@ -5,10 +5,15 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import {
+  NgbOffcanvas,
+  OffcanvasDismissReasons,
+} from '@ng-bootstrap/ng-bootstrap';
 import { ComponentInitilizer } from 'src/app/shared/component-initilizer';
 import { DocumentFormComponent } from './document-form/document-form.component';
 import { DocumentPreviewComponent } from './document-preview/document-preview.component';
 declare var $: any;
+declare var interact: any;
 @Component({
   selector: 'ocs-documents',
   templateUrl: './documents.component.html',
@@ -21,9 +26,11 @@ export class DocumentsComponent implements AfterViewInit, OnInit {
   textSelectedComponent: DocumentFormComponent;
   @ViewChild('documentPreview') documentPreview: DocumentPreviewComponent;
   selectedItem: any;
+  closeResult = '';
   constructor(private componentInitializer: ComponentInitilizer) {}
   ngOnInit(): void {
     this.createDragAndDropGroup();
+    this.selectedItem = this.documentData[0];
   }
   createDragAndDropGroup() {
     this.connectedTo = [];
@@ -45,13 +52,17 @@ export class DocumentsComponent implements AfterViewInit, OnInit {
     $('[data-widget="expandable-table"]').on(
       'expanded.lte.expandableTable',
       (e) => {
-        debugger;
         this.selectedItem = $(e.currentTarget).attr('index');
         // this.documentPreview.loadDocument(
         //   this.documentData[this.selectedItem].images[0]
         // );
       }
     );
+    this.currentDocumentChanged({
+      page: this.documentData[0].images[0],
+
+      documentId: this.documentData[0].id,
+    });
   }
 
   setSelectedDocument(data) {
@@ -63,11 +74,13 @@ export class DocumentsComponent implements AfterViewInit, OnInit {
   }
   resizeCanvas(size) {}
   textSelected(data) {
-    debugger;
     this.textSelectedComponent.setFomrData(data);
   }
-  currentDocumentChanged(data, id) {
-    this.documentPreview.loadDocument(data, id);
+  currentDocumentChanged(data) {
+    this.documentPreview.loadDocument(data['page'], data['documentId']);
+    this.selectedItem = this.documentData.filter((document) => {
+      return document.id == data['documentId'];
+    })[0];
   }
   splitDocument(data) {
     var currentDocument = this.documentData.findIndex(
@@ -76,7 +89,6 @@ export class DocumentsComponent implements AfterViewInit, OnInit {
     var currentPage = this.documentData[currentDocument].images.findIndex(
       (element) => element.id == data.page.id
     );
-    debugger;
     this.documentData[currentDocument].images.splice(currentPage, 1);
     if (currentDocument) {
       this.documentData.splice(currentDocument, 1);

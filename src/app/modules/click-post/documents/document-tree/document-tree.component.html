@@ -1,84 +1,159 @@
-<div class="btn-group" style="left: 0px; max-width: 300px; width: 100%">
-  <button
-    type="button"
-    class="btn btn-default btn-flat"
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="calculate and assign field values"
-  >
-    <img
-      src="assets/img/buttons/performFieldAssignments.svg"
-      width="25"
-    /></button
-  ><button
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="delete"
-    type="button"
-    class="btn btn-default btn-flat"
-  >
-    <img src="assets/img/buttons/delete.svg" width="25" /></button
-  ><button
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="send document"
-    type="button"
-    class="btn btn-default btn-flat"
-  >
-    <img src="assets/img/buttons/send.svg" width="25" />
-  </button>
-</div>
-<ul class="tree" id="documentTree">
-  <li>
-    <a href="javascript:void(0)">{{ treeData.id }}</a>
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">
+        <ul class="todo-list ui-sortable" data-widget="todo-list">
+          <li>
+            <div class="icheck-primary d-inline ml-2">
+              <input
+                type="checkbox"
+                value=""
+                name="todo1"
+                [id]="'selectDocument' + treeData.id"
+              />
+              <label [for]="'selectDocument' + treeData.id"></label>
+            </div>
+            <!-- todo text -->
+            <span
+              data-toggle="collapse"
+              data-parent="#accordion"
+              [attr.href]="'#tree' + treeData.id"
+            >
+              <strong>{{ treeData.company }}</strong></span
+            >
+            <div class="tools">
+              <a
+                data-toggle="tooltip"
+                data-placement="right"
+                class="document-button"
+              >
+                <img
+                  src="assets/img/buttons/performFieldAssignments.svg"
+                  width="25"
+                />
+              </a>
+              <a data-placement="bottom" title="delete" class="document-button">
+                <img src="assets/img/buttons/delete.svg" width="25"
+              /></a>
+              <a
+                data-placement="bottom"
+                title="send document"
+                class="document-button"
+              >
+                <img src="assets/img/buttons/send.svg" width="25" />
+              </a>
+              <i class="fas fa-trash-o"></i>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div [id]="'tree' + treeData.id" class="panel-collapse collapse in show">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-6">
+            <ul class="tree">
+              <li>
+                <a href="javascript:void(0)" style="margin-left: 12px"
+                  >Page count : {{ treeData.images.length }}</a
+                >
+                <ul
+                  cdkDropList
+                  #documentList="cdkDropList"
+                  [cdkDropListData]="treeData.images"
+                  (cdkDropListDropped)="doDrop($event)"
+                  [cdkDropListConnectedTo]="connectedTo"
+                  [id]="treeData.id"
+                >
+                  <li
+                    *ngFor="let image of treeData.images; let order = index"
+                    cdkDrag
+                    [id]="'node' + image.id"
+                  >
+                    <img
+                      src="assets/img/documents/thumbnails/{{ image.id }}.jpg"
+                      class="thumbnails"
+                      (click)="changeCurrentDocument(image)"
+                    />
+                    <div
+                      class="btn-group-vertical document-action-button"
+                      [id]="'thumbnail' + image.id"
+                      *ngIf="image.id == currentDocumentId"
+                    >
+                      <a
+                        type="button"
+                        class="btn btn-default btn-xs p-2"
+                        (click)="moveUp(order)"
+                      >
+                        <img
+                          src="assets/img/buttons/movePageUp.svg"
+                          width="20px"
+                        />
+                      </a>
 
-    <ul
-      cdkDropList
-      #documentList="cdkDropList"
-      [cdkDropListData]="treeData.images"
-      (cdkDropListDropped)="doDrop($event)"
-      [cdkDropListConnectedTo]="connectedTo"
-      id="{{ treeData.id }}"
-    >
-      <li
-        *ngFor="let image of treeData.images; let order = index"
-        cdkDrag
-        [id]="'node' + image.id"
-      >
-        <img
-          src="assets/img/documents/thumbnails/{{ image.id }}.jpg"
-          class="thumbnails"
-          (click)="changeCurrentDocument(image)"
-        />
-        <div
-          class="btn-group-vertical document-action-button"
-          [id]="'thumbnail' + image.id"
-          *ngIf="image.id == currentDocumentId"
-        >
-          <a
-            type="button"
-            class="btn btn-default btn-xs p-2"
-            (click)="moveUp(order)"
-          >
-            <img src="assets/img/buttons/movePageUp.svg" width="20px" />
-          </a>
-
-          <a
-            type="button"
-            class="btn btn-default btn-xs p-2"
-            (click)="splitDocument(image)"
-          >
-            <img src="assets/img/buttons/split.svg" width="20px" />
-          </a>
-          <a
-            type="button"
-            class="btn btn-default btn-xs p-2"
-            (click)="moveDown(order)"
-          >
-            <img src="assets/img/buttons/movePageDown.svg" width="20px" />
-          </a>
+                      <a
+                        type="button"
+                        class="btn btn-default btn-xs p-2"
+                        (click)="splitDocument(image)"
+                      >
+                        <img src="assets/img/buttons/split.svg" width="20px" />
+                      </a>
+                      <a
+                        type="button"
+                        class="btn btn-default btn-xs p-2"
+                        (click)="moveDown(order)"
+                      >
+                        <img
+                          src="assets/img/buttons/movePageDown.svg"
+                          width="20px"
+                        />
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-6 border-left">
+            <dl>
+              <dt>Company</dt>
+              <dd>{{ treeData.company }}</dd>
+              <dt>Department</dt>
+              <dd>
+                {{ treeData.department }}
+              </dd>
+              <dt>Surename</dt>
+              <dd>
+                {{ treeData.surname }}
+              </dd>
+              <dt>Given names</dt>
+              <dd>
+                {{ treeData.givenNames }}
+              </dd>
+              <dt>E-mail</dt>
+              <dd>
+                {{ treeData.eMail }}
+              </dd>
+              <!-- <dt>Sender</dt>
+              <dd>
+                {{ treeData.sender }}
+              </dd>
+              <dt>Subject</dt>
+              <dd>
+                {{ treeData.subject }}
+              </dd>
+              <dt>Date</dt>
+              <dd>
+                {{ treeData.date }}
+              </dd>
+              <dt>Note</dt>
+              <dd>
+                {{ treeData.note }}
+              </dd> -->
+            </dl>
+          </div>
         </div>
-      </li>
-    </ul>
-  </li>
-</ul>
+      </div>
+    </div>
+  </div>
+</div>

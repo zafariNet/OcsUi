@@ -9,6 +9,7 @@ import { AccountComponent } from './account/account.component';
 import { RouteGard } from './shared/gaurds/route.gaurd';
 import { ClickPostComponent } from './modules/click-post/click-post.component';
 import { FileUploadComponent } from './modules/file-center/file-upload/file-upload.component';
+import { QueueMonitorComponent } from './modules/queue-monitor/queue-monitor-main/queue-monitor.component';
 
 // const routes: Routes = [{ path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule) }];
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'click-post', component: ClickPostComponent },
       { path: 'file-center/upload', component: FileUploadComponent },
+      { path: 'queue-monitor', component: QueueMonitorComponent },
       {
         path: 'account',
         component: AccountComponent,

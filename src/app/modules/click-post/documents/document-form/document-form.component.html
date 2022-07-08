@@ -1,157 +1,159 @@
-<form [formGroup]="documentForm">
-  <div class="form-group document-control">
-    <label for="company" class="lable-from-control-document">Company</label>
-    <div class="input-group">
-      <input
-        type="text"
-        class="form-control form-control-sm border-right-0 border"
-        id="company"
-        placeholder="Company name"
-        formControlName="company"
-      />
-      <span class="input-group-append" (click)="clearField('company')">
-        <div class="input-group-text bg-transparent">
-          <i class="fa fa-times input-remover"></i>
-        </div>
-      </span>
+<div *ngIf="documentData" class="p-1">
+  <form [formGroup]="documentForm">
+    <div class="form-group document-control">
+      <label for="company" class="lable-from-control-document">Company</label>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control form-control-sm border-right-0 border"
+          id="company"
+          placeholder="Company name"
+          formControlName="company"
+        />
+        <span class="input-group-append" (click)="clearField('company')">
+          <div class="input-group-text bg-transparent">
+            <i class="fa fa-times input-remover"></i>
+          </div>
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="form-group document-control">
-    <label for="department" class="lable-from-control-document"
-      >Department</label
-    >
-    <div class="input-group">
-      <input
-        type="text"
-        class="form-control form-control-sm border-right-0 border"
-        id="department"
-        placeholder="Department name"
-        formControlName="department"
-      />
-      <span class="input-group-append" (click)="clearField('department')">
-        <div class="input-group-text bg-transparent">
-          <i class="fa fa-times input-remover"></i>
-        </div>
-      </span>
-    </div>
-  </div>
-  <div class="form-group document-control">
-    <label for="surname" class="lable-from-control-document">Surename</label>
-    <div class="input-group">
-      <input
-        type="text"
-        class="form-control form-control-sm border-right-0 border"
-        id="surname"
-        placeholder="surname"
-        formControlName="surname"
-      />
-      <span class="input-group-append" (click)="clearField('surname')">
-        <div class="input-group-text bg-transparent">
-          <i class="fa fa-times input-remover"></i>
-        </div>
-      </span>
-    </div>
-  </div>
-  <div class="form-group document-control">
-    <label for="givenNames" class="lable-from-control-document"
-      >Given names</label
-    >
-    <div class="input-group">
-      <input
-        type="text"
-        class="form-control form-control-sm border-right-0 border"
-        id="givenNames"
-        placeholder="Given names"
-        formControlName="givenNames"
-      />
-      <span class="input-group-append" (click)="clearField('givenNames')">
-        <div class="input-group-text bg-transparent">
-          <i class="fa fa-times input-remover"></i>
-        </div>
-      </span>
-    </div>
-  </div>
-  <div class="form-group document-control">
-    <label for="eMail" class="lable-from-control-document">E-Mail</label>
-    <div class="input-group">
-      <input
-        type="text"
-        class="form-control form-control-sm border-right-0 border"
-        id="eMail"
-        placeholder="eMail"
-        formControlName="eMail"
-      />
-      <span class="input-group-append" (click)="clearField('eMail')">
-        <div class="input-group-text bg-transparent">
-          <i class="fa fa-times input-remover"></i>
-        </div>
-      </span>
-    </div>
-  </div>
-  <div class="form-group document-control">
-    <label for="sender" class="lable-from-control-document">Sender</label>
-    <div class="input-group">
-      <input
-        type="text"
-        class="form-control form-control-sm border-right-0 border"
-        id="sender"
-        placeholder="sender"
-        formControlName="sender"
-      />
-      <span class="input-group-append" (click)="clearField('sender')">
-        <div class="input-group-text bg-transparent">
-          <i class="fa fa-times input-remover"></i>
-        </div>
-      </span>
-    </div>
-  </div>
-  <div class="form-group document-control">
-    <label for="date" class="lable-from-control-document">Date</label>
-    <input
-      type="text"
-      class="form-control form-control-sm"
-      id="date"
-      data-provide="datepicker"
-      formControlName="date"
-    />
-  </div>
-  <div class="form-group document-control">
-    <label class="lable-from-control-document">Note</label>
-    <div class="input-group">
-      <textarea
-        class="form-control border-right-0 border"
-        formControlName="note"
-        rows="3"
-        placeholder=""
-        id="note"
-      ></textarea>
-      <span class="input-group-append" (click)="clearField('note')">
-        <div class="input-group-text bg-transparent">
-          <i class="fa fa-times input-remover"></i>
-        </div>
-      </span>
-    </div>
-  </div>
-  <div class="form-group document-control">
-    <label class="lable-from-control-document">Quick dial buttons</label>
-    <div class="select2-primary">
-      <select
-        [id]="documentData.id + 'select2'"
-        class="select2"
-        multiple="multiple"
-        data-placeholder="Select a State"
-        data-dropdown-css-class="select2-primary"
-        style="width: 100%"
-        formControlName="other"
+    <div class="form-group document-control">
+      <label for="department" class="lable-from-control-document"
+        >Department</label
       >
-        <option>Alabama</option>
-        <option>Alaska</option>
-        <option>California</option>
-        <option>Delaware</option>
-        <option>Tennessee</option>
-        <option>Texas</option>
-        <option>Washington</option>
-      </select>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control form-control-sm border-right-0 border"
+          id="department"
+          placeholder="Department name"
+          formControlName="department"
+        />
+        <span class="input-group-append" (click)="clearField('department')">
+          <div class="input-group-text bg-transparent">
+            <i class="fa fa-times input-remover"></i>
+          </div>
+        </span>
+      </div>
     </div>
-  </div>
-</form>
+    <div class="form-group document-control">
+      <label for="surname" class="lable-from-control-document">Surename</label>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control form-control-sm border-right-0 border"
+          id="surname"
+          placeholder="surname"
+          formControlName="surname"
+        />
+        <span class="input-group-append" (click)="clearField('surname')">
+          <div class="input-group-text bg-transparent">
+            <i class="fa fa-times input-remover"></i>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="form-group document-control">
+      <label for="givenNames" class="lable-from-control-document"
+        >Given names</label
+      >
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control form-control-sm border-right-0 border"
+          id="givenNames"
+          placeholder="Given names"
+          formControlName="givenNames"
+        />
+        <span class="input-group-append" (click)="clearField('givenNames')">
+          <div class="input-group-text bg-transparent">
+            <i class="fa fa-times input-remover"></i>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="form-group document-control">
+      <label for="eMail" class="lable-from-control-document">E-Mail</label>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control form-control-sm border-right-0 border"
+          id="eMail"
+          placeholder="eMail"
+          formControlName="eMail"
+        />
+        <span class="input-group-append" (click)="clearField('eMail')">
+          <div class="input-group-text bg-transparent">
+            <i class="fa fa-times input-remover"></i>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="form-group document-control">
+      <label for="sender" class="lable-from-control-document">Sender</label>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control form-control-sm border-right-0 border"
+          id="sender"
+          placeholder="sender"
+          formControlName="sender"
+        />
+        <span class="input-group-append" (click)="clearField('sender')">
+          <div class="input-group-text bg-transparent">
+            <i class="fa fa-times input-remover"></i>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="form-group document-control">
+      <label for="date" class="lable-from-control-document">Date</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="date"
+        data-provide="datepicker"
+        formControlName="date"
+      />
+    </div>
+    <div class="form-group document-control">
+      <label class="lable-from-control-document">Note</label>
+      <div class="input-group">
+        <textarea
+          class="form-control border-right-0 border"
+          formControlName="note"
+          rows="3"
+          placeholder=""
+          id="note"
+        ></textarea>
+        <span class="input-group-append" (click)="clearField('note')">
+          <div class="input-group-text bg-transparent">
+            <i class="fa fa-times input-remover"></i>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="form-group document-control">
+      <label class="lable-from-control-document">Quick dial buttons</label>
+      <div class="select2-primary">
+        <select
+          [id]="documentData.id + 'select2'"
+          class="select2"
+          multiple="multiple"
+          data-placeholder="Select a State"
+          data-dropdown-css-class="select2-primary"
+          style="width: 100%"
+          formControlName="other"
+        >
+          <option>Alabama</option>
+          <option>Alaska</option>
+          <option>California</option>
+          <option>Delaware</option>
+          <option>Tennessee</option>
+          <option>Texas</option>
+          <option>Washington</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>

@@ -25,7 +25,6 @@ export class DocumentPreviewComponent implements AfterViewInit {
   canvasScale = 1;
 
   ngAfterViewInit(): void {
-    debugger;
     var wrapper = $('#convas-wrapper' + this.documentId);
     wrapper.empty().append('<canvas id="canvas' + this.page.id + '"></canvas>');
   }
@@ -43,7 +42,7 @@ export class DocumentPreviewComponent implements AfterViewInit {
   setCanvas(id) {
     let that = this;
     that.canvas = undefined;
-    that.canvas = new fabric.Canvas('canvas' + id);
+    that.canvas = new fabric.Canvas('canvas');
     fabric.Group.prototype.hasControls = false;
     fabric.Group.prototype.lockMovementY = true;
     fabric.Group.prototype.lockMovementX = true;
@@ -218,12 +217,11 @@ export class DocumentPreviewComponent implements AfterViewInit {
   }
 
   loadDocument(page, id) {
-    debugger;
     this.page = page;
     this.documentId = id;
     if (this.canvas) {
-      var wrapper = $('#convas-wrapper' + this.documentId);
-      wrapper.empty().append('<canvas id="canvas' + page.id + '"></canvas>');
+      var wrapper = $('#convas-wrapper');
+      wrapper.empty().append('<canvas id="canvas"></canvas>');
     }
 
     this.canvasScale = 1;

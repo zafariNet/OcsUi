@@ -26,6 +26,7 @@ import { Error500Component } from './layout/errors/error-500.component';
 import { GlobalModelService } from './account/services/global-model.service';
 import { ClickPostModule } from './modules/click-post/click-post.module';
 import { FileCenterModule } from './modules/file-center/file-center.module';
+import { QueueMonitorModule } from './modules/queue-monitor/queue-monitor.module';
 
 export function tokenGetter(): string | null {
   var token = localStorage.getItem('token');
@@ -39,6 +40,7 @@ export function tokenGetter(): string | null {
     LayoutModule,
     DashboardModule,
     AccountModule,
+    QueueMonitorModule,
     AppRoutingModule,
     SharedModule,
     ClickPostModule,

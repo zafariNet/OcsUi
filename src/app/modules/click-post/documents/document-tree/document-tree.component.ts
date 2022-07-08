@@ -31,7 +31,6 @@ export class DocumentTreeComponent extends AppBaseComponent implements OnInit {
     new EventEmitter<any>();
   currentDocumentId: string;
   doDrop(event: CdkDragDrop<string[]>) {
-    debugger;
     if (event.previousContainer === event.container) {
       var xxx = event.previousContainer.data[event.previousIndex]['id'];
       var yyy = event.previousContainer.data[event.currentIndex]['id'];
@@ -50,18 +49,22 @@ export class DocumentTreeComponent extends AppBaseComponent implements OnInit {
     }
   }
 
-  changeCurrentDocument(document: any) {
-    this.currentDocumentId = document.id;
+  changeCurrentDocument(page: any) {
+    debugger;
+    this.currentDocumentId = page.id;
     setTimeout(() => {
       $('.document-action-button').animate({ opacity: 0 }, { queue: false });
-      $("[attribute|='" + document.id + "']").animate({
+      $("[attribute|='" + page.id + "']").animate({
         backgroundColor: '#e7f4f9',
       });
-      $('#thumbnail' + document.id).animate({ opacity: 1 }), { queue: false };
+      $('#thumbnail' + page.id).animate({ opacity: 1 }), { queue: false };
       $('[id^=node]').removeClass('selected-tree-node');
-      $('#node' + document.id).addClass('selected-tree-node');
+      $('#node' + page.id).addClass('selected-tree-node');
 
-      this.currentDocumentChanged.emit(document);
+      this.currentDocumentChanged.emit({
+        page: page,
+        documentId: this.treeData.id,
+      });
     }, 1);
   }
 
@@ -76,7 +79,6 @@ export class DocumentTreeComponent extends AppBaseComponent implements OnInit {
     this.documentMove(order, order - 1);
   }
   moveDown(order) {
-    debugger;
     if (order == this.treeData.images.length - 1) {
       this.notificationService.showSimpleError(
         this.l('CAN_NOT_MOVE_FURTHER'),
@@ -101,7 +103,6 @@ export class DocumentTreeComponent extends AppBaseComponent implements OnInit {
     );
   }
   splitDocument(document) {
-    debugger;
     this.documentSplitted.emit({
       documentId: this.treeData.id,
       page: document,

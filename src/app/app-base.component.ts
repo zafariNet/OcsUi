@@ -8,6 +8,7 @@ import { NotifyService } from './services/notify-service.service';
 import { TokenService } from './account/services/token.service';
 import { Router } from '@angular/router';
 import { API_BASE_URL } from './service-proxies/service-proxies';
+
 @Component({
   template: '',
   animations: [

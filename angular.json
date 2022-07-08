@@ -26,7 +26,6 @@
             "styles": [
               "node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css",
               "node_modules/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
-
               "node_modules/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
 
               "node_modules/admin-lte/plugins/flag-icon-css/css/flag-icons.min.css",

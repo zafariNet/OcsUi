@@ -3,32 +3,30 @@ import { ChangePasswordComponent } from './../account/change-password/change-pas
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
-import { HeaderComponent } from './header/header.component';
+
 import { MainLayoutComponent } from './main/main-layout.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../shared/shared.module';
+import { TopNavbarComponent } from './main/navbar/top-navbar.component';
+import { NgbOffcanvasModule } from '@ng-bootstrap/ng-bootstrap';
+import { SignalRService } from '../shared/service-proxies/signalr.service';
 
 @NgModule({
   declarations: [
     MainLayoutComponent,
-
-    HeaderComponent,
-    SidebarComponent,
-    BreadcrumbComponent,
     ChangePasswordComponent,
+    TopNavbarComponent,
   ],
   imports: [
     RouterModule,
     CommonModule,
     BrowserAnimationsModule,
-
+    NgbOffcanvasModule,
     SharedModule,
     ReactiveFormsModule,
   ],
   exports: [],
-  providers: [],
+  providers: [SignalRService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class LayoutModule {}
