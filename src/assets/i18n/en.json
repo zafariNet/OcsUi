@@ -70,11 +70,14 @@
   "FILE_CENTER": "File center",
   "FILE_UPLOAD": "File upload",
   "ADD_FILES": "Add files",
+  "FILE_LIST": "Files list",
   "START_UPLOAD": "Start upload",
   "CANCEL_UPLOAD": "Cancel upload",
   "START": "Start",
   "CANCEL": "Cancel",
   "DELETE": "Delete",
   "CAN_NOT_MOVE_FURTHER": "The page cannot be moved any further!",
-  "CAN_NOT_MOVE_FURTHER_DETAIL": "If you want to move the page to a different document, please drag it with the mouse!"
+  "CAN_NOT_MOVE_FURTHER_DETAIL": "If you want to move the page to a different document, please drag it with the mouse!",
+  "QUEUEMONITOR": "Queue Monitor",
+  "UPLOAD_CENTER": "Upload center"
 }

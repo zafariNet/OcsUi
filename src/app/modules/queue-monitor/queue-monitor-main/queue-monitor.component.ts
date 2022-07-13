@@ -43,8 +43,6 @@ export class QueueMonitorComponent implements AfterViewInit {
     private signalRService: SignalRService,
     public globalModelService: GlobalModelService
   ) {
-    debugger;
-
     this.data['Scan-To-File'] = [];
     this.data['Scan-Work'] = [];
   }

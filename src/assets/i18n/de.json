@@ -70,11 +70,14 @@
   "FILE_CENTER": "Datei-Center",
   "FILE_UPLOAD": "Datei hochladen",
   "ADD_FILES": "Dateien hinzufügen",
+  "FILE_LIST": "Liste der Dateien",
   "START_UPLOAD": "Upload starten",
   "CANCEL_UPLOAD": "Upload abbrechen",
   "START": "Starten",
   "CANCEL": "abbrechen",
   "DELETE": "löschen",
   "CAN_NOT_MOVE_FURTHER": "Die Seite kann nicht weiter verschoben werden!",
-  "CAN_NOT_MOVE_FURTHER_DETAIL": "Wenn Sie die Seite in ein anderes Dokument verschieben möchten, ziehen Sie sie bitte mit der Maus!"
+  "CAN_NOT_MOVE_FURTHER_DETAIL": "Wenn Sie die Seite in ein anderes Dokument verschieben möchten, ziehen Sie sie bitte mit der Maus!",
+  "QUEUEMONITOR": "Queue Monitor",
+  "UPLOAD_CENTER": "Upload-Center"
 }

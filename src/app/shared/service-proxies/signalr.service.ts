@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
+import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 import { GlobalModelService } from 'src/app/account/services/global-model.service';
 @Injectable({
   providedIn: 'root',
@@ -11,18 +12,28 @@ export class SignalRService {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl('http://localhost:5232/LoadEngin')
       .build();
+    this.createConnection();
+    this.hubConnection.onclose(() => {
+      alert('Starting');
+      setTimeout(() => {
+        this.createConnection();
+      }, 2000);
+    });
+  };
+  public createConnection() {
     this.hubConnection
       .start()
       .then(() => console.log('Connection started'))
       .catch((err) => console.log('Error while starting connection: ' + err));
-  };
-  public addTransferChartDataListener = () => {
-    this.hubConnection.on('TransferChartData', (data) => {
+  }
+  public scanToFileCreated = () => {
+    this.hubConnection.on('ScanToFile_Created', (data) => {
+      debugger;
       this.globalModelSergvice.scanToFile.push(data);
     });
   };
-  public deleteFileListener = () => {
-    this.hubConnection.on('fileDeleted', (data) => {
+  public scanToFileDeleted = () => {
+    this.hubConnection.on('ScanToFile_Deleted', (data) => {
       var index = this.globalModelSergvice.scanToFile.indexOf(data);
       this.globalModelSergvice.scanToFile.splice(index, 1);
     });
@@ -36,7 +47,7 @@ export class SignalRService {
   public scanWorkDeleteListener = () => {
     this.hubConnection.on('ScanWorkDeleted', (data) => {
       var index = this.globalModelSergvice.scanToWork.indexOf(data);
-      this.globalModelSergvice.scanToFile.splice(index, 1);
+      this.globalModelSergvice.scanToWork.splice(index, 1);
     });
   };
 }

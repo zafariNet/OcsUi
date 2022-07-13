@@ -23,7 +23,7 @@ export class FileUploadComponent
     previewNode!['parentNode']?.removeChild(previewNode!);
 
     var myDropzone = new Dropzone(document.body, {
-      url: this.baseUrl + '/api/account/file', // Set the url
+      url: this.baseUrl + '/api/File/Upload', // Set the url
       headers: { Authorization: 'Bearer ' + this.tokenService.getToken() },
       thumbnailWidth: 100,
       thumbnailHeight: 80,

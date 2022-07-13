@@ -43,8 +43,8 @@ export class MainLayoutComponent
   }
   ngOnInit(): void {
     this.signalRService.startConnection();
-    this.signalRService.addTransferChartDataListener();
-    this.signalRService.deleteFileListener();
+    this.signalRService.scanToFileCreated();
+    this.signalRService.scanToFileDeleted();
     this.signalRService.scanWorkCreateListener();
     this.signalRService.scanWorkDeleteListener();
 
