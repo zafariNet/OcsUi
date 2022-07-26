@@ -1,1637 +1,960 @@
-<br />
-<div class="col-lg-12">
-  <div class="row">
-    <div class="col-md-2">
-      <div class="card card-primary card-outline">
-        <div class="card-header">
-          <h3 class="card-title">Engines</h3>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Queue Monitor</h3>
 
-          <div class="card-tools">
-            <button
-              type="button"
-              class="btn btn-tool"
-              data-card-widget="collapse"
+    <div class="card-tools">
+      <button
+        type="button"
+        class="btn btn-tool"
+        data-card-widget="collapse"
+        title="Collapse"
+      >
+        <i class="fas fa-minus"></i>
+      </button>
+      <button
+        type="button"
+        class="btn btn-tool"
+        data-card-widget="remove"
+        title="Remove"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-2 order-1 order-md-1">
+        <table class="table table-sm table-borderless">
+          <tbody>
+            <tr>
+              <td colspan="2">
+                <button
+                  type="button"
+                  class="btn btn-block btn-default btn-flat text-left btn-sm"
+                >
+                  <i class="fa fa-check text-success"></i>
+                  <span class="button-text">Click Post Service</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <button
+                  type="button"
+                  class="btn btn-block btn-default btn-flat text-left btn-sm"
+                  (click)="goggleAddressRecognitionEngine()"
+                  [buttonBusy]="addressRecognitionEnginStarting"
+                  [busyText]="'Please wait...'"
+                >
+                  <i
+                    class="fa fa-circle text-danger"
+                    id="address_recognition_engine_button"
+                    [serviceRunning]="
+                      this.globalModelService.addressRecognitionEngineStarted
+                    "
+                  ></i>
+                  <span class="button-text">Address recognition engine</span>
+                </button>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="2">
+                <button
+                  type="button"
+                  class="btn btn-block btn-default btn-flat text-left btn-sm"
+                  (click)="toggleAddressEnginge()"
+                  [buttonBusy]="addressEnginStarting"
+                  [busyText]="'Please wait...'"
+                >
+                  <i
+                    class="fa fa-circle text-danger"
+                    id="Load_engine_button"
+                    [serviceRunning]="globalModelService.addressEngineStarted"
+                  ></i>
+                  <span class="button-text">Address engine</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <button
+                  type="button"
+                  class="btn btn-block btn-default btn-flat text-left btn-sm"
+                >
+                  <i class="fa fa-circle text-danger"></i>
+                  <span class="button-text">Document router</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <button
+                  type="button"
+                  class="btn btn-block btn-default btn-flat text-left btn-sm"
+                >
+                  <i class="fa fa-circle text-danger"></i>
+                  <span class="button-text">Field value assigner</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-block btn-default btn-flat text-left btn-sm"
+                  (click)="toggleLoadEngine()"
+                  [buttonBusy]="loadEngingStarting"
+                  [busyText]="'Please wait...'"
+                >
+                  <i
+                    id="load_engine_button"
+                    [serviceRunning]="globalModelService.loadEnginStarted"
+                  ></i>
+                  <span class="button-text">Load engine</span>
+                </button>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-block btn-default btn-flat text-left btn-sm"
+                  (click)="toggleOcrAgent()"
+                  [buttonBusy]="loadOcrAgentStarting"
+                  [busyText]="'Please wait...'"
+                >
+                  <i
+                    id="ocr_agent_button"
+                    [serviceRunning]="globalModelService.ocrAgentStarted"
+                  ></i>
+                  <span class="button-text">OCR agent</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-block btn-default btn-flat text-left btn-sm"
+                  (click)="toggleOcrEngine()"
+                  [buttonBusy]="ocrEngineStarting"
+                  [busyText]="'Please wait...'"
+                >
+                  <i
+                    id="ocr_engine_button"
+                    class="fa fa-circle text-danger"
+                    [serviceRunning]="globalModelService.ocrEngineStarted"
+                  ></i>
+                  <span class="button-text">OCR engine</span>
+                </button>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-block btn-default btn-flat text-left btn-sm"
+                  (click)="toggleSendMailEnging()"
+                  [buttonBusy]="sendMailEngineStarting"
+                  [busyText]="'Please wait...'"
+                >
+                  <i
+                    class="fa fa-circle text-danger"
+                    id="send_mail_engine_button"
+                    class="fa fa-circle text-danger"
+                    [serviceRunning]="globalModelService.sendMailEngineStarted"
+                  ></i>
+                  <span class="button-text">SendMail engine</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <button
+                  type="button"
+                  class="btn btn-block btn-default btn-flat text-left btn-sm"
+                >
+                  <i class="fa fa-circle text-danger"></i>
+                  <span class="button-text">TFTP engine</span>
+                </button>
+              </td>
+            </tr>
+            <tr></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-12 col-md-12 col-lg-10 order-2 order-md-2 border-left">
+        <div class="row">
+          <div
+            class="col-12 col-sm-3"
+            ocs-queue-monitor
+            [displayName]="'Scan-To-File'"
+            [name]="'ScanToFile'"
+            [type]="'directory'"
+            [directory]="'Scan-To-File'"
+            [dataSource]="'scanToFile'"
+            [titleClass]="'bg-info'"
+            (showFile)="showPreviewFile($event)"
+            (downloadFile)="onDownloadFile($event)"
+            (deleteFile)="onDeleteFile($event)"
+          ></div>
+          <div
+            class="col-12 col-sm-3"
+            ocs-queue-monitor
+            [displayName]="'Scan-Work'"
+            [name]="'ScanWork'"
+            [type]="'directory'"
+            [directory]="'Scan-Work'"
+            [dataSource]="'scanWork'"
+            [titleClass]="'bg-success'"
+            (showFile)="showPreviewFile($event)"
+            (downloadFile)="onDownloadFile($event)"
+            (deleteFile)="onDeleteFile($event)"
+          ></div>
+          <div
+            class="col-12 col-sm-3"
+            ocs-queue-monitor
+            [displayName]="'OCR-Work'"
+            [name]="'OcrWork'"
+            [type]="'directory'"
+            [directory]="'OCR-Work'"
+            [dataSource]="'ocrWork'"
+            [titleClass]="'bg-warning'"
+            (showFile)="showPreviewFile($event)"
+            (downloadFile)="onDownloadFile($event)"
+            (deleteFile)="onDeleteFile($event)"
+          ></div>
+
+          <div class="col-12 col-sm-3">
+            <div
+              class="queue-box bg-light table-responsive p-0"
+              style="min-height: 250px; max-height: 250px"
             >
-              <i class="fas fa-minus"></i>
-            </button>
-            <button
-              type="button"
-              class="btn btn-tool"
-              data-card-widget="remove"
-            >
-              <i class="fas fa-times"></i>
-            </button>
+              <div class="queue-box-header bg-info">
+                <table
+                  class="table table-borderless table-sm table-queue-monitor"
+                >
+                  <tr>
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <i class="fas fa-cog"></i>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-folder-open"></i
+                            ><span class="p-1">Open directory</span></a
+                          >
+                          <a class="dropdown-item" href="javascript:void(0)"
+                            ><i class="fa fa-eraser"></i
+                            ><span class="p-1">Clear queue</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-default btn-xs text-center"
+                          style="width: 25px"
+                          [disabled]="data['Scan-To-File'].length == 0"
+                        >
+                          <i class="fas fa-angle-double-left"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="text-white">
+                      <div class="text-right"><h6>SCAN-Queue</h6></div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <table class="table table-striped table-sm">
+                <tbody>
+                  <tr
+                    *ngFor="let item of globalModelService.scanQueue"
+                    @fadeAnimation
+                  >
+                    <td class="text-left">
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-eye"></i
+                            ><span class="p-1">Preview entry</span></a
+                          >
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-edit"></i
+                            ><span class="p-1">Edit entry</span></a
+                          >
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-book-open"></i
+                            ><span class="p-1">Open queue file</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#"
+                            ><i class="fas fa-arrow-alt-circle-left"></i
+                            ><span class="p-1">Move one</span></a
+                          >
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-right">
+                      <small>{{ item }}</small>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-        <div class="card-body p-2">
-          <button
-            type="button"
-            class="btn btn-block btn-default btn-flat text-left"
-            [buttonBusy]="gettingData"
-            [busyText]="'Please wait...'"
-            (click)="startAddressService()"
-          >
-            <i
-              class="fa fa-circle text-danger"
-              id="mohammad"
-              [serviceRunning]="fileReaderRunnigService"
-            ></i>
-            <span class="button-text">ClickPost Service</span>
-          </button>
+          <div class="col-12 col-sm-3">
+            <div
+              class="queue-box bg-light table-responsive p-0"
+              style="min-height: 250px; max-height: 250px"
+            >
+              <div class="queue-box-header bg-info">
+                <table
+                  class="table table-borderless table-sm table-queue-monitor"
+                >
+                  <tr>
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <i class="fas fa-cog"></i>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-folder-open"></i
+                            ><span class="p-1">Open directory</span></a
+                          >
+                          <a
+                            class="dropdown-item"
+                            href="javascript:void(0)"
+                            (click)="openXmlFile()"
+                            ><i class="fa fa-eraser"></i
+                            ><span class="p-1">Edit Entity</span></a
+                          >
+                          <a class="dropdown-item" href="javascript:void(0)"
+                            ><i class="fa fa-eraser"></i
+                            ><span class="p-1">Clear queue</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-default btn-xs text-center"
+                          style="width: 25px"
+                          [disabled]="data['Scan-To-File'].length == 0"
+                        >
+                          <i class="fas fa-angle-double-left"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="text-white">
+                      <div class="text-right"><h6>OCR-Queue</h6></div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
 
-          <button
-            type="button"
-            class="btn btn-block btn-default btn-flat text-left"
-          >
-            <i class="fa fa-circle text-danger"></i
-            ><span class="button-text"> Address recognition engine</span>
-          </button>
-
-          <button
-            type="button"
-            class="btn btn-block btn-default btn-flat text-left"
-          >
-            <i class="fa fa-check text-success"></i
-            ><span class="button-text">Address engine</span>
-          </button>
-          <button
-            type="button"
-            class="btn btn-block btn-default btn-flat text-left"
-          >
-            <i class="fa fa-check text-success"></i
-            ><span class="button-text"> Document router</span>
-          </button>
-          <button
-            type="button"
-            class="btn btn-block btn-default btn-flat text-left"
-          >
-            <i class="fa fa-circle text-danger"></i>
-            <span class="button-text">Field value assigner</span>
-          </button>
-          <button
-            type="button"
-            class="btn btn-block btn-default btn-flat text-left"
-          >
-            <i class="fa fa-circle text-danger"></i>
-            <span class="button-text">Load engine</span>
-          </button>
-          <button
-            type="button"
-            class="btn btn-block btn-default btn-flat text-left"
-          >
-            <i class="fa fa-circle text-danger"></i>
-            <span class="button-text">OCR agent</span>
-          </button>
-          <button
-            type="button"
-            class="btn btn-block btn-default btn-flat text-left"
-          >
-            <i class="fa fa-circle text-danger"></i>
-            <span class="button-text">OCR engine</span>
-          </button>
-          <button
-            type="button"
-            class="btn btn-block btn-default btn-flat text-left"
-          >
-            <i class="fa fa-circle text-danger"></i>
-            <span class="button-text">SendMail engine</span>
-          </button>
-          <button
-            type="button"
-            class="btn btn-block btn-default btn-flat text-left"
-          >
-            <i class="fa fa-circle text-danger"></i>
-            <span class="button-text">SFTP engine</span>
-          </button>
+              <table class="table table-striped table-sm">
+                <tbody>
+                  <tr
+                    *ngFor="let item of globalModelService.ocrQueue"
+                    @fadeAnimation
+                  >
+                    <td class="text-left">
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-eye"></i
+                            ><span class="p-1">Preview entry</span></a
+                          >
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-edit"></i
+                            ><span class="p-1">Edit entry</span></a
+                          >
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-book-open"></i
+                            ><span class="p-1">Open queue file</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#"
+                            ><i class="fas fa-arrow-alt-circle-left"></i
+                            ><span class="p-1">Move one</span></a
+                          >
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-right">
+                      <small>{{ item }}</small>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-12 col-sm-3">
+            <div
+              class="queue-box bg-light table-responsive p-0"
+              style="min-height: 250px; max-height: 250px"
+            >
+              <div class="queue-box-header bg-info">
+                <table
+                  class="table table-borderless table-sm table-queue-monitor"
+                >
+                  <tr>
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <i class="fas fa-cog"></i>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-folder-open"></i
+                            ><span class="p-1">Open directory</span></a
+                          >
+                          <a class="dropdown-item" href="javascript:void(0)"
+                            ><i class="fa fa-eraser"></i
+                            ><span class="p-1">Clear queue</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-default btn-xs text-center"
+                          style="width: 25px"
+                          [disabled]="data['Scan-To-File'].length == 0"
+                        >
+                          <i class="fas fa-angle-double-left"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="text-white">
+                      <div class="text-right"><h6>3-ADR-Queue</h6></div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <table class="table table-striped table-sm">
+                <tbody>
+                  <tr
+                    *ngFor="let item of globalModelService.addressQueue"
+                    @fadeAnimation
+                  >
+                    <td class="text-left">
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-eye"></i
+                            ><span class="p-1">Preview entry</span></a
+                          >
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-edit"></i
+                            ><span class="p-1">Edit entry</span></a
+                          >
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-book-open"></i
+                            ><span class="p-1">Open queue file</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#"
+                            ><i class="fas fa-arrow-alt-circle-left"></i
+                            ><span class="p-1">Move one</span></a
+                          >
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-right">
+                      <small>{{ item }}</small>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-12 col-sm-3">
+            <div
+              class="queue-box bg-light table-responsive p-0"
+              style="min-height: 250px; max-height: 250px"
+            >
+              <div class="queue-box-header bg-info">
+                <table
+                  class="table table-borderless table-sm table-queue-monitor"
+                >
+                  <tr>
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <i class="fas fa-cog"></i>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-folder-open"></i
+                            ><span class="p-1">Open directory</span></a
+                          >
+                          <a class="dropdown-item" href="javascript:void(0)"
+                            ><i class="fa fa-eraser"></i
+                            ><span class="p-1">Clear queue</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-default btn-xs text-center"
+                          style="width: 25px"
+                          [disabled]="data['Scan-To-File'].length == 0"
+                        >
+                          <i class="fas fa-angle-double-left"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="text-white">
+                      <div class="text-right">
+                        <h6>AddressRecognition-OutQueue</h6>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <table class="table table-striped table-sm">
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of globalModelService.addressReqognitionOutQueue
+                    "
+                    @fadeAnimation
+                  >
+                    <td class="text-left">
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-eye"></i
+                            ><span class="p-1">Preview entry</span></a
+                          >
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-edit"></i
+                            ><span class="p-1">Edit entry</span></a
+                          >
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-book-open"></i
+                            ><span class="p-1">Open queue file</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#"
+                            ><i class="fas fa-arrow-alt-circle-left"></i
+                            ><span class="p-1">Move one</span></a
+                          >
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-right">
+                      <small>{{ item }}</small>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-12 col-sm-3">
+            <div
+              class="queue-box bg-light table-responsive p-0"
+              style="min-height: 250px; max-height: 250px"
+            >
+              <div class="queue-box-header bg-info">
+                <table
+                  class="table table-borderless table-sm table-queue-monitor"
+                >
+                  <tr>
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <i class="fas fa-cog"></i>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-folder-open"></i
+                            ><span class="p-1">Open directory</span></a
+                          >
+                          <a class="dropdown-item" href="javascript:void(0)"
+                            ><i class="fa fa-eraser"></i
+                            ><span class="p-1">Clear queue</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-default btn-xs text-center"
+                          style="width: 25px"
+                          [disabled]="data['Scan-To-File'].length == 0"
+                        >
+                          <i class="fas fa-angle-double-left"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="text-white">
+                      <div class="text-right">
+                        <h6>4-AddrEngine-OutQueue</h6>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <table class="table table-striped table-sm">
+                <tbody>
+                  <tr
+                    *ngFor="let item of globalModelService.sendMailQueue"
+                    @fadeAnimation
+                  >
+                    <td class="text-left">
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-eye"></i
+                            ><span class="p-1">Preview entry</span></a
+                          >
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-edit"></i
+                            ><span class="p-1">Edit entry</span></a
+                          >
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-book-open"></i
+                            ><span class="p-1">Open queue file</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#"
+                            ><i class="fas fa-arrow-alt-circle-left"></i
+                            ><span class="p-1">Move one</span></a
+                          >
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-right">
+                      <small>{{ item }}</small>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-12 col-sm-3">
+            <div
+              class="queue-box bg-light table-responsive p-0"
+              style="min-height: 250px; max-height: 250px"
+            >
+              <div class="queue-box-header bg-info">
+                <table
+                  class="table table-borderless table-sm table-queue-monitor"
+                >
+                  <tr>
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <i class="fas fa-cog"></i>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-folder-open"></i
+                            ><span class="p-1">Open directory</span></a
+                          >
+                          <a class="dropdown-item" href="javascript:void(0)"
+                            ><i class="fa fa-eraser"></i
+                            ><span class="p-1">Clear queue</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-default btn-xs text-center"
+                          style="width: 25px"
+                          [disabled]="data['Scan-To-File'].length == 0"
+                        >
+                          <i class="fas fa-angle-double-left"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="text-white">
+                      <div class="text-right">
+                        <h6>8-SENDMAIL-Queue</h6>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-3">
+            <div
+              class="queue-box bg-light table-responsive p-0"
+              style="min-height: 250px; max-height: 250px"
+            >
+              <div class="queue-box-header bg-info">
+                <table
+                  class="table table-borderless table-sm table-queue-monitor"
+                >
+                  <tr>
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <i class="fas fa-cog"></i>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-folder-open"></i
+                            ><span class="p-1">Open directory</span></a
+                          >
+                          <a class="dropdown-item" href="javascript:void(0)"
+                            ><i class="fa fa-eraser"></i
+                            ><span class="p-1">Clear queue</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-default btn-xs text-center"
+                          style="width: 25px"
+                          [disabled]="data['Scan-To-File'].length == 0"
+                        >
+                          <i class="fas fa-angle-double-left"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="text-white">
+                      <div class="text-right">
+                        <h6>8-SendMailPrivate-Queue</h6>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-3">
+            <div
+              class="queue-box bg-light table-responsive p-0"
+              style="min-height: 250px; max-height: 250px"
+            >
+              <div class="queue-box-header bg-info">
+                <table
+                  class="table table-borderless table-sm table-queue-monitor"
+                >
+                  <tr>
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <i class="fas fa-cog"></i>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-folder-open"></i
+                            ><span class="p-1">Open directory</span></a
+                          >
+                          <a class="dropdown-item" href="javascript:void(0)"
+                            ><i class="fa fa-eraser"></i
+                            ><span class="p-1">Clear queue</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-default btn-xs text-center"
+                          style="width: 25px"
+                          [disabled]="data['Scan-To-File'].length == 0"
+                        >
+                          <i class="fas fa-angle-double-left"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="text-white">
+                      <div class="text-right">
+                        <h6>11-AutoClick-Queue</h6>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-3">
+            <div
+              class="queue-box bg-light table-responsive p-0"
+              style="min-height: 250px; max-height: 250px"
+            >
+              <div class="queue-box-header bg-info">
+                <table
+                  class="table table-borderless table-sm table-queue-monitor"
+                >
+                  <tr>
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <i class="fas fa-cog"></i>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-folder-open"></i
+                            ><span class="p-1">Open directory</span></a
+                          >
+                          <a class="dropdown-item" href="javascript:void(0)"
+                            ><i class="fa fa-eraser"></i
+                            ><span class="p-1">Clear queue</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-default btn-xs text-center"
+                          style="width: 25px"
+                          [disabled]="data['Scan-To-File'].length == 0"
+                        >
+                          <i class="fas fa-angle-double-left"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="text-white">
+                      <div class="text-right">
+                        <h6>11-AutoClickBatch-Queue</h6>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-3">
+            <div
+              class="queue-box bg-light table-responsive p-0"
+              style="min-height: 250px; max-height: 250px"
+            >
+              <div class="queue-box-header bg-info">
+                <table
+                  class="table table-borderless table-sm table-queue-monitor"
+                >
+                  <tr>
+                    <td>
+                      <div class="btn-group">
+                        <button
+                          type="button"
+                          class="btn btn-default dropdown-icon btn-xs"
+                          data-toggle="dropdown"
+                        >
+                          <i class="fas fa-cog"></i>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="dropdown-item" href="#"
+                            ><i class="fa fa-folder-open"></i
+                            ><span class="p-1">Open directory</span></a
+                          >
+                          <a class="dropdown-item" href="javascript:void(0)"
+                            ><i class="fa fa-eraser"></i
+                            ><span class="p-1">Clear queue</span></a
+                          >
+                          <div class="dropdown-divider"></div>
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-default btn-xs text-center"
+                          style="width: 25px"
+                          [disabled]="data['Scan-To-File'].length == 0"
+                        >
+                          <i class="fas fa-angle-double-left"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="text-white">
+                      <div class="text-right">
+                        <h6>11-SCAN-ERROR-Queue</h6>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-10" *ngIf="data">
-      <section id="Workflow">
-        <div class="row">
-          <!-- Scan-To-File -->
-          <div class="col-lg-4 col-md-12 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a
-                      class="dropdown-item"
-                      href="javascript:void(0)"
-                      (click)="clearScanToFileQueue()"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center"
-                    style="width: 25px"
-                    [disabled]="data['Scan-To-File'].length == 0"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>Scan-To-File</h6>
-              </div>
-              <table class="table table-striped table-sm">
-                <tbody>
-                  <tr
-                    *ngFor="let item of globalModelService.scanToFile"
-                    @fadeAnimation
-                  >
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">{{ item }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- Scan-Work -->
-          <div class="col-lg-4 col-md-12 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a
-                      class="dropdown-item"
-                      href="javascript:void(0)"
-                      (click)="clearScanWorkQueue()"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center"
-                    style="width: 25px"
-                    [disabled]="data['Scan-Work'].length == 0"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>Scan-Work</h6>
-              </div>
-              <table class="table table-striped table-sm">
-                <tbody>
-                  <tr
-                    *ngFor="
-                      let item of globalModelService.scanToWork;
-                      let i = index
-                    "
-                    @fadeAnimation
-                  >
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a
-                            class="dropdown-item"
-                            href="javascript:void(0)"
-                            (click)="showXmlData(item.name)"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a
-                            class="dropdown-item"
-                            href="javascript:void(0)"
-                            (click)="showEditXml(item.name)"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a
-                            class="dropdown-item"
-                            href="javascript:void(0)"
-                            (click)="MoveToScanFile(i)"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">{{ item }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="javascript:void(0)"
-                      ><i class="fa fa-eraser" (click)="clearOCRWorkQueue()"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center"
-                    style="width: 25px"
-                    [disabled]="globalModelService.OcrWork.length == 0"
-                    (click)="moveAlltoScanWorkQueue()"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>OCR-Work</h6>
-              </div>
-              <table class="table table-striped table-sm">
-                <tbody>
-                  <tr
-                    *ngFor="
-                      let item of globalModelService.OcrWork;
-                      let i = index
-                    "
-                    @fadeAnimation
-                  >
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">{{ item.name }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs disabled"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-left"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>1-Scan-Queue</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs disabled"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-left"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>2-Scan-Queue</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-left"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>3-ADR-Queue</h6>
-              </div>
-              <table class="table table-striped table-sm">
-                <tbody>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs disabled"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-left"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>Address Recognition Out Queue</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs disabled"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-left"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>Address Engine Queue</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs disabled"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-left"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>2-Adr Engine Out Queue</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs disabled"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-left"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>Send Mail Queue</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs disabled"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-left"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>Send Mail Private Queue</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-left"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>AutoClick Queue</h6>
-              </div>
-              <table class="table table-striped table-sm">
-                <tbody>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-left"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>AutoClick Batch</h6>
-              </div>
-              <table class="table table-striped table-sm">
-                <tbody>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-left"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>Scan Error Queue</h6>
-              </div>
-              <table class="table table-striped table-sm">
-                <tbody>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                  <tr>
-                    <td class="text-left">
-                      <div class="btn-group">
-                        <button
-                          type="button"
-                          class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
-                          data-toggle="dropdown"
-                        >
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-eye"></i
-                            ><span class="p-1">Preview entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-edit"></i
-                            ><span class="p-1">Edit entry</span></a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><i class="fa fa-book-open"></i
-                            ><span class="p-1">Open queue file</span></a
-                          >
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#"
-                            ><i class="fas fa-arrow-alt-circle-left"></i
-                            ><span class="p-1">Move one</span></a
-                          >
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">Scan-to-File-2203081425491919</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs disabled"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-left"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>Mailroom Default Input Queue</h6>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="work-process p-1">
-              <div class="card-title">
-                <div class="btn-group">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-icon btn-xs disabled"
-                    data-toggle="dropdown"
-                  >
-                    <i class="fas fa-cog"></i>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-folder-open"></i
-                      ><span class="p-1">Open directory</span></a
-                    >
-                    <a class="dropdown-item" href="#"
-                      ><i class="fa fa-eraser"></i
-                      ><span class="p-1">Clear queue</span></a
-                    >
-                    <div class="dropdown-divider"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-left"></i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-default btn-xs text-center disabled"
-                    style="width: 25px"
-                  >
-                    <i class="fas fa-angle-double-left"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-tools text-right p-1">
-                <h6>Mailroom Default Output Queue</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Workflow Section -->
-    </div>
   </div>
+  <!-- /.card-body -->
 </div>
-<ocs-show-xml-modal #showXmlModal></ocs-show-xml-modal>
+
+<br />
+<ocs-pdf-preview-modal #pdfPreviewModal></ocs-pdf-preview-modal>
 <ocs-edit-xml-modal #editXmlModal></ocs-edit-xml-modal>

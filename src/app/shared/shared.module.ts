@@ -16,6 +16,7 @@ import { Select2Component } from './components/select2/select2.component';
 import { ButtonBusyDirective } from './directives/button-busy.directive';
 import { ServiceRunningDirective } from './directives/service-runnging.directive';
 import { RouteGard } from './gaurds/route.gaurd';
+import { PdfSafePipe } from './pipes/pdf-save.pipe';
 const DragConfig = {
   dragStartThreshold: 0,
   pointerDirectionChangeThreshold: 5,
@@ -26,6 +27,7 @@ const DragConfig = {
     ButtonBusyDirective,
     Select2Component,
     ServiceRunningDirective,
+    PdfSafePipe,
   ],
   imports: [
     CommonModule,
@@ -50,6 +52,7 @@ const DragConfig = {
     FormsModule,
     DragDropModule,
     ServiceRunningDirective,
+    PdfSafePipe,
   ],
   providers: [
     BsModalService,

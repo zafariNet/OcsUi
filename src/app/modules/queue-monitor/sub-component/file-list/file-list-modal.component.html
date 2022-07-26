@@ -1,0 +1,66 @@
+<ng-template #fileListModal>
+  <div
+    class="card shadow-lg"
+    style="margin-bottom: 0rem !important; height: 500px"
+  >
+    <div class="card-header">
+      <h3 class="card-title">
+        {{ directory }} file list
+        <button
+          type="button"
+          class="btn btn-default btn-flat text-left btn-sm"
+          style="margin-left: 150px"
+          *ngIf="selected.length > 1"
+          (click)="deleteFiles()"
+        >
+          <i class="fas fa-trash text-danger"></i
+          ><span class="button-text">remove</span>
+        </button>
+      </h3>
+
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="maximize">
+          <i class="fas fa-expand"></i>
+        </button>
+        <button type="button" class="btn btn-tool" (click)="modalRef.hide()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <dts-select-container class="drag-area" [(selectedItems)]="selected">
+      <div
+        class="card-body table-responsive"
+        id="itemlist"
+        style="min-height: 500px"
+      >
+        <div class="row">
+          <div
+            class="col-lg-3 col-xl-2"
+            *ngFor="let file of files; let i = index"
+          >
+            <div
+              class="file-man-box"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              [title]="file.fileName"
+              [dtsSelectItem]="file"
+            >
+              <a class="file-close" (click)="deleteFile(file.fileName!)"
+                ><i class="fa fa-times-circle"></i
+              ></a>
+              <div class="file-img-box">
+                <img [src]="getExtension(file.fileName!)" alt="icon" />
+              </div>
+              <a (click)="download(file.fileName!)" class="file-download"
+                ><i class="fa fa-download"></i
+              ></a>
+              <div class="file-man-title">
+                <h5 class="mb-0 text-overflow">{{ file.fileName! }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dts-select-container>
+  </div>
+</ng-template>

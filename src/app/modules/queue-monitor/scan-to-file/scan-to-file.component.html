@@ -1,0 +1,92 @@
+<div
+  class="queue-box bg-light table-responsive p-0"
+  style="min-height: 250px; max-height: 250px"
+>
+  <div class="queue-box-header bg-info">
+    <table class="table table-borderless table-sm table-queue-monitor">
+      <tr>
+        <td>
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn btn-default dropdown-icon btn-xs"
+              data-toggle="dropdown"
+            >
+              <i class="fas fa-cog"></i>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item" (click)="showFileList()"
+                ><i class="fa fa-folder-open"></i
+                ><span class="p-1">Open directory</span></a
+              >
+              <a
+                class="dropdown-item"
+                href="javascript:void(0)"
+                (click)="deleteFiles()"
+                ><i class="fa fa-eraser"></i
+                ><span class="p-1">Clear queue</span></a
+              >
+            </div>
+            <button
+              type="button"
+              class="btn btn-default btn-xs text-center"
+              style="width: 25px"
+            >
+              <i class="fas fa-angle-double-left"></i>
+            </button>
+          </div>
+        </td>
+        <td class="text-white">
+          <div class="text-right"><h6>Scan-To-File</h6></div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <table class="table table-striped table-sm">
+    <tbody>
+      <tr *ngFor="let item of globalModelService.scanToFile" @fadeAnimation>
+        <td class="text-left">
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn btn-default dropdown-toggle dropdown-icon btn-xs"
+              data-toggle="dropdown"
+            >
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item" (click)="showPreview(item)"
+                ><i class="fa fa-eye"></i
+                ><span class="p-1">Preview entry</span></a
+              >
+              <a class="dropdown-item" (click)="download(item.fileName!)"
+                ><i class="fa fa-download"></i
+                ><span class="p-1">Download file</span></a
+              >
+              <a class="dropdown-item" (click)="deleteFile(item.fileName!)"
+                ><i class="fas fa-trash"></i
+                ><span class="p-1">Delete file</span></a
+              >
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#"
+                ><i class="fas fa-arrow-alt-circle-left"></i
+                ><span class="p-1">Move</span></a
+              >
+            </div>
+          </div>
+        </td>
+        <td class="text-right">
+          <small>{{ item.fileName }}</small>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ocs-pdf-preview-modal #pdfPreviewModal></ocs-pdf-preview-modal>
+<ocs-file-list-modal
+  #fileListModal
+  [files]="globalModelService.scanWork"
+></ocs-file-list-modal>
+<iframe id="download_section" style="display: none"></iframe>

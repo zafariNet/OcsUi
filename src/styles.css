@@ -146,7 +146,27 @@ legend {
   box-shadow: none !important;
 
 }
-
+.queue-box-header
+{
+  position: -webkit-sticky; /* Safari & IE */
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.table-queue-monitor{
+  margin-bottom: 0px !important;
+}
+.queue-box
+{
+  box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+    border-radius: 0.25rem;
+    background-color: #fff;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
+}
 #Workflow .work-process::after {
   content: "";
   position: absolute;
@@ -167,7 +187,7 @@ legend {
   border-radius: 10px;
 }
 
-#Workflow .work-process {
+#Workflow .work-process.running {
   background-color: #fff;
   padding: 10px 15px;
   position: relative;
@@ -182,6 +202,20 @@ legend {
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 5px 10px rgba(0, 0, 0, 0.2)
 }
 
+#Workflow .work-process.stopped {
+  background-color: #fff;
+  padding: 10px 15px;
+  position: relative;
+  z-index: 1;
+  transition: 0.5s;
+  /* box-shadow: 0px 30px 0px -20px #ffffff; */
+  margin-bottom: 30px;
+  border: 2px solid #a94442;
+  text-align: center;
+  height: 300px;
+  overflow: auto;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 5px 10px rgba(0, 0, 0, 0.2)
+}
 /* width */
 div::-webkit-scrollbar {
   width: 10px;
@@ -753,3 +787,76 @@ hr.divider {
 }
 
 
+.btn-glyphicon { padding:8px; background:#ffffff; margin-right:4px; }
+.icon-btn { padding: 1px 15px 3px 2px; border-radius:50px;}
+
+.dropdown-icon{
+  padding: 5px;
+}
+
+
+
+.card-box {
+  padding: 20px;
+  border-radius: 3px;
+  margin-bottom: 30px;
+  background-color: #fff;
+}
+
+.file-man-box {
+  padding: 20px;
+  border: 1px solid #e3eaef;
+  border-radius: 5px;
+  position: relative;
+  margin-bottom: 20px
+}
+
+.file-man-box .file-close {
+  color: #f1556c;
+  position: absolute;
+  line-height: 24px;
+  font-size: 24px;
+  right: 10px;
+  top: 10px;
+  visibility: hidden
+}
+
+.file-man-box .file-img-box {
+  line-height: 120px;
+  text-align: center
+}
+
+.file-man-box .file-img-box img {
+  height: 64px
+}
+
+.file-man-box .file-download {
+  font-size: 32px;
+  color: #98a6ad;
+  position: absolute;
+  right: 10px
+}
+
+.file-man-box .file-download:hover {
+  color: #313a46
+}
+
+.file-man-box .file-man-title {
+  padding-right: 25px
+}
+
+.file-man-box:hover {
+  -webkit-box-shadow: 0 0 24px 0 rgba(0, 0, 0, .06), 0 1px 0 0 rgba(0, 0, 0, .02);
+  box-shadow: 0 0 24px 0 rgba(0, 0, 0, .06), 0 1px 0 0 rgba(0, 0, 0, .02)
+}
+
+.file-man-box:hover .file-close {
+  visibility: visible
+}
+.text-overflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+}

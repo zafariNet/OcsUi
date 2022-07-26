@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import {
   LogedInUserViewModel,
+  QueueMonitorFileListViewModel,
   UserSettingViewModel,
 } from 'src/app/service-proxies/service-proxies';
 
@@ -25,6 +26,19 @@ export class GlobalModelService {
   userSetting: UserSettingViewModel = new UserSettingViewModel();
   sidebarInitilized: boolean;
   scanToFile: any[] = [];
-  scanToWork: any[] = [];
-  OcrWork: any[] = [];
+  scanWork: any[] = [];
+  ocrWork: any[] = [];
+  scanQueue: any[] = [];
+  addressReqognitionOutQueue: any[] = [];
+  addressEngineQueue: any[] = [];
+  sendMailQueue: any[] = [];
+  ocrQueue: any[] = [];
+  addressQueue: any[] = [];
+  logs: any[] = [];
+  loadEnginStarted: boolean = false;
+  ocrAgentStarted: boolean = false;
+  ocrEngineStarted: boolean = false;
+  addressEngineStarted: boolean = false;
+  sendMailEngineStarted: boolean = false;
+  addressRecognitionEngineStarted: boolean = false;
 }

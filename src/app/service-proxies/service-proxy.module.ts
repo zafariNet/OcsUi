@@ -6,6 +6,7 @@ import * as ApiServiceProxies from './service-proxies';
     ApiServiceProxies.UserService,
     ApiServiceProxies.RoleService,
     ApiServiceProxies.FileService,
+    ApiServiceProxies.QueueMonitorService,
   ],
   imports: [],
 })

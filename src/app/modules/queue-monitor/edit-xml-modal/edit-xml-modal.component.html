@@ -1,28 +1,35 @@
 <ng-template #modalTemplate>
   <div class="modal-header modal-xl">
     <h4 class="modal-title pull-left">{{ data }}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
       <span aria-hidden="true">×</span>
     </button>
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <textarea id="xml" rows="10" [ngModel]="xml" class="form-control">
-    </textarea>
-
+      <textarea id="codeMirrorDemo" class="p-3"> </textarea>
     </div>
   </div>
   <div class="modal-footer clearfix">
     <div class="d-flex justify-content-end">
-      <button class="btn btn-primary float-left" (click)="formatXml()"><i class="fa 	fa-file-code"></i><span class=""> Format
-        XML</span></button>
-
+      <button class="btn btn-primary float-left" (click)="formatXml()">
+        <i class="fa fa-file-code"></i><span class=""> Format XML</span>
+      </button>
     </div>
-        <button type="button" class="btn btn-default float-right" (click)="modalRef.hide()">
+    <button
+      type="button"
+      class="btn btn-default float-right"
+      (click)="modalRef.hide()"
+    >
       Close
     </button>
     <button type="button" class="btn btn-success" (click)="modalRef.hide()">
-      <i class="fa fa-save"></i><span class=""> Save</span></button>
-
+      <i class="fa fa-save"></i><span class=""> Save</span>
+    </button>
   </div>
 </ng-template>

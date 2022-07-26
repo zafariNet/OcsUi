@@ -43,10 +43,24 @@ export class MainLayoutComponent
   }
   ngOnInit(): void {
     this.signalRService.startConnection();
-    this.signalRService.scanToFileCreated();
-    this.signalRService.scanToFileDeleted();
-    this.signalRService.scanWorkCreateListener();
-    this.signalRService.scanWorkDeleteListener();
+    this.signalRService.serviceLogDetected();
+    this.signalRService.LoadEnginServiceStoped();
+    this.signalRService.LoadEnginServiceStarted();
+    this.signalRService.addressRecognitionStarted();
+    this.signalRService.addressRecognitionSttoped();
+    this.signalRService.scanQueueListener();
+    this.signalRService.ocrQueueListener();
+    this.signalRService.ocrAgentStoped();
+    this.signalRService.ocrAgentStarted();
+    this.signalRService.addressQueueListener();
+    this.signalRService.ocrEngineStarted();
+    this.signalRService.ocrEngineStoped();
+    this.signalRService.addressRecognitionOutQueueChangeListener();
+    this.signalRService.addressEngineStarted();
+    this.signalRService.addressEngineStoped();
+    this.signalRService.addressEngineQueueChangeListener();
+    this.signalRService.sendMailEngineStarted();
+    this.signalRService.sendMailEngineStoped();
 
     this._globalModelService.initialDataFeteched.subscribe({
       next: (data) => (this.initialDataFetched = data),

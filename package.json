@@ -32,6 +32,8 @@
     "fabric": "^5.2.1",
     "interactjs": "^1.10.14",
     "jquery-confirm": "^3.3.4",
+    "ng2-pdf-viewer": "^9.0.0",
+    "ngx-drag-to-select": "^5.0.1",
     "ngx-pagination": "^6.0.1",
     "ngx-spinner": "^13.1.1",
     "rxjs": "~7.5.0",
